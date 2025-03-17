@@ -1,121 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Arcade Target Shooting Game</title>
+  <title>CaineTinyArms</title>
   <style>
     body {
-      background-color: #222;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      text-align: center;
+      background-color: #99ccff;
+      font-family: "Comic Sans MS", cursive, sans-serif;
       margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #ffcc00;
+      text-align: center;
       padding: 20px;
     }
-    canvas {
-      background-color: #333;
-      border: 2px solid #fff;
-      display: block;
-      margin: 20px auto;
+    .nav {
+      background-color: #66ff66;
+      padding: 10px;
+      text-align: center;
     }
+    .nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+    .content {
+      margin: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border: 2px solid #000;
+    }
+    .footer {
+      background-color: #ffcc00;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9em;
+    }
+    /* Optional: 90's style animated blinking text */
+    .blink {
+      animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {  
+      50% { opacity: 0; }
+    }
+
+    .spin {
+      animation: spin 5s linear infinite;
+      transform-origin: center center;
+      display: inline-block; /* Ensures proper transform origin */
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    /* Pulse animation for the image */
+    .pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%   { transform: scale(0.7); }
+      50%  { transform: scale(0.5); }
+      100% { transform: scale(0.7); }
+    }
+
   </style>
 </head>
 <body>
-  <h1>Arcade Target Shooting Game</h1>
-  <p>Score: <span id="score">0</span></p>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
-
-  <script>
-    // Set up canvas and context
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const scoreDisplay = document.getElementById('score');
-    let score = 0;
-
-    // Target class definition
-    class Target {
-      constructor(x, y, radius) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-      }
-
-      draw() {
-        // Draw outer circle
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'red';
-        ctx.fill();
-        ctx.closePath();
-
-        // Draw middle circle
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius * 0.6, 0, Math.PI * 2);
-        ctx.fillStyle = 'white';
-        ctx.fill();
-        ctx.closePath();
-
-        // Draw inner circle
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius * 0.3, 0, Math.PI * 2);
-        ctx.fillStyle = 'blue';
-        ctx.fill();
-        ctx.closePath();
-      }
-
-      // Check if the target is hit by a mouse click
-      isHit(mx, my) {
-        const dx = this.x - mx;
-        const dy = this.y - my;
-        return Math.sqrt(dx * dx + dy * dy) < this.radius;
-      }
-    }
-
-    let targets = [];
-
-    // Function to spawn a new target at a random position
-    function spawnTarget() {
-      const radius = 30;
-      const x = Math.random() * (canvas.width - 2 * radius) + radius;
-      const y = Math.random() * (canvas.height - 2 * radius) + radius;
-      targets.push(new Target(x, y, radius));
-    }
-
-    // Main game loop
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // Draw each target on the canvas
-      for (let target of targets) {
-        target.draw();
-      }
-      requestAnimationFrame(gameLoop);
-    }
-
-    // Event listener for mouse clicks on the canvas
-    canvas.addEventListener('click', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
-
-      // Check if any target is hit
-      for (let i = 0; i < targets.length; i++) {
-        if (targets[i].isHit(mouseX, mouseY)) {
-          targets.splice(i, 1);  // Remove the hit target
-          score++;
-          scoreDisplay.textContent = score;
-          spawnTarget();         // Spawn a new target after a hit
-          break;
-        }
-      }
-    });
-
-    // Spawn a few initial targets
-    for (let i = 0; i < 5; i++) {
-      spawnTarget();
-    }
-
-    // Start the game loop
-    gameLoop();
-  </script>
+  <div class="header">
+    <h1>Welcome to my Portfolio!</h1>
+    <marquee behavior="scroll" direction="left">Aspiring Game Developer</marquee>
+  </div>
+  
+  <div class="nav">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">My Games</a>
+    <a href="#">Contact</a>
+  </div>
+  
+  <div class="content">
+    <h2>Brief Introduction</h2>
+    <p>
+      From the smash hit "bergs" to the inspired "Dall of Cuty", there is no game I won't develop.
+    </p>
+    <p class="blink">UNLESS IT'S COPYRIGHT INFRINGEMENT, I DON'T MESS WITH THAT </p>
+    <div class="spin">
+      <img src="fire.png" alt="Retro image placeholder" class="pulse" height="200" width="300">
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
+  </div>
 </body>
 </html>
