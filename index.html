@@ -76,4 +76,46 @@
     // Function to spawn a new target at a random position
     function spawnTarget() {
       const radius = 30;
-      const x = Math.random() * (can
+      const x = Math.random() * (canvas.width - 2 * radius) + radius;
+      const y = Math.random() * (canvas.height - 2 * radius) + radius;
+      targets.push(new Target(x, y, radius));
+    }
+
+    // Main game loop
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Draw each target on the canvas
+      for (let target of targets) {
+        target.draw();
+      }
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Event listener for mouse clicks on the canvas
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      // Check if any target is hit
+      for (let i = 0; i < targets.length; i++) {
+        if (targets[i].isHit(mouseX, mouseY)) {
+          targets.splice(i, 1);  // Remove the hit target
+          score++;
+          scoreDisplay.textContent = score;
+          spawnTarget();         // Spawn a new target after a hit
+          break;
+        }
+      }
+    });
+
+    // Spawn a few initial targets
+    for (let i = 0; i < 5; i++) {
+      spawnTarget();
+    }
+
+    // Start the game loop
+    gameLoop();
+  </script>
+</body>
+</html>
