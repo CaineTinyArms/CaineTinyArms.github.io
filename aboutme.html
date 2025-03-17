@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>About Me - 90's Style</title>
+  <style>
+    body {
+      background-color: #99ccff; /* Light, bright background color */
+      margin: 0;
+      padding: 0;
+      font-family: "Comic Sans MS", cursive, sans-serif; /* Iconic 90's font choice */
+    }
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border: 2px solid #000; /* Thick black border for that retro vibe */
+      border-collapse: collapse;
+      background-color: #ffffff; /* White table background */
+    }
+    td, th {
+      border: 2px solid #000;
+      padding: 20px;
+      vertical-align: top;
+    }
+    .header {
+      background-color: #ffcc00; /* Bright color for the header row */
+      text-align: center;
+    }
+    .header h1 {
+      margin: 10px 0; /* Slight spacing */
+    }
+    .nav-bar {
+      background-color: #66ff66; /* Bright green nav bar */
+      text-align: center;
+    }
+    .nav-bar a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+    .footer {
+      background-color: #ffcc00; /* Same color as header for consistency */
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Main layout table -->
+<table>
+  <!-- Header row -->
+  <tr class="header">
+    <td colspan="2">
+      <h1>ABOUT ME</h1>
+    </td>
+  </tr>
+
+  <!-- Nav Bar row -->
+  <tr class="nav-bar">
+    <td colspan="2">
+      <p>
+        <a href="index.html">Home</a> | 
+        <a href="#">My Games</a> | 
+        <a href="#">Contact</a>
+      </p>
+    </td>
+  </tr>
+
+  <!-- Main Content row: Left text block and Right image -->
+  <tr>
+    <!-- LEFT CELL (My Story) -->
+    <td width="50%" style="position: relative;">
+      <h2>My Story</h2>
+      <p>
+        This is where I would put the information about myself... IF I HAD ANY.
+      </p>
+      <p>
+        <b>Favorite Things:</b>
+        <ul>
+          <li>Ludwig Van Beethoven</li>
+          <li>Bird Watching</li>
+          <li>Spongebob</li>
+        </ul>
+      </p>
+      
+      <!-- New image placed at bottom-right of this cell -->
+      <img 
+        src="thegoat.jpg" 
+        alt="Another fun image" 
+        height="100"
+        width="150"
+        style="position: absolute; bottom: 10px; right: 430px;"
+      />
+
+      <img 
+        src="bird.jpg" 
+        alt="Another fun image" 
+        height="100"
+        width="150"
+        style="position: absolute; bottom: 10px; right: 230px;"
+      />
+
+      <img 
+        src="spongebob.png" 
+        alt="Another fun image" 
+        height="100"
+        width="150"
+        style="position: absolute; bottom: 10px; right: 30px;"
+      />
+    </td>
+
+    <!-- RIGHT CELL (Big image) -->
+    <td width="50%">
+      <img 
+        src="https://via.placeholder.com/300x200" 
+        alt="IMAGE OF MYSELF WHEN I CAN BE BOTHERED" 
+      />
+    </td>
+  </tr>
+
+  <!-- Footer row -->
+  <tr class="footer">
+    <td colspan="2">
+      <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
