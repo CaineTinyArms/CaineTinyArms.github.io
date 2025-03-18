@@ -34,6 +34,15 @@ td, th {
 .footer {
   background-color: #ffcc00;
   text-align: center;
+  /* We'll let .footer-content handle the spacing for left & right text. */
+}
+
+/* Center + separate left & right items in the footer */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px; /* some horizontal padding */
 }
 
 /* ========== Navigation Bar ========== */
@@ -41,7 +50,7 @@ td, th {
 .nav {
   background-color: #66ff66;
   text-align: center;
-  padding: 10px; /* used only in index, but it's fine to keep here */
+  padding: 10px;
 }
 
 .nav-bar a,
@@ -105,55 +114,29 @@ canvas {
   display: block;
 }
 
-/* ========== Custom Image Classes ========== */
-/*
-  Example: If you want to remove inline
-  styles from images, define classes below
-  and apply them in your HTML.
-*/
-.image-style {
-  position: relative;
-  bottom: 10px;
-  right: auto;
-  height: 150px;
-  width: 150px;
-}
-
-/* 
-  ========== Contact Page Layout (3 top, 3 bottom) ==========
-
-  UPDATED: 
-  - .contact-layout changed from "display: flex;" to "display: block;" 
-    to allow multiple flex rows inside (".contact-row").
-  - .contact-row is a flex container for each row of .contact-box elements.
-*/
-
-/* Wrapper around all contact rows */
+/* ========== Contact Page Layout ========== */
 .contact-layout {
-  display: block;             /* CHANGED from flex to block */
+  display: block;
   margin: 20px;
   padding: 20px;
   border: 2px solid #000;
   background-color: #fff;
 }
 
-/* Each row (flex container) for 3 boxes side by side */
 .contact-row {
   display: flex;
-  justify-content: space-around;  /* space out the boxes horizontally */
-  margin-bottom: 20px;            /* spacing between rows */
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
-/* Individual "card" box in each row */
 .contact-box {
-  width: 200px;                  /* Adjust as needed (e.g., 220px or 250px) */
+  width: 200px;
   margin: 10px;
   border: 2px solid #000;
   background-color: #fff;
   text-align: center;
 }
 
-/* Make images responsive within their boxes */
 .contact-box img {
   max-width: 100%;
   height: auto;
@@ -161,8 +144,32 @@ canvas {
   margin: 0 auto;
 }
 
-/* Optional: style the horizontal rule inside each card */
 .contact-box hr {
   margin: 10px 0;
   border: 1px solid #000;
+}
+
+/* 
+   #gameArea is the wrapper for the logos + the canvas on top
+   The canvas has pointer-events: none so clicks pass through by default
+*/
+#gameArea {
+  position: relative;
+  overflow: hidden;
+}
+
+#gameCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;  /* Very high, so it appears above logos visually */
+  pointer-events: none; /* Let clicks pass through unless we intercept them in JS */
+  background-color: transparent;
+}
+
+/* Logos behind the canvas visually */
+.contact-box,
+.contact-box img {
+  position: relative;
+  z-index: 1;
 }
