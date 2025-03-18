@@ -1,61 +1,44 @@
 // wordle.js
 
-const WORDS = [
-  "abate", "adopt", "abode", "aware", "badge", "bicep", "bluff", "board", "build", "bring",
-  "brash", "brush", "campy", "cheek", "chest", "chalk", "clown", "crate", "crane", "crook",
-  "ditch", "dwell", "faint", "fetch", "ferry", "float", "fresh", "fruit", "grade", "glass",
-  "grain", "horse", "harsh", "alive", "alarm", "alpha", "amuse", "agile", "alone", "alley",
-  "align", "onion", "minus", "month", "might", "night", "proxy", "scaly", "shady", "shelf",
-  "shift", "shrug", "slyly", "smile", "spare", "spice", "spree", "stack", "stage", "stale",
-  "start", "steak", "steel", "steep", "sneer", "swirl", "toxic", "twist", "token", "trace",
-  "today", "until", "voice", "watch", "weird", "witty", "yield", "young", "yearn", "zesty",
-  "admit", "quilt", "quick", "agent", "again", "spore", "share", "shame", "media", "mania",
-  "llama", "short", "phone", "realm", "petty", "nails", "slice", "slick", "totem", "unify",
-  "fable", "truce", "vivid", "noble", "spiky", "trend", "crisp", "frost", "gloom", "flame",
-  "flare", "grape", "vixen", "charm", "cloak", "mirth", "panic", "plush", "pride", "quest",
-  "siren", "sunny", "tease", "tidal", "torso", "vapor", "whisk", "wager", "wound", "zebra",
-  "brave", "climb", "drape", "eager", "elite", "envoy", "fancy", "flick", "glare", "haste",
-  "humor", "ivory", "jolly", "jumbo", "latch", "lemon", "lyric", "mango", "mercy", "motto",
-  "nudge", "ocean", "pearl", "phase", "quirk", "radar", "rifle", "rocky", "scoop", "shade",
-  "spine", "table", "thorn", "trend", "valve", "verge", "vocal", "waver", "witty", "zesty",
-  "candy", "dizzy", "furry", "grand", "hover", "icily", "jumpy", "kayak", "lunar", "mirth",
-  "nifty", "ozone", "perch", "quack", "risky", "silky", "tulip", "vixen", "woven", "xerox",
-  "amber", "beast", "crash", "dream", "eagle", "flock", "grasp", "hazel", "icing", "jazzy",
-  "koala", "latch", "meaty", "nerdy", "olive", "plume", "quilt", "raven", "shiny", "torch",
-  "ultra", "vivid", "whale", "xenon", "yacht", "zebra", "azure", "blaze", "cloud", "daisy",
-  "ember", "froze", "glide", "hover", "inlet", "joust", "kiosk", "lobby", "mirth", "nudge",
-  "opera", "proud", "quirk", "rider", "spade", "truly", "vapor", "whisk", "yield", "zesty",
-  "alien", "bluff", "chore", "dandy", "elbow", "flare", "grape", "hotel", "ivory", "jolly",
-  "knock", "leech", "mango", "novel", "oasis", "peace", "query", "ranch", "serum", "tiger",
-  "udder", "velar", "witty", "xylem", "youth", "zephyr", "bloom", "creek", "diver", "eager",
-  "fence", "globe", "honor", "infer", "japan", "kneel", "lemon", "mirth", "noble", "onset",
-  "prism", "quiet", "rusty", "swarm", "throb", "vital", "wound", "xeric", "yummy", "zonal"
-];
+// Arrays loaded from text files
+let answersList = [];      // Will hold valid answers from wordle-answers-alphabetical.txt
+let allowedGuesses = [];   // Will hold valid guesses from wordle-allowed-guesses.txt
+let solution = "";         // Randomly chosen from answersList
 
-// Choose the secret word from WORDS
-const solution = WORDS[Math.floor(Math.random() * WORDS.length)];
-console.log("Solution (for debugging):", solution);
-
+// Game state
 let currentRow = 0;
 let currentCol = 0;
 let isGameOver = false;
 
-// Global variable to hold allowed guesses loaded from external file
-let allowedGuesses = [];
+/* --- 1) Load the ANSWERS from "wordle-answers-alphabetical.txt" --- */
+fetch("wordle-answers-alphabetical.txt")
+  .then(response => response.text())
+  .then(text => {
+    answersList = text
+      .split(/\r?\n/)
+      .map(word => word.trim().toLowerCase())
+      .filter(word => word.length === 5);
 
-// Load allowed guesses from "wordle-allowed-guesses.txt"
-fetch('wordle-allowed-guesses.txt')
+    // Pick a random solution from the loaded answers
+    solution = answersList[Math.floor(Math.random() * answersList.length)];
+    console.log("Solution (for debugging):", solution);
+  })
+  .catch(error => console.error("Error loading answers list:", error));
+
+/* --- 2) Load the ALLOWED GUESSES from "wordle-allowed-guesses.txt" --- */
+fetch("wordle-allowed-guesses.txt")
   .then(response => response.text())
   .then(text => {
     allowedGuesses = text
       .split(/\r?\n/)
-      .map(word => word.trim())
+      .map(word => word.trim().toLowerCase())
       .filter(word => word.length === 5);
-    console.log("Allowed guesses loaded: " + allowedGuesses.length);
-    // Optionally, enable user input here once the list is loaded.
+
+    console.log("Allowed guesses loaded:", allowedGuesses.length);
   })
   .catch(error => console.error("Error loading allowed guesses:", error));
 
+/* --- Keyboard Events --- */
 document.addEventListener("keydown", (e) => {
   if (isGameOver) return;
   if (e.key === "Enter") {
@@ -83,6 +66,7 @@ keys.forEach((key) => {
   });
 });
 
+/* --- Add a Letter to the Current Tile --- */
 function addLetter(letter) {
   if (currentCol < 5 && currentRow < 6) {
     const tile = document.getElementById(`${currentRow}-${currentCol}`);
@@ -91,6 +75,7 @@ function addLetter(letter) {
   }
 }
 
+/* --- Delete a Letter from the Current Tile --- */
 function deleteLetter() {
   if (currentCol > 0) {
     currentCol--;
@@ -99,32 +84,43 @@ function deleteLetter() {
   }
 }
 
+/* --- Check the User's Guess --- */
 function checkRow() {
+  // If the solution hasn't loaded yet, we can't proceed
+  if (!solution) {
+    setMessage("Please wait, loading word list...");
+    return;
+  }
+
   if (currentCol < 5) {
     setMessage("Not enough letters!");
     return;
   }
 
+  // Gather the guess from the current row
   let guess = "";
   for (let c = 0; c < 5; c++) {
     guess += document.getElementById(`${currentRow}-${c}`).textContent;
   }
+  guess = guess.toLowerCase();
 
-  // Accept the guess if it is in the allowed guesses file OR in WORDS.
-  if (!allowedGuesses.includes(guess) && !WORDS.includes(guess)) {
+  // Validate guess: it must be in allowedGuesses OR answersList
+  if (!allowedGuesses.includes(guess) && !answersList.includes(guess)) {
     setMessage("Word not in list!");
     return;
   }
 
+  // Evaluate guess against the solution
   const guessArray = guess.split("");
   const solutionArray = solution.split("");
 
+  // Track how many times each letter appears in the solution
   const solutionLetterCount = {};
-  solutionArray.forEach((letter) => {
+  solutionArray.forEach(letter => {
     solutionLetterCount[letter] = (solutionLetterCount[letter] || 0) + 1;
   });
 
-  // Mark correct letters (right letter in the right position)
+  // Mark correct letters (green)
   for (let i = 0; i < 5; i++) {
     const tile = document.getElementById(`${currentRow}-${i}`);
     const letter = guessArray[i];
@@ -134,12 +130,12 @@ function checkRow() {
     }
   }
 
-  // Mark present/absent letters
+  // Mark present (yellow) or absent (gray)
   for (let i = 0; i < 5; i++) {
     const tile = document.getElementById(`${currentRow}-${i}`);
     const letter = guessArray[i];
     if (!tile.classList.contains("correct")) {
-      if (solutionLetterCount[letter] && solutionLetterCount[letter] > 0) {
+      if (solutionLetterCount[letter]) {
         tile.classList.add("present");
         solutionLetterCount[letter]--;
       } else {
@@ -148,7 +144,7 @@ function checkRow() {
     }
   }
 
-  // Check win or move to next row
+  // Check if user guessed the solution
   if (guess === solution) {
     setMessage("Good Job, transferring you to the games page!");
     isGameOver = true;
@@ -156,18 +152,21 @@ function checkRow() {
       window.location.href = "games.html";
     }, 3000);
   } else {
+    // If out of rows, game over
     if (currentRow >= 5) {
       setMessage(`You Suck! The word was "${solution}". You must now click the loser link in order to see the games page.`);
       isGameOver = true;
       const linkPara = document.getElementById("gamesLinkParagraph");
       linkPara.innerHTML = '<a href="games.html">LOSER LINK</a>';
     } else {
+      // Move to next row
       currentRow++;
       currentCol = 0;
     }
   }
 }
 
+/* --- Display a Message to the User --- */
 function setMessage(msg) {
   document.getElementById("message").textContent = msg;
 }
