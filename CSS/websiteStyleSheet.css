@@ -107,9 +107,9 @@ canvas {
 
 /* ========== Custom Image Classes ========== */
 /*
-Example: If you want to remove inline
-styles from images, define classes below
-and apply them in your HTML.
+  Example: If you want to remove inline
+  styles from images, define classes below
+  and apply them in your HTML.
 */
 .image-style {
   position: relative;
@@ -119,33 +119,38 @@ and apply them in your HTML.
   width: 150px;
 }
 
-/* ========== Contact Page 4-Column Layout ========== */
+/* 
+  ========== Contact Page Layout (3 top, 3 bottom) ==========
+
+  UPDATED: 
+  - .contact-layout changed from "display: flex;" to "display: block;" 
+    to allow multiple flex rows inside (".contact-row").
+  - .contact-row is a flex container for each row of .contact-box elements.
+*/
+
+/* Wrapper around all contact rows */
 .contact-layout {
-  /* Reuse .content’s flex display but control spacing */
-  display: flex;
-  justify-content: space-around;  /* Distribute space between cards */
-  align-items: flex-start;        /* Align cards at the top */
-  /* Add some margin or padding if desired */
+  display: block;             /* CHANGED from flex to block */
   margin: 20px;
   padding: 20px;
   border: 2px solid #000;
   background-color: #fff;
 }
 
-/* Each row inside the contact layout */
+/* Each row (flex container) for 3 boxes side by side */
 .contact-row {
   display: flex;
   justify-content: space-around;  /* space out the boxes horizontally */
   margin-bottom: 20px;            /* spacing between rows */
 }
 
-/* Each box/card in the 4-column layout */
+/* Individual "card" box in each row */
 .contact-box {
-  width: 200px;                /* Adjust as needed */
-  margin: 10px;                /* Space around each box */
-  border: 2px solid #000;      /* Matches your theme’s border style */
-  background-color: #fff;      /* White background inside each card */
-  text-align: center;          /* Center text and image */
+  width: 200px;                  /* Adjust as needed (e.g., 220px or 250px) */
+  margin: 10px;
+  border: 2px solid #000;
+  background-color: #fff;
+  text-align: center;
 }
 
 /* Make images responsive within their boxes */
