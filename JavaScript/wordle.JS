@@ -180,7 +180,7 @@ function setMessage(msg) {
   messageEl.textContent = msg;
 
   // If it's specifically "Word not in list!", fade out after 2 seconds
-  if (msg === "Word not in list!") {
+  if (msg === "Word not in list!" || msg == "Not enough letters!") {
     setTimeout(() => {
       // Only fade out if the message is still the same
       if (messageEl.textContent === msg) {
