@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>My Wordle Clone</title>
+  <!-- Adjust if your CSS is in a different place -->
   <link rel="stylesheet" href="../CSS/wordle.css">
 </head>
 <body>
@@ -24,6 +25,7 @@
       <h2>Complete this Wordle to access the games page</h2>
       <div id="message"></div>
 
+      <!-- The 6 rows, each with 5 tiles, all having unique IDs -->
       <div id="game-container">
         <div class="row">
           <div class="tile" id="0-0"></div>
@@ -69,6 +71,7 @@
         </div>
       </div>
 
+      <!-- The keyboard area with buttons that have class="key" -->
       <div id="keyboard">
         <button class="key">q</button>
         <button class="key">w</button>
@@ -114,140 +117,7 @@
     <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
   </div>
 
-  <script>
-    const WORDS = [
-      "abate","adopt","abode","aware","badge","bicep","bluff","board","build","bring",
-      "brash","brush","campy","cheek","chest","chalk","clown","crate","crane","crook",
-      "ditch","dwell","faint","fetch","ferry","float","fresh","fruit","grade","glass",
-      "grain","horse","harsh","alive","alarm","alpha","amuse","agile","alone","alley",
-      "align","onion","minus","month","might","night","proxy","scaly","shady","shelf",
-      "shift","shrug","slyly","smile","spare","spice","spree","stack","stage","stale",
-      "start","steak","steel","steep","sneer","swirl","toxic","twist","token","trace",
-      "today","until","voice","watch","weird","witty","yield","young","yearn","zesty",
-      "admit","quilt","quick","agent","again","spore","share","shame","media","mania",
-      "llama","short","phone","realm","petty","nails","slice","slick","totem","unify"
-    ];
-
-    const solution = WORDS[Math.floor(Math.random() * WORDS.length)];
-    console.log("Solution (for debugging):", solution);
-
-    let currentRow = 0;
-    let currentCol = 0;
-    let isGameOver = false;
-
-    document.addEventListener("keydown", (e) => {
-      if (isGameOver) return;
-      if (e.key === "Enter") {
-        checkRow();
-      } else if (e.key === "Backspace") {
-        deleteLetter();
-      } else if (/^[a-z]$/i.test(e.key)) {
-        addLetter(e.key.toLowerCase());
-      }
-    });
-
-    const keys = document.querySelectorAll(".key");
-    keys.forEach((key) => {
-      key.addEventListener("click", () => {
-        if (isGameOver) return;
-        const keyValue = key.textContent.toLowerCase();
-
-        if (key.id === "enter") {
-          checkRow();
-        } else if (key.id === "backspace") {
-          deleteLetter();
-        } else {
-          addLetter(keyValue);
-        }
-      });
-    });
-
-    function addLetter(letter) {
-      if (currentCol < 5 && currentRow < 6) {
-        const tile = document.getElementById(`${currentRow}-${currentCol}`);
-        tile.textContent = letter;
-        currentCol++;
-      }
-    }
-
-    function deleteLetter() {
-      if (currentCol > 0) {
-        currentCol--;
-        const tile = document.getElementById(`${currentRow}-${currentCol}`);
-        tile.textContent = "";
-      }
-    }
-
-    function checkRow() {
-      if (currentCol < 5) {
-        setMessage("Not enough letters!");
-        return;
-      }
-
-      let guess = "";
-      for (let c = 0; c < 5; c++) {
-        guess += document.getElementById(`${currentRow}-${c}`).textContent;
-      }
-
-      if (!WORDS.includes(guess)) {
-        setMessage("Word not in list!");
-        return;
-      }
-
-      const guessArray = guess.split("");
-      const solutionArray = solution.split("");
-
-      const solutionLetterCount = {};
-      solutionArray.forEach((letter) => {
-        solutionLetterCount[letter] = (solutionLetterCount[letter] || 0) + 1;
-      });
-
-      for (let i = 0; i < 5; i++) {
-        const tile = document.getElementById(`${currentRow}-${i}`);
-        const letter = guessArray[i];
-        if (solutionArray[i] === letter) {
-          tile.classList.add("correct");
-          solutionLetterCount[letter]--;
-        }
-      }
-
-      for (let i = 0; i < 5; i++) {
-        const tile = document.getElementById(`${currentRow}-${i}`);
-        const letter = guessArray[i];
-        if (!tile.classList.contains("correct")) {
-          if (solutionLetterCount[letter] && solutionLetterCount[letter] > 0) {
-            tile.classList.add("present");
-            solutionLetterCount[letter]--;
-          } else {
-            tile.classList.add("absent");
-          }
-        }
-      }
-
-      if (guess === solution) {
-        setMessage("Good Job, transferring you to the games page!");
-        isGameOver = true;
-        setTimeout(() => {
-          window.location.href = "games.html";
-        }, 3000);
-      } else {
-        if (currentRow >= 5) {
-          setMessage(`You Suck! The word was "${solution}". You must now click the loser link in order to see the games page.`);
-          isGameOver = true;
-
-          const linkPara = document.getElementById("gamesLinkParagraph");
-          linkPara.innerHTML = '<a href="games.html">LOSER LINK</a>';
-
-        } else {
-          currentRow++;
-          currentCol = 0;
-        }
-      }
-    }
-
-    function setMessage(msg) {
-      document.getElementById("message").textContent = msg;
-    }
-  </script>
+  <!-- IMPORTANT: adjust this path if needed -->
+  <script src="../JavaScript/wordle.js"></script>
 </body>
 </html>
