@@ -172,7 +172,6 @@ function checkRow() {
   }
 }
 
-/* --- Display a Message to the User --- */
 function setMessage(msg) {
   const messageEl = document.getElementById("message");
   
@@ -190,4 +189,3 @@ function setMessage(msg) {
     }, 2000);
   }
 }
-

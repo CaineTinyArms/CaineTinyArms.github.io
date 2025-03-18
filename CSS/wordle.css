@@ -124,6 +124,7 @@ body {
     font-weight: bold;
     text-align: center;
     min-height: 24px; /* to maintain space if empty */
+    transition: opacity 1s ease-out;
   }
   
   /* Footer matches your main site’s style */
@@ -133,7 +134,4 @@ body {
     padding: 10px;
     font-size: 0.9em;
   }
-  
-  #message {
-    transition: opacity 1s ease-out;
-  }
+ 
