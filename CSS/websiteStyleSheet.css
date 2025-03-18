@@ -132,6 +132,13 @@ and apply them in your HTML.
   background-color: #fff;
 }
 
+/* Each row inside the contact layout */
+.contact-row {
+  display: flex;
+  justify-content: space-around;  /* space out the boxes horizontally */
+  margin-bottom: 20px;            /* spacing between rows */
+}
+
 /* Each box/card in the 4-column layout */
 .contact-box {
   width: 200px;                /* Adjust as needed */
