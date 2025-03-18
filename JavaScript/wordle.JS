@@ -10,29 +10,35 @@ let currentRow = 0;
 let currentCol = 0;
 let isGameOver = false;
 
-/* --- 1) Load the ANSWERS from "wordle-answers-alphabetical.txt" --- */
+/* --- 1) Load answers from "wordle-answers-alphabetical.txt" --- */
 fetch("wordle-answers-alphabetical.txt")
   .then(response => response.text())
   .then(text => {
+    // Remove a possible BOM
+    text = text.replace(/^\uFEFF/, "");
+    // Split on newlines, trim, lowercase, and filter for exactly 5 letters
     answersList = text
       .split(/\r?\n/)
-      .map(word => word.trim().toLowerCase())
-      .filter(word => word.length === 5);
+      .map(line => line.trim().toLowerCase())
+      .filter(line => line.length === 5);
 
-    // Pick a random solution from the loaded answers
+    // Pick a random solution from answersList
     solution = answersList[Math.floor(Math.random() * answersList.length)];
-    console.log("Solution (for debugging):", solution);
+    console.log("Solution (debug):", solution);
   })
   .catch(error => console.error("Error loading answers list:", error));
 
-/* --- 2) Load the ALLOWED GUESSES from "wordle-allowed-guesses.txt" --- */
+/* --- 2) Load allowed guesses from "wordle-allowed-guesses.txt" --- */
 fetch("wordle-allowed-guesses.txt")
   .then(response => response.text())
   .then(text => {
+    // Remove a possible BOM
+    text = text.replace(/^\uFEFF/, "");
+    // Split on newlines, trim, lowercase, and filter for exactly 5 letters
     allowedGuesses = text
       .split(/\r?\n/)
-      .map(word => word.trim().toLowerCase())
-      .filter(word => word.length === 5);
+      .map(line => line.trim().toLowerCase())
+      .filter(line => line.length === 5);
 
     console.log("Allowed guesses loaded:", allowedGuesses.length);
   })
