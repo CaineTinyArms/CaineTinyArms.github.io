@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>CaineTinyArms</title>
   <!-- Link to the external style sheet -->
-  <link rel="stylesheet" type="text/css" href="websiteStyleSheet.css">
+  <link rel="stylesheet" type="text/css" href="/CSS/websiteStyleSheet.css">
 </head>
 <body>
   <div class="header">
@@ -14,9 +14,9 @@
   
   <div class="nav">
     <a href="index.html">Home</a>
-    <a href="aboutme.html">About</a>
-    <a href="wordle.html">My Games</a>
-    <a href="contact.html">Contact</a>
+    <a href="HTML/aboutme.html">About</a>
+    <a href="HTML/wordle.html">My Games</a>
+    <a href="HTML/contact.html">Contact</a>
   </div>
 
   <div class="content">
@@ -27,7 +27,7 @@
       </p>
       <p class="blink">UNLESS IT'S COPYRIGHT INFRINGEMENT, I DON'T MESS WITH THAT </p>
       <div class="spin">
-        <img src="fire.png" alt="Image of Fire" class="pulse" height="200" width="300">
+        <img src="Images/fire.png" alt="Image of Fire" class="pulse" height="200" width="300">
       </div>
     </div>
 
@@ -41,7 +41,7 @@
     const ctx = canvas.getContext('2d');
 
     const planeImage = new Image();
-    planeImage.src = "plane.png";
+    planeImage.src = "Images/plane.png";
 
     let t = 0;
     function animate() {
