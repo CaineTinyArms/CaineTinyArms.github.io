@@ -174,5 +174,20 @@ function checkRow() {
 
 /* --- Display a Message to the User --- */
 function setMessage(msg) {
-  document.getElementById("message").textContent = msg;
+  const messageEl = document.getElementById("message");
+  
+  // Show the message at full opacity
+  messageEl.style.opacity = 1;
+  messageEl.textContent = msg;
+
+  // If it's specifically "Word not in list!", fade out after 2 seconds
+  if (msg === "Word not in list!") {
+    setTimeout(() => {
+      // Only fade out if the message is still the same
+      if (messageEl.textContent === msg) {
+        messageEl.style.opacity = 0;
+      }
+    }, 2000);
+  }
 }
+

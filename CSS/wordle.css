@@ -134,3 +134,6 @@ body {
     font-size: 0.9em;
   }
   
+  #message {
+    transition: opacity 1s ease-out;
+  }
