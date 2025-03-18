@@ -12,11 +12,15 @@ window.addEventListener("load", () => {
     let score = 0;
     const scoreDisplay = document.getElementById("scoreDisplay");
   
-    // Randomly place the target
     function placeTarget() {
-      targetX = Math.random() * (canvas.width  - 2*targetRadius) + targetRadius;
-      targetY = Math.random() * (canvas.height - 2*targetRadius) + targetRadius;
-    }
+        const PADDING = 100; // adjust as you like
+        const spawnWidth  = canvas.width  - 2*targetRadius - 2*PADDING;
+        const spawnHeight = canvas.height - 2*targetRadius - 2*PADDING;
+      
+        targetX = Math.random() * spawnWidth  + (targetRadius + PADDING);
+        targetY = Math.random() * spawnHeight + (targetRadius + PADDING);
+      }
+      
   
     // Draw the target
     function drawTarget() {
