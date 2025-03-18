@@ -3,47 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>About Me</title>
-  <style>
-    body {
-      background-color: #99ccff; 
-      margin: 0;
-      padding: 0;
-      font-family: "Comic Sans MS", cursive, sans-serif; 
-    }
-    table {
-      width: 80%;
-      margin: 20px auto;
-      border: 2px solid #000; 
-      border-collapse: collapse;
-      background-color: #ffffff; 
-    }
-    td, th {
-      border: 2px solid #000;
-      padding: 20px;
-      vertical-align: top;
-    }
-    .header {
-      background-color: #ffcc00; 
-      text-align: center;
-    }
-    .header h1 {
-      margin: 10px 0; 
-    }
-    .nav-bar {
-      background-color: #66ff66; 
-      text-align: center;
-    }
-    .nav-bar a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-    }
-    .footer {
-      background-color: #ffcc00; 
-      text-align: center;
-    }
-  </style>
+  <!-- Link to the external style sheet -->
+  <link rel="stylesheet" type="text/css" href="websiteStyleSheet.css">
 </head>
 <body>
 
@@ -65,11 +26,9 @@
   </tr>
 
   <tr>
-    <td width="50%" style="position: relative;">
+    <td width="50%">
       <h2>My Story</h2>
-      <p>
-        This is where I would put the information about myself... IF I HAD ANY.
-      </p>
+      <p>This is where I would put the information about myself... IF I HAD ANY.</p>
       <p>
         <b>Favorite Things:</b>
         <ul>
@@ -78,29 +37,22 @@
           <li>Spongebob</li>
         </ul>
       </p>
-      
+
+      <!-- Example if you want to remove inline styles and use the .image-style class -->
       <img 
         src="thegoat.jpg" 
-        alt="Ludwig Van Beethoven" 
-        height="150"
-        width="150"
-        style="position: relative; bottom: 10px; right: auto"
+        alt="Ludwig Van Beethoven"
+        class="image-style"
       />
-
       <img 
         src="bird.jpg" 
-        alt="bird" 
-        height="150"
-        width="150"
-        style="position: relative; bottom: 10px; right: auto;"
+        alt="bird"
+        class="image-style"
       />
-
       <img 
         src="spongebob.png" 
-        alt="spongebob" 
-        height="150"
-        width="150"
-        style="position: relative; bottom: 10px; right: auto"
+        alt="spongebob"
+        class="image-style"
       />
     </td>
 

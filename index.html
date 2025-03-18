@@ -3,80 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>CaineTinyArms</title>
-  <style>
-    body {
-      background-color: #99ccff;
-      font-family: "Comic Sans MS", cursive, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .header {
-      background-color: #ffcc00;
-      text-align: center;
-      padding: 20px;
-    }
-    .nav {
-      background-color: #66ff66;
-      padding: 10px;
-      text-align: center;
-    }
-    .nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-    }
-    .content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px;
-      background-color: #fff;
-      border: 2px solid #000;
-      margin: 20px;
-    }
-    .text-section {
-      flex: 1;
-    }
-    .animation-container {
-      width: 600px;
-      height: 600px;
-      position: relative;
-    }
-    .footer {
-      background-color: #ffcc00;
-      text-align: center;
-      padding: 10px;
-      font-size: 0.9em;
-    }
-    .blink {
-      animation: blinker 1s linear infinite;
-    }
-    @keyframes blinker {  
-      50% { opacity: 0; }
-    }
-    .spin {
-      animation: spin 5s linear infinite;
-      transform-origin: center center;
-      display: inline-block;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .pulse {
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%   { transform: scale(0.7); }
-      50%  { transform: scale(0.5); }
-      100% { transform: scale(0.7); }
-    }
-    canvas {
-      background-color: transparent;
-      display: block;
-    }
-  </style>
+  <!-- Link to the external style sheet -->
+  <link rel="stylesheet" type="text/css" href="websiteStyleSheet.css">
 </head>
 <body>
   <div class="header">
@@ -109,35 +37,34 @@
   </div>
 
   <script>
-      const canvas = document.getElementById('canvas');
-      const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
 
-      const planeImage = new Image();
-      planeImage.src = "plane.png"; 
+    const planeImage = new Image();
+    planeImage.src = "plane.png";
 
-      let t = 0;
-      function animate() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let t = 0;
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-          let x = 300 + 250 * Math.sin(t); 
-          let y = 300 + 200 * Math.sin(2 * t);
+      let x = 300 + 250 * Math.sin(t);
+      let y = 300 + 200 * Math.sin(2 * t);
 
-          
-          let angle = Math.atan2(2 * Math.cos(2 * t), Math.cos(t));
+      let angle = Math.atan2(2 * Math.cos(2 * t), Math.cos(t));
 
-          ctx.save();
-          ctx.translate(x, y);
-          ctx.rotate(angle);
-          ctx.drawImage(planeImage, -75, -75, 150, 150); 
-          ctx.restore();
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      ctx.drawImage(planeImage, -75, -75, 150, 150);
+      ctx.restore();
 
-          t += 0.01; 
-          requestAnimationFrame(animate);
-      }
+      t += 0.01;
+      requestAnimationFrame(animate);
+    }
 
-      planeImage.onload = () => {
-          animate();
-      };
+    planeImage.onload = () => {
+      animate();
+    };
   </script>
 
   <div class="footer">

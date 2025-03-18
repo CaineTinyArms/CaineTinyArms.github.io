@@ -1,0 +1,121 @@
+/* ========== Global Styles ========== */
+body {
+    background-color: #99ccff;
+    margin: 0;
+    padding: 0;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+  }
+  
+  /* ========== Table & Layout Styles ========== */
+  table {
+    width: 80%;
+    margin: 20px auto;
+    border: 2px solid #000;
+    border-collapse: collapse;
+    background-color: #ffffff;
+  }
+  
+  td, th {
+    border: 2px solid #000;
+    padding: 20px;
+    vertical-align: top;
+  }
+  
+  /* ========== Header & Footer Styles ========== */
+  .header {
+    background-color: #ffcc00;
+    text-align: center;
+  }
+  
+  .header h1 {
+    margin: 10px 0;
+  }
+  
+  .footer {
+    background-color: #ffcc00;
+    text-align: center;
+  }
+  
+  /* ========== Navigation Bar ========== */
+  .nav-bar,
+  .nav {
+    background-color: #66ff66;
+    text-align: center;
+    padding: 10px; /* used only in index, but it's fine to keep here */
+  }
+  
+  .nav-bar a,
+  .nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+  }
+  
+  /* ========== Index Page Content Layout ========== */
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #000;
+    margin: 20px;
+  }
+  
+  .text-section {
+    flex: 1;
+  }
+  
+  /* ========== Animations ========== */
+  @keyframes blinker {
+    50% { opacity: 0; }
+  }
+  .blink {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .spin {
+    animation: spin 5s linear infinite;
+    transform-origin: center center;
+    display: inline-block;
+  }
+  
+  @keyframes pulse {
+    0%   { transform: scale(0.7); }
+    50%  { transform: scale(0.5); }
+    100% { transform: scale(0.7); }
+  }
+  .pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  /* ========== Canvas Container ========== */
+  .animation-container {
+    width: 600px;
+    height: 600px;
+    position: relative;
+  }
+  canvas {
+    background-color: transparent;
+    display: block;
+  }
+  
+  /* ========== Custom Image Classes ========== */
+  /*
+    Example: If you want to remove inline
+    styles from images, define classes below
+    and apply them in your HTML.
+  */
+  .image-style {
+    position: relative;
+    bottom: 10px;
+    right: auto;
+    height: 150px;
+    width: 150px;
+  }
+  
