@@ -186,6 +186,6 @@ function setMessage(msg) {
       if (messageEl.textContent === msg) {
         messageEl.style.opacity = 0;
       }
-    }, 2000);
+    }, 1000);
   }
 }
