@@ -20,6 +20,7 @@
 
   <!-- 
     Main container with both rows of bigger logos and the canvas on top.
+    The target will appear on top, ignoring collisions. 
   -->
   <div class="content contact-layout" id="gameArea">
     <canvas id="gameCanvas" width="800" height="800"></canvas>
@@ -58,13 +59,18 @@
         <hr>
         <p>i cant legally use the twitter logo but its still twitter to me.</p>
       </div>
+
+      <!-- 2nd column in the 2nd row (where we put the Score) -->
       <div class="contact-box">
         <a href="https://github.com/CaineTinyArms">
           <img src="../Images/github.svg" alt="GitHub">
         </a>
         <hr>
         <p>the only hub that matters.</p>
+        <!-- SCORE GOES HERE -->
+        <p id="scoreDisplay">Score: 0</p>
       </div>
+
       <div class="contact-box">
         <a href="https://www.twitch.tv/cainetinyarms">
           <img src="../Images/twitch.svg" alt="Twitch">
@@ -75,14 +81,11 @@
     </div>
   </div>
 
-  <!-- Footer with score on the right -->
   <div class="footer">
-    <p class="footer-content">
-      <span>&copy; 2025 CaineTinyArms. All Rights Reserved.</span>
-      <span id="scoreDisplay">Score: 0</span>
-    </p>
+    <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
   </div>
 
+  <!-- The JS file with the "priority click" logic -->
   <script src="../JavaScript/shootingGame.js"></script>
 </body>
 </html>

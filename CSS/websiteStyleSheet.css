@@ -34,15 +34,6 @@ td, th {
 .footer {
   background-color: #ffcc00;
   text-align: center;
-  /* We'll let .footer-content handle the spacing for left & right text. */
-}
-
-/* Center + separate left & right items in the footer */
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 20px; /* some horizontal padding */
 }
 
 /* ========== Navigation Bar ========== */
@@ -172,4 +163,20 @@ canvas {
 .contact-box img {
   position: relative;
   z-index: 1;
+}
+
+/* ========== NEW: Score Column ========== */
+.score-column {
+  /* So it aligns with the other columns in .contact-row */
+  width: 200px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center the box & the score text horizontally */
+}
+
+#scoreDisplay {
+  margin-top: 10px;
+  font-weight: bold;
+  color: red; /* or whatever style you prefer */
 }
