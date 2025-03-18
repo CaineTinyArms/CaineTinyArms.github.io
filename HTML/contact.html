@@ -18,10 +18,6 @@
     <a href="contact.html">Contact</a>
   </div>
 
-  <!-- 
-    Main container with both rows of bigger logos and the canvas on top.
-    The target will appear on top, ignoring collisions. 
-  -->
   <div class="content contact-layout" id="gameArea">
     <canvas id="gameCanvas" width="800" height="800"></canvas>
 
@@ -60,14 +56,17 @@
         <p>i cant legally use the twitter logo but its still twitter to me.</p>
       </div>
 
-      <!-- 2nd column in the 2nd row (where we put the Score) -->
-      <div class="contact-box">
-        <a href="https://github.com/CaineTinyArms">
-          <img src="../Images/github.svg" alt="GitHub">
-        </a>
-        <hr>
-        <p>the only hub that matters.</p>
-        <!-- SCORE GOES HERE -->
+      <!-- MIDDLE COLUMN: a container holding the contact-box + score below -->
+      <div class="score-column">
+        <!-- The actual contact box -->
+        <div class="contact-box">
+          <a href="https://github.com/CaineTinyArms">
+            <img src="../Images/github.svg" alt="GitHub">
+          </a>
+          <hr>
+          <p>the only hub that matters.</p>
+        </div>
+        <!-- The score is placed OUTSIDE the box, but still in the same column -->
         <p id="scoreDisplay">Score: 0</p>
       </div>
 
@@ -85,7 +84,6 @@
     <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
   </div>
 
-  <!-- The JS file with the "priority click" logic -->
   <script src="../JavaScript/shootingGame.js"></script>
 </body>
 </html>
