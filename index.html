@@ -27,10 +27,21 @@
       font-weight: bold;
     }
     .content {
-      margin: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 20px;
       background-color: #fff;
       border: 2px solid #000;
+      margin: 20px;
+    }
+    .text-section {
+      flex: 1;
+    }
+    .animation-container {
+      width: 600px;
+      height: 600px;
+      position: relative;
     }
     .footer {
       background-color: #ffcc00;
@@ -38,24 +49,21 @@
       padding: 10px;
       font-size: 0.9em;
     }
-    /* Optional: 90's style animated blinking text */
     .blink {
       animation: blinker 1s linear infinite;
     }
     @keyframes blinker {  
       50% { opacity: 0; }
     }
-
     .spin {
       animation: spin 5s linear infinite;
       transform-origin: center center;
-      display: inline-block; /* Ensures proper transform origin */
+      display: inline-block;
     }
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-    /* Pulse animation for the image */
     .pulse {
       animation: pulse 2s ease-in-out infinite;
     }
@@ -64,7 +72,10 @@
       50%  { transform: scale(0.5); }
       100% { transform: scale(0.7); }
     }
-
+    canvas {
+      background-color: transparent;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -79,18 +90,56 @@
     <a href="games.html">My Games</a>
     <a href="contact.html">Contact</a>
   </div>
-  
+
   <div class="content">
-    <h2>Brief Introduction</h2>
-    <p>
-      From the smash hit "bergs" to the inspired "Dall of Cuty", there is no game I will not develop.
-    </p>
-    <p class="blink">UNLESS IT'S COPYRIGHT INFRINGEMENT, I DON'T MESS WITH THAT </p>
-    <div class="spin">
-      <img src="fire.png" alt="Retro image placeholder" class="pulse" height="200" width="300">
+    <div class="text-section">
+      <h2>Brief Introduction</h2>
+      <p>
+        From the smash hit "bergs" to the inspired "Dall of Cuty", there is no game I will not develop.
+      </p>
+      <p class="blink">UNLESS IT'S COPYRIGHT INFRINGEMENT, I DON'T MESS WITH THAT </p>
+      <div class="spin">
+        <img src="fire.png" alt="Image of Fire" class="pulse" height="200" width="300">
+      </div>
+    </div>
+
+    <div class="animation-container">
+      <canvas id="canvas" width="600" height="600"></canvas>
     </div>
   </div>
-  
+
+  <script>
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      const planeImage = new Image();
+      planeImage.src = "plane.png"; 
+
+      let t = 0;
+      function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          let x = 300 + 250 * Math.sin(t); 
+          let y = 300 + 200 * Math.sin(2 * t);
+
+          
+          let angle = Math.atan2(2 * Math.cos(2 * t), Math.cos(t));
+
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(angle);
+          ctx.drawImage(planeImage, -75, -75, 150, 150); 
+          ctx.restore();
+
+          t += 0.01; 
+          requestAnimationFrame(animate);
+      }
+
+      planeImage.onload = () => {
+          animate();
+      };
+  </script>
+
   <div class="footer">
     <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
   </div>
