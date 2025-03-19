@@ -1,23 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Games</title>
-  <link rel="stylesheet" type="text/css" href="../CSS/websiteStyleSheet.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Games - 90s Style Portfolio</title>
+    <link rel="stylesheet" href="../CSS/games.css">
 </head>
 <body>
-  <h1>MY GAMES</h1>
-  <p>bergs is the only one that matters.</p>
-
-  <div class="nav">
-    <a href="../index.html">Home</a>
-    <a href="aboutme.html">About</a>
-    <a href="games.html">My Games</a>
-    <a href="contact.html">Contact</a>
-  </div>
-
-  <div class="footer">
-    <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
-  </div>
+    <!-- Background overlay for retro effect -->
+    <div class="page-overlay"></div>
+    
+    <!-- Added Navigation Bar -->
+    <div class="nav">
+        <a href="../index.html">Home</a>
+        <a href="aboutme.html">About</a>
+        <a href="wordle.html">My Games</a>
+        <a href="contact.html">Contact</a>
+    </div>
+    
+    <div class="blockbuster-container">
+        <header class="blockbuster-header">
+            <h1>MY GAMES</h1>
+        </header>
+        
+        <div class="shelf-container">
+            <div class="shelf">
+                <div class="game-box" data-game="game1">
+                    <div class="game-cover">
+                        <img src="../images/shrink.png" alt="Game 1">
+                    </div>
+                    <div class="game-title">shrink</div>
+                </div>
+                <div class="game-box" data-game="game2">
+                    <div class="game-cover">
+                        <img src="../images/dwelling.png" alt="Game 2">
+                    </div>
+                    <div class="game-title">The Dwelling Afar</div>
+                </div>
+                <div class="game-box" data-game="game3">
+                    <div class="game-cover">
+                        <img src="../images/cargo.png" alt="Game 3">
+                    </div>
+                    <div class="game-title">Contained Cargo</div>
+                </div>
+            </div>
+            
+            <div class="shelf">
+                <div class="game-box" data-game="game4">
+                    <div class="game-cover">
+                        <img src="../images/fire.png" alt="Game 4">
+                    </div>
+                    <div class="game-title">Dall of Cuty</div>
+                </div>
+                <div class="game-box" data-game="game5">
+                    <div class="game-cover">
+                        <img src="../images/bergs.png" alt="Game 5">
+                    </div>
+                    <div class="game-title">bergs</div>
+                </div>
+                <div class="game-box" data-game="game6">
+                    <div class="game-cover">
+                        <img src="../images/fire.png" alt="Game 6">
+                    </div>
+                    <div class="game-title">Sonder: Reflections</div>
+                </div>
+            </div>
+            
+            <div class="shelf">
+                <div class="game-box" data-game="game7">
+                    <div class="game-cover">
+                        <img src="../images/balloon.png" alt="Game 7">
+                    </div>
+                    <div class="game-title">My Little Balloon Stand</div>
+                </div>
+                <div class="game-box" data-game="game8">
+                    <div class="game-cover">
+                        <img src="../images/fire.png" alt="Game 8">
+                    </div>
+                    <div class="game-title">Supermarket of the Dead</div>
+                </div>
+                <div class="game-box" data-game="game9">
+                    <div class="game-cover">
+                        <img src="../images/fire.png" alt="Game 9">
+                    </div>
+                    <div class="game-title">Unfinished Puzzle Game</div>
+                </div>
+            </div>
+            
+            <div class="shelf-bottom"></div>
+        </div>
+        
+        <div id="game-details-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <div id="game-details-content">
+                    <h2>Game Title</h2>
+                    <div class="game-screenshot">
+                        <img src="../images/fire.png" alt="Game Screenshot">
+                    </div>
+                    <p class="game-description">Game description goes here.</p>
+                    <div class="game-tags">
+                        <span class="tag">Tag 1</span>
+                        <span class="tag">Tag 2</span>
+                    </div>
+                    <a href="#" class="play-button">PLAY GAME</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Added Footer -->
+    <div class="footer">
+        <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
+    </div>
+    
+    <script src="../JavaScript/games.js"></script>
 </body>
 </html>

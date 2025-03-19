@@ -1,0 +1,302 @@
+/* games.css - 90s Blockbuster Style */
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Courier New", Courier, monospace;
+    background-color: #000;
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Navigation Bar - Styled to match websiteStyleSheet.css but with Blockbuster theme */
+.nav {
+    background-color: #66ff66;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 4px solid #1e3f8f;
+    box-shadow: 0 0 10px #1e3f8f;
+}
+
+.nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.nav a:hover {
+    color: #1e3f8f;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Footer - Styled to match websiteStyleSheet.css but with Blockbuster theme */
+.footer {
+    background-color: #ffcc00;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    border: 4px solid #1e3f8f;
+    box-shadow: 0 0 10px #1e3f8f;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #000;
+}
+
+/* Blockbuster Container */
+.blockbuster-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 4px solid #1e3f8f;
+    box-shadow: 0 0 20px #1e3f8f;
+}
+
+/* Header */
+.blockbuster-header {
+    background-color: #1e3f8f;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 4px solid #fff;
+}
+
+.blockbuster-header h1 {
+    font-family: "Impact", sans-serif;
+    font-size: 3rem;
+    letter-spacing: 5px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Shelf Container */
+.shelf-container {
+    background-color: rgba(26, 26, 26, 0.9);
+    padding: 20px;
+}
+
+/* Shelf */
+.shelf {
+    display: flex;
+    justify-content: space-around;
+    background-color: #654321; /* Changed from #333 to brown (#654321) to match shelf edges */
+    border-left: 15px solid #654321;
+    border-right: 15px solid #654321;
+    border-bottom: 2px solid #111;
+    padding: 20px 10px;
+    margin-bottom: 20px;
+}
+
+
+.shelf-bottom {
+    height: 20px;
+    background-color: #654321;
+    border-bottom: 8px solid #432100;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+
+/* Game Box */
+.game-box {
+    width: 180px;
+    height: 250px;
+    background-color: #fff;
+    border: 2px solid #000;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-box:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+}
+
+.game-cover {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    background-color: #1e3f8f;
+    margin: 5% auto;
+    padding: 20px;
+    border: 4px solid #fff;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 0 30px #1e3f8f;
+    animation: modalFadeIn 0.5s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-button {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #ff0;
+}
+
+#game-details-content {
+    padding: 20px;
+}
+
+#game-details-content h2 {
+    color: #ff0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+    font-family: "Impact", sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.game-screenshot {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 3px solid #fff;
+}
+
+.game-screenshot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-description {
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.game-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.tag {
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.play-button {
+    display: inline-block;
+    background-color: #ff0;
+    color: #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #000;
+    text-transform: uppercase;
+    font-family: "Impact", sans-serif;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.play-button:hover {
+    background-color: #ff5500;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* Background Overlay */
+.page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.05) 0px,
+        rgba(0, 0, 0, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .shelf {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-box {
+        margin-bottom: 20px;
+    }
+    
+    .blockbuster-header h1 {
+        font-size: 2rem;
+    }
+    
+    .nav a {
+        font-size: 1rem;
+        margin: 0 10px;
+    }
+}
