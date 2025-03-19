@@ -189,7 +189,9 @@ canvas {
 }
 
 .about-images img {
-  display: inline-block; /* so they line up side by side */
+  display: inline-block;
   margin: 10px;
-  vertical-align: middle; /* or top, if you prefer them top-aligned */
+  vertical-align: middle;
+  width: 150px;   /* force width to 150px */
+  height: 150px;  /* force height to 150px */
 }
