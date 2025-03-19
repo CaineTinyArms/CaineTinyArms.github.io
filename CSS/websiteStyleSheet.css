@@ -180,3 +180,16 @@ canvas {
   font-weight: bold;
   color: red; /* or whatever style you prefer */
 }
+
+
+/* ========== About Page Specific ========== */
+.about-images {
+  text-align: center; /* optional: center them horizontally */
+  /* or you can omit this if you prefer left alignment */
+}
+
+.about-images img {
+  display: inline-block; /* so they line up side by side */
+  margin: 10px;
+  vertical-align: middle; /* or top, if you prefer them top-aligned */
+}
