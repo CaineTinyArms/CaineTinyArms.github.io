@@ -212,7 +212,6 @@ function shoot(event) {
 
     // Game won
     function gameWon() {
-        gameActive = false;
         unlockAllContacts();
         
         // Display winning message
