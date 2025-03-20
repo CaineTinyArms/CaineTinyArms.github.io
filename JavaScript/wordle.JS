@@ -88,6 +88,43 @@ function deleteLetter() {
   }
 }
 
+/**
+ * --- NEW FUNCTION: Update keyboard key colors based on guess results ---
+ * This function updates the on-screen keyboard to visually show which letters
+ * have been tried and their statuses (correct, present, absent)
+ * 
+ * @param {string} letter - The letter that needs its keyboard key updated
+ * @param {string} status - The status of the letter: "correct", "present", or "absent"
+ */
+function updateKeyboardColors(letter, status) {
+  // Find all keys with this letter (should be only one per letter)
+  const keys = document.querySelectorAll(`.key`);
+  keys.forEach((key) => {
+    // Only update keys that match the current letter
+    if (key.textContent.toLowerCase() === letter) {
+      // Only upgrade the key status (absent → present → correct), never downgrade
+      // This follows the original Wordle behavior, where the highest status "wins"
+      if (status === "correct") {
+        // Correct (green) is the highest status, always apply it
+        key.className = "key correct";
+      } else if (status === "present" && !key.classList.contains("correct")) {
+        // Present (yellow) is the middle status, apply if not already correct
+        key.className = "key present";
+      } else if (status === "absent" && 
+                !key.classList.contains("correct") && 
+                !key.classList.contains("present")) {
+        // Absent (gray) is the lowest status, apply only if no status yet
+        key.className = "key absent";
+      }
+      
+      // Preserve the wide-key class for enter and backspace keys
+      if (key.id === "enter" || key.id === "backspace") {
+        key.classList.add("wide-key");
+      }
+    }
+  });
+}
+
 /* --- Function to check the current row guess against the solution --- */
 function checkRow() {
   // Ensure the solution has loaded
@@ -96,6 +133,7 @@ function checkRow() {
     return;
   }
 
+  // Validate the guess has enough letters
   if (currentCol < 5) {
     setMessage("Not enough letters!");
     return;
@@ -119,17 +157,25 @@ function checkRow() {
   const solutionArray = solution.split("");
 
   // Count frequency of each letter in the solution
+  // This helps handle duplicate letters correctly
   const solutionLetterCount = {};
   solutionArray.forEach(letter => {
     solutionLetterCount[letter] = (solutionLetterCount[letter] || 0) + 1;
   });
 
   // First pass: mark correct letters (green)
+  // We do this in a separate pass to prioritize exact matches when handling duplicates
   for (let i = 0; i < 5; i++) {
     const tile = document.getElementById(`${currentRow}-${i}`);
     const letter = guessArray[i];
     if (solutionArray[i] === letter) {
+      // Add the correct class to the tile
       tile.classList.add("correct");
+      
+      // NEW: Update the corresponding keyboard key to green
+      updateKeyboardColors(letter, "correct");
+      
+      // Decrement the letter count to handle duplicates correctly
       solutionLetterCount[letter]--;
     }
   }
@@ -138,12 +184,24 @@ function checkRow() {
   for (let i = 0; i < 5; i++) {
     const tile = document.getElementById(`${currentRow}-${i}`);
     const letter = guessArray[i];
+    
+    // Skip letters already marked as correct in the first pass
     if (!tile.classList.contains("correct")) {
-      if (solutionLetterCount[letter]) {
+      // If the letter is in the solution and we haven't used up all occurrences
+      if (solutionLetterCount[letter] && solutionLetterCount[letter] > 0) {
         tile.classList.add("present");
+        
+        // NEW: Update the corresponding keyboard key to yellow
+        updateKeyboardColors(letter, "present");
+        
+        // Decrement the letter count to handle duplicates correctly
         solutionLetterCount[letter]--;
       } else {
+        // Letter is not in the solution or all occurrences were already accounted for
         tile.classList.add("absent");
+        
+        // NEW: Update the corresponding keyboard key to gray
+        updateKeyboardColors(letter, "absent");
       }
     }
   }

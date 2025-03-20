@@ -106,6 +106,7 @@ body {
   justify-content: center;
 }
 
+/* Individual keyboard key styling */
 .key {
   margin: 3px;
   padding: 10px 15px;
@@ -115,12 +116,38 @@ body {
   font-size: 14px;
   border-radius: 4px;
   background-color: #d3d6da;
+  /* NEW: Add smooth transition for color changes */
+  transition: background-color 0.3s ease;
 }
 
 .key:hover {
   background-color: #b5b9bd;
 }
 
+/* 
+ * NEW: Color styling for keyboard keys 
+ * These match the tile colors but are applied to the keyboard keys
+ * Following the same color scheme as the original Wordle:
+ * - Green for correct letters
+ * - Yellow for present letters (right letter, wrong position)
+ * - Gray for absent letters (not in the word)
+ */
+.key.correct {
+  background-color: #6aaa64;  /* Green */
+  color: #ffffff; /* White text for better contrast */
+}
+
+.key.present {
+  background-color: #c9b458;  /* Yellow */
+  color: #ffffff; /* White text for better contrast */
+}
+
+.key.absent {
+  background-color: #787c7e;  /* Gray */
+  color: #ffffff; /* White text for better contrast */
+}
+
+/* Wider keys for enter and backspace */
 .wide-key {
   flex: 1 0 60px;
 }
