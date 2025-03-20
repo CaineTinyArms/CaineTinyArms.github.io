@@ -1,14 +1,16 @@
-// Game variables
-let score = 0;
-let targetVisible = true;
-let gameActive = true;
-let gameWonDisplayed = false;
-let targetMoveTimer;
-let targetHitCooldown = false;
+// shootingGame.js - Implements the shooting mini-game for unlocking contact options
 
-// Wait for DOM to be fully loaded
+// Global game state variables
+let score = 0;
+let targetVisible = true;         // Flag if target is currently visible (unused here, but kept for potential future use)
+let gameActive = true;            // Flag to control if game is running
+let gameWonDisplayed = false;     // To prevent multiple win messages
+let targetMoveTimer;              // Timer for moving the target periodically
+let targetHitCooldown = false;    // Cooldown flag to prevent multiple hits in rapid succession
+
+// Wait for the DOM to fully load before initializing game elements
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM elements
+    // Get DOM elements used in the game
     const gameArea = document.getElementById('game-area');
     const target = document.getElementById('target');
     const gun = document.getElementById('gun');
@@ -16,35 +18,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactOptions = document.querySelectorAll('.contact-option');
     const skipGameButton = document.getElementById('skip-game');
     
-    // Initialize game
+    // Initialize game: position target, update score, and set event listeners
     function initializeGame() {
-        // Position target with initial values
+        // Set initial position for the target
         target.style.left = '100px';
         target.style.top = '50px';
         
-        // Update score display
+        // Initialize score display
         updateScore(0);
         
-        // Add event listeners
+        // Set up event listeners for mouse movement (aiming) and key presses (shooting)
         document.addEventListener('mousemove', aimGun);
         document.addEventListener('keydown', handleKeyPress);
         skipGameButton.addEventListener('click', skipGame);
         
-        // Start target movement with a single timer system
-        moveTarget(); // Initial position
+        // Set the target’s initial position and start the movement timer
+        moveTarget();
         resetTargetMoveTimer();
     }
 
-    // Reset the target movement timer
+    // Resets the timer for moving the target
     function resetTargetMoveTimer() {
         clearTimeout(targetMoveTimer);
         targetMoveTimer = setTimeout(moveTarget, 3000);
     }
 
-    // Handle key presses (space to shoot)
+    // Listen for key press events; spacebar triggers shooting
     function handleKeyPress(event) {
         if (event.code === 'Space' && gameActive) {
-            event.preventDefault(); // Prevent page scrolling
+            event.preventDefault(); // Prevent default scrolling behavior
+            // Call shoot() with simulated coordinates from the center of the gun
             shoot({
                 clientX: gun.getBoundingClientRect().left + (gun.offsetWidth / 2),
                 clientY: gun.getBoundingClientRect().top - 10
@@ -52,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Move the target to a random position
+    // Move the target to a random position within the game area boundaries
     function moveTarget() {
         if (!gameActive) return;
         
@@ -66,10 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
         target.style.top = randomY + 'px';
     }
 
-    // Aim the gun based on mouse position
+    // Aim the gun based on the current mouse position within the game area
     function aimGun(event) {
-        // Only aim if mouse is inside game area
         const areaRect = gameArea.getBoundingClientRect();
+        // Check if mouse is within the game area
         if (
             event.clientX < areaRect.left || 
             event.clientX > areaRect.right || 
@@ -79,30 +82,27 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Get horizontal mouse position relative to game area
         const mouseX = event.clientX - areaRect.left;
-        
-        // Limit gun movement to container width
         let gunX = mouseX - (gun.offsetWidth / 2);
+        // Constrain the gun position to within the game area
         gunX = Math.max(0, Math.min(gunX, gameArea.offsetWidth - gun.offsetWidth));
         
         gun.style.left = gunX + 'px';
     }
 
-    // Handle shooting
+    // Shoot function: creates a bullet and animates it towards the target
     function shoot(event) {
         if (!gameActive) return;
         
-        // Create bullet
+        // Create bullet element
         const bullet = document.createElement('div');
         bullet.className = 'bullet';
         
-        // Get position of click in the game area
         const areaRect = gameArea.getBoundingClientRect();
         const clickX = event.clientX - areaRect.left;
         const clickY = event.clientY - areaRect.top;
         
-        // Position bullet at gun position (center of the gun)
+        // Calculate gun center position relative to game area
         const gunRect = gun.getBoundingClientRect();
         const gunCenterX = gunRect.left + (gun.offsetWidth / 2) - areaRect.left;
         const gunCenterY = gunRect.top + (gun.offsetHeight / 2) - areaRect.top;
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         gameArea.appendChild(bullet);
         
-        // Calculate angle to move bullet towards click point
+        // Calculate direction and velocity for bullet movement
         const deltaX = clickX - gunCenterX;
         const deltaY = clickY - gunCenterY;
         const angle = Math.atan2(deltaY, deltaX);
@@ -120,22 +120,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const velocityX = Math.cos(angle) * speed;
         const velocityY = Math.sin(angle) * speed;
         
-        // Current bullet position
         let bulletX = gunCenterX;
         let bulletY = gunCenterY;
         
-        // Animate bullet
+        // Animate bullet movement at regular intervals
         const bulletInterval = setInterval(() => {
-            // Update bullet position
             bulletX += velocityX;
             bulletY += velocityY;
             bullet.style.left = bulletX + 'px';
             bullet.style.top = bulletY + 'px';
             
-            // Check if bullet hit target
+            // Get bounding rectangles for collision detection
             const bulletRect = bullet.getBoundingClientRect();
             const targetRect = target.getBoundingClientRect();
             
+            // If bullet intersects target and not in cooldown state
             if (
                 !targetHitCooldown &&
                 bulletRect.left < targetRect.right &&
@@ -143,33 +142,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 bulletRect.top < targetRect.bottom &&
                 bulletRect.bottom > targetRect.top
             ) {
-                // Set cooldown to prevent multiple hits on same target
-                targetHitCooldown = true;
+                targetHitCooldown = true; // Set cooldown
                 
-                // Hit!
-                clearInterval(bulletInterval);
-                target.classList.add('hit');
+                clearInterval(bulletInterval); // Stop bullet animation
+                target.classList.add('hit');   // Add hit animation class
                 setTimeout(() => target.classList.remove('hit'), 500);
                 
-                // Add points
-                updateScore(5);
+                updateScore(5);  // Increase score by 5 points
+                updateContactOptions(); // Check if new contact options should be unlocked
                 
-                // Highlight contact options based on score
-                updateContactOptions();
-                
-                // Move target after a short delay and reset the timer
+                // After a short delay, move the target and reset cooldown and timer
                 setTimeout(() => {
                     moveTarget();
                     resetTargetMoveTimer();
-                    // Reset cooldown after target has moved
                     targetHitCooldown = false;
                 }, 500);
                 
-                // Remove bullet
-                bullet.remove();
+                bullet.remove(); // Remove bullet element from the DOM
             }
             
-            // Remove bullet if it goes off screen
+            // Remove bullet if it goes outside the game area boundaries
             if (
                 bulletX < 0 || 
                 bulletX > gameArea.offsetWidth || 
@@ -182,26 +174,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 20);
     }
 
-    // Update score
+    // Update the score and display it on screen; check for win condition
     function updateScore(points) {
         score += points;
         scoreDisplay.textContent = 'Score: ' + score;
         
-        // Check for game completion
         if (score >= 100) {
             gameWon();
         }
     }
 
-    // Update contact options based on score
+    // Unlock contact options based on score thresholds
     function updateContactOptions() {
         contactOptions.forEach(option => {
             const points = parseInt(option.getAttribute('data-points'), 10);
             if (score >= points && !option.classList.contains('activated')) {
-                // Activate this option
                 option.classList.add('activated');
                 
-                // Create a floating 'Unlocked!' animation
+                // Create a temporary popup indicating the option is unlocked
                 const pointsPopup = document.createElement('div');
                 pointsPopup.textContent = 'Unlocked!';
                 pointsPopup.style.position = 'absolute';
@@ -216,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 option.appendChild(pointsPopup);
                 
-                // Animate and remove
+                // Animate and remove the popup
                 setTimeout(() => {
                     pointsPopup.style.transition = 'all 1s ease-out';
                     pointsPopup.style.top = '0%';
@@ -227,44 +217,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Game won
+    // When the game is won, unlock all contacts and display a win message
     function gameWon() {
       if (gameWonDisplayed) return;
 
       gameWonDisplayed = true;
-
       unlockAllContacts();
         
-        // Display winning message
-        const winMessage = document.createElement('div');
-        winMessage.className = 'win-message';
-        winMessage.textContent = 'All contact methods unlocked!';
+      const winMessage = document.createElement('div');
+      winMessage.className = 'win-message';
+      winMessage.textContent = 'All contact methods unlocked!';
+      gameArea.appendChild(winMessage);
         
-        gameArea.appendChild(winMessage);
-        
-        // Fade out after 3 seconds
-        setTimeout(() => {
-            winMessage.classList.add('fade-out');
-            setTimeout(() => {
-                winMessage.remove();
-            }, 1000);
-        }, 3000);
+      // Fade out the win message after a delay
+      setTimeout(() => {
+          winMessage.classList.add('fade-out');
+          setTimeout(() => {
+              winMessage.remove();
+          }, 1000);
+      }, 3000);
     }
     
-    // Skip game and unlock all contacts
+    // Skip game functionality: immediately unlock all contact options
     function skipGame() {
         unlockAllContacts();
-
         skipGameButton.style.display = 'none';
-
-        // Display skipped message
         const skipMessage = document.createElement('div');
         skipMessage.className = 'win-message';
         skipMessage.textContent = 'Game skipped! All contact methods unlocked!';
-        
         gameArea.appendChild(skipMessage);
-        
-        // Fade out after 3 seconds
         setTimeout(() => {
             skipMessage.classList.add('fade-out');
             setTimeout(() => {
@@ -273,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
     
-    // Unlock all contact options
+    // Unlock all contact options and add a pulse effect
     function unlockAllContacts() {
         contactOptions.forEach(option => {
             option.classList.add('activated');
@@ -281,6 +262,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Initialize the game
+    // Start game initialization
     initializeGame();
 });

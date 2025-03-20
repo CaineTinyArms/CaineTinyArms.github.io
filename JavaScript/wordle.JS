@@ -1,40 +1,37 @@
-// wordle.js
+// wordle.JS - Implements a Wordle-style game to verify human users before accessing the games page
 
-// Arrays loaded from text files
-let answersList = [];      // Will hold valid answers from wordle-answers-alphabetical.txt
-let allowedGuesses = [];   // Will hold valid guesses from wordle-allowed-guesses.txt
-let solution = "";         // Randomly chosen from answersList
+// Global arrays for valid answers and allowed guesses
+let answersList = [];
+let allowedGuesses = [];
+let solution = "";  // The randomly chosen solution
 
-// Game state
+// Global game state variables for tracking user input
 let currentRow = 0;
 let currentCol = 0;
 let isGameOver = false;
 
-/* --- 1) Load answers from "wordle-answers-alphabetical.txt" --- */
+/* --- Load valid answers from "wordle-answers-alphabetical.txt" --- */
 fetch("wordle-answers-alphabetical.txt")
   .then(response => response.text())
   .then(text => {
-    // Remove a possible BOM
+    // Remove BOM if present, then split into lines and filter for exactly 5-letter words
     text = text.replace(/^\uFEFF/, "");
-    // Split on newlines, trim, lowercase, and filter for exactly 5 letters
     answersList = text
       .split(/\r?\n/)
       .map(line => line.trim().toLowerCase())
       .filter(line => line.length === 5);
 
-    // Pick a random solution from answersList
+    // Choose a random word as the solution
     solution = answersList[Math.floor(Math.random() * answersList.length)];
     console.log("Solution (debug):", solution);
   })
   .catch(error => console.error("Error loading answers list:", error));
 
-/* --- 2) Load allowed guesses from "wordle-allowed-guesses.txt" --- */
+/* --- Load allowed guesses from "wordle-allowed-guesses.txt" --- */
 fetch("wordle-allowed-guesses.txt")
   .then(response => response.text())
   .then(text => {
-    // Remove a possible BOM
     text = text.replace(/^\uFEFF/, "");
-    // Split on newlines, trim, lowercase, and filter for exactly 5 letters
     allowedGuesses = text
       .split(/\r?\n/)
       .map(line => line.trim().toLowerCase())
@@ -44,7 +41,7 @@ fetch("wordle-allowed-guesses.txt")
   })
   .catch(error => console.error("Error loading allowed guesses:", error));
 
-/* --- Keyboard Events --- */
+/* --- Keyboard event listener for physical keyboard input --- */
 document.addEventListener("keydown", (e) => {
   if (isGameOver) return;
   if (e.key === "Enter") {
@@ -56,6 +53,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+// Set up click event listeners for the on-screen keyboard keys
 const keys = document.querySelectorAll(".key");
 keys.forEach((key) => {
   key.addEventListener("click", () => {
@@ -72,7 +70,7 @@ keys.forEach((key) => {
   });
 });
 
-/* --- Add a Letter to the Current Tile --- */
+/* --- Function to add a letter to the current guess --- */
 function addLetter(letter) {
   if (currentCol < 5 && currentRow < 6) {
     const tile = document.getElementById(`${currentRow}-${currentCol}`);
@@ -81,7 +79,7 @@ function addLetter(letter) {
   }
 }
 
-/* --- Delete a Letter from the Current Tile --- */
+/* --- Function to delete the last letter in the current guess --- */
 function deleteLetter() {
   if (currentCol > 0) {
     currentCol--;
@@ -90,9 +88,9 @@ function deleteLetter() {
   }
 }
 
-/* --- Check the User's Guess --- */
+/* --- Function to check the current row guess against the solution --- */
 function checkRow() {
-  // If the solution hasn't loaded yet, we can't proceed
+  // Ensure the solution has loaded
   if (!solution) {
     setMessage("Please wait, loading word list...");
     return;
@@ -103,30 +101,30 @@ function checkRow() {
     return;
   }
 
-  // Gather the guess from the current row
+  // Construct the guess string from the current row of tiles
   let guess = "";
   for (let c = 0; c < 5; c++) {
     guess += document.getElementById(`${currentRow}-${c}`).textContent;
   }
   guess = guess.toLowerCase();
 
-  // Validate guess: it must be in allowedGuesses OR answersList
+  // Validate guess: must be in allowedGuesses or answersList
   if (!allowedGuesses.includes(guess) && !answersList.includes(guess)) {
     setMessage("Word not in list!");
     return;
   }
 
-  // Evaluate guess against the solution
+  // Split guess and solution into arrays for comparison
   const guessArray = guess.split("");
   const solutionArray = solution.split("");
 
-  // Track how many times each letter appears in the solution
+  // Count frequency of each letter in the solution
   const solutionLetterCount = {};
   solutionArray.forEach(letter => {
     solutionLetterCount[letter] = (solutionLetterCount[letter] || 0) + 1;
   });
 
-  // Mark correct letters (green)
+  // First pass: mark correct letters (green)
   for (let i = 0; i < 5; i++) {
     const tile = document.getElementById(`${currentRow}-${i}`);
     const letter = guessArray[i];
@@ -136,7 +134,7 @@ function checkRow() {
     }
   }
 
-  // Mark present (yellow) or absent (gray)
+  // Second pass: mark present (yellow) or absent (gray) letters
   for (let i = 0; i < 5; i++) {
     const tile = document.getElementById(`${currentRow}-${i}`);
     const letter = guessArray[i];
@@ -150,7 +148,7 @@ function checkRow() {
     }
   }
 
-  // Check if user guessed the solution
+  // If guess matches the solution, notify user and redirect after a delay
   if (guess === solution) {
     setMessage("Good Job, transferring you to the games page!");
     isGameOver = true;
@@ -158,31 +156,29 @@ function checkRow() {
       window.location.href = "games.html";
     }, 3000);
   } else {
-    // If out of rows, game over
+    // If last row has been used without success, display failure message with a link
     if (currentRow >= 5) {
       setMessage(`You Suck! The word was "${solution}". You must now click the loser link in order to see the games page.`);
       isGameOver = true;
       const linkPara = document.getElementById("gamesLinkParagraph");
       linkPara.innerHTML = '<a href="games.html">LOSER LINK</a>';
     } else {
-      // Move to next row
+      // Otherwise, move to the next row for another guess
       currentRow++;
       currentCol = 0;
     }
   }
 }
 
+/* --- Function to display a message to the user --- */
 function setMessage(msg) {
   const messageEl = document.getElementById("message");
-  
-  // Show the message at full opacity
   messageEl.style.opacity = 1;
   messageEl.textContent = msg;
 
-  // If it's specifically "Word not in list!", fade out after 2 seconds
+  // Fade out error messages after 1 second if still unchanged
   if (msg === "Word not in list!" || msg == "Not enough letters!") {
     setTimeout(() => {
-      // Only fade out if the message is still the same
       if (messageEl.textContent === msg) {
         messageEl.style.opacity = 0;
       }

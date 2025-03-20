@@ -1,93 +1,95 @@
-// Wait for the DOM to be fully loaded
+// Wait for the DOM to be fully loaded before running the game code
 document.addEventListener('DOMContentLoaded', function() {
-  // Canvas setup - NEW DIMENSIONS: 1200x800 pixels (even wider)
+  // Get the canvas element and its drawing context
   const canvas = document.getElementById('breakoutCanvas');
   const ctx = canvas.getContext('2d');
+
+  // Get control buttons by their IDs
   const startButton = document.getElementById('startButton');
   const resetButton = document.getElementById('resetButton');
   const skipButton = document.getElementById('skipButton');
-  
-  // Game variables
+
+  // Game state variables
   let gameStarted = false;
   let gameOver = false;
   let score = 0;
-  
-  // Load background image (this will be revealed as blocks are broken)
+
+  // Load the background image that will be revealed as bricks are broken
   const backgroundImage = new Image();
-  backgroundImage.src = '../Images/test.png'; // Replace with your actual image path
-  
-  // Make sure the image is loaded before starting
+  backgroundImage.src = '../Images/test.png'; // Update to actual image path if needed
+
+  // When the image is loaded, draw the initial state on the canvas
   backgroundImage.onload = function() {
     drawInitialState();
   };
-  
-  // Ball properties - SLOWER BALL
+
+  // Define ball properties (position, movement, and appearance)
   const ball = {
     x: canvas.width / 2,
     y: canvas.height - 50,
     radius: 12,
-    dx: 2.5, // Reduced speed (was 4)
-    dy: -2.5, // Reduced speed (was -4)
+    dx: 2.5, // Horizontal speed (slower than previous version)
+    dy: -2.5, // Vertical speed
     color: '#ff3366'
   };
-  
-  // Paddle properties - BIGGER PADDLE
+
+  // Define paddle properties (size, position, and color)
   const paddle = {
-    width: 250, // Increased width for wider canvas
-    height: 20, // Slightly taller
+    width: 250, // Wider paddle
+    height: 20, // Slightly taller paddle
     x: (canvas.width - 250) / 2,
     color: '#66ff66'
   };
-  
-  // Calculate how many rows would fill about 4/5 of the canvas height
+
+  // Calculate playable area height (using 80% of canvas height)
   const canvasHeight = canvas.height;
-  const playableHeight = canvasHeight * 0.8; // 4/5 of the canvas height
-  
-  // Brick properties - LARGER BRICKS WITH FEWER COLUMNS AND ROWS
-  const brickHeight = 30; // Increased from 14 to 30
-  const brickWidth = 140; // Increased from 90 to 140
-  const brickPadding = 8; // Increased from 4 to 8
-  const brickOffsetTop = 40; // Same as before
-  const brickOffsetLeft = 30; // Slightly increased from 25
-  
-  // Calculate how many columns will fit across the canvas width
+  const playableHeight = canvasHeight * 0.8;
+
+  // Brick properties: size, padding, offsets
+  const brickHeight = 30;
+  const brickWidth = 140;
+  const brickPadding = 8;
+  const brickOffsetTop = 40;
+  const brickOffsetLeft = 30;
+
+  // Calculate the number of brick columns that fit in the canvas
   const brickColumnCount = Math.floor((canvas.width - 2 * brickOffsetLeft) / (brickWidth + brickPadding));
-  
-  // Calculate how many rows will fit in the playable height
+  // Calculate number of brick rows that fit in the playable height
   const rowHeight = brickHeight + brickPadding;
   const brickRowCount = Math.floor((playableHeight - brickOffsetTop) / rowHeight);
-  
-  // Create bricks array
+
+  // Create a 2D array to store brick objects
   const bricks = [];
   for (let c = 0; c < brickColumnCount; c++) {
     bricks[c] = [];
     for (let r = 0; r < brickRowCount; r++) {
       bricks[c][r] = { 
-        x: 0, 
-        y: 0, 
-        status: 1,
-        color: getRandomColor()
+        x: 0, // Will be calculated when drawing
+        y: 0,
+        status: 1, // 1 means brick is intact; 0 means broken
+        color: getRandomColor() // Random color for visual variety
       };
     }
   }
-  
-  // Get random color for bricks
+
+  // Function to randomly select a color for bricks
   function getRandomColor() {
     const colors = ['#ff3366', '#33ccff', '#ffcc00', '#66ff66', '#cc66ff', '#ff9933'];
     return colors[Math.floor(Math.random() * colors.length)];
   }
-  
-  // Event listeners for paddle movement
+
+  // Event listeners for paddle movement using keyboard keys
   let rightPressed = false;
   let leftPressed = false;
-  
   document.addEventListener('keydown', keyDownHandler);
   document.addEventListener('keyup', keyUpHandler);
-  
+
+  // Event listeners for control buttons
   startButton.addEventListener('click', startGame);
   resetButton.addEventListener('click', resetGame);
   skipButton.addEventListener('click', skipGame);
-  
+
+  // Handle keydown events for arrow keys and WASD
   function keyDownHandler(e) {
     if (e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
       rightPressed = true;
@@ -95,7 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
       leftPressed = true;
     }
   }
-  
+
+  // Handle keyup events to stop paddle movement
   function keyUpHandler(e) {
     if (e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
       rightPressed = false;
@@ -103,8 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
       leftPressed = false;
     }
   }
-  
-  // Draw functions
+
+  // Function to draw the ball on the canvas
   function drawBall() {
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
@@ -112,7 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ctx.fill();
     ctx.closePath();
   }
-  
+
+  // Function to draw the paddle on the canvas
   function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddle.x, canvas.height - paddle.height, paddle.width, paddle.height);
@@ -123,11 +127,12 @@ document.addEventListener('DOMContentLoaded', function() {
     ctx.stroke();
     ctx.closePath();
   }
-  
+
+  // Function to loop through and draw all bricks
   function drawBricks() {
     for (let c = 0; c < brickColumnCount; c++) {
       for (let r = 0; r < brickRowCount; r++) {
-        if (bricks[c][r].status === 1) {
+        if (bricks[c][r].status === 1) { // Only draw if brick is not broken
           const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
           const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
           bricks[c][r].x = brickX;
@@ -145,13 +150,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-  
+
+  // Function to draw the current score on the canvas
   function drawScore() {
     ctx.font = '24px "Comic Sans MS"';
     ctx.fillStyle = '#000';
     ctx.fillText('Score: ' + score, 20, 40);
   }
-  
+
+  // Function to display a game over or win message
   function drawGameOver(win) {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -170,23 +177,24 @@ document.addEventListener('DOMContentLoaded', function() {
     ctx.fillText('Score: ' + score, canvas.width / 2, canvas.height / 2 + 60);
     ctx.textAlign = 'start';
     
-    // Fade out the win screen after 1 second and show just the image
+    // If win, show the full background image after a short delay
     if (win) {
       setTimeout(function() {
         showFullImage();
       }, 1000);
     }
   }
-  
+
+  // Function to draw the initial canvas state before the game starts
   function drawInitialState() {
-    // Clear canvas
+    // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Draw the background (fully covered by gray before game starts)
+    // Draw a gray background
     ctx.fillStyle = '#ccc';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Draw title text
+    // Display introductory text
     ctx.font = '36px "Comic Sans MS"';
     ctx.fillStyle = '#000';
     ctx.textAlign = 'center';
@@ -195,8 +203,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ctx.fillText('Click "Start Game" to begin', canvas.width / 2, canvas.height / 2 + 50);
     ctx.textAlign = 'start';
   }
-  
-  // Collision detection
+
+  // Collision detection between the ball and bricks
   function collisionDetection() {
     for (let c = 0; c < brickColumnCount; c++) {
       for (let r = 0; r < brickRowCount; r++) {
@@ -209,11 +217,12 @@ document.addEventListener('DOMContentLoaded', function() {
             ball.y > brick.y &&
             ball.y < brick.y + brickHeight
           ) {
+            // Reverse ball vertical direction on collision
             ball.dy = -ball.dy;
-            brick.status = 0;
+            brick.status = 0; // Mark brick as broken
             score++;
             
-            // Check if all bricks are gone
+            // Check if all bricks have been broken
             let allBroken = true;
             for (let i = 0; i < brickColumnCount; i++) {
               for (let j = 0; j < brickRowCount; j++) {
@@ -233,13 +242,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-  
-  // Draw background image with masked regions for bricks
+
+  // Draw the background image with “masked” bricks
   function drawRevealedImage() {
-    // First draw the image
+    // Draw the background image
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     
-    // Then cover it with rectangles where bricks still exist
+    // Cover the areas where bricks are still intact with gray rectangles
     ctx.fillStyle = '#ccc';
     for (let c = 0; c < brickColumnCount; c++) {
       for (let r = 0; r < brickRowCount; r++) {
@@ -249,49 +258,51 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-  
-  // Function to show the full image without any game elements
+
+  // Function to display the full background image (when game is skipped or won)
   function showFullImage() {
-    // Clear canvas and draw full image
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   }
-  
-  // Main game loop
+
+  // Main game loop that updates and draws the game elements
   function draw() {
-    // Clear the canvas
+    // Clear the canvas for new frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Draw the partially revealed image
+    // Draw the background image with covered bricks
     drawRevealedImage();
     
-    // Draw game elements
+    // Draw bricks, ball, paddle, and score on top
     drawBricks();
     drawBall();
     drawPaddle();
     drawScore();
     
-    // Collision detection
+    // Check for collisions between the ball and bricks
     collisionDetection();
     
-    // Ball movement and collision with walls
+    // Bounce the ball off the left and right walls
     if (ball.x + ball.dx > canvas.width - ball.radius || ball.x + ball.dx < ball.radius) {
       ball.dx = -ball.dx;
     }
     
+    // Bounce the ball off the top wall
     if (ball.y + ball.dy < ball.radius) {
       ball.dy = -ball.dy;
-    } else if (ball.y + ball.dy > canvas.height - ball.radius - paddle.height) {
+    } 
+    // Check for collision with paddle or bottom of canvas
+    else if (ball.y + ball.dy > canvas.height - ball.radius - paddle.height) {
       if (ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
-        // Calculate angle based on where ball hits paddle
+        // Calculate hit angle based on where the ball hits the paddle
         let hitPosition = (ball.x - (paddle.x + paddle.width / 2)) / (paddle.width / 2);
-        let angle = hitPosition * (Math.PI / 4); // Max 45 degree angle
+        let angle = hitPosition * (Math.PI / 4); // Maximum 45° angle
         
         let speed = Math.sqrt(ball.dx * ball.dx + ball.dy * ball.dy);
         ball.dx = speed * Math.sin(angle);
         ball.dy = -speed * Math.cos(angle);
       } else if (ball.y + ball.dy > canvas.height - ball.radius) {
-        // Reset ball position instead of losing a life
+        // Reset ball if missed by the paddle
         ball.x = canvas.width / 2;
         ball.y = canvas.height - 50;
         ball.dx = (Math.random() > 0.5 ? 1 : -1) * 2.5;
@@ -299,53 +310,53 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
-    // Paddle movement
+    // Move paddle based on user input
     if (rightPressed && paddle.x < canvas.width - paddle.width) {
-      paddle.x += 9; // Slightly faster paddle movement
+      paddle.x += 9;
     } else if (leftPressed && paddle.x > 0) {
-      paddle.x -= 9; // Slightly faster paddle movement
+      paddle.x -= 9;
     }
     
-    // Move the ball
+    // Update ball position for the next frame
     ball.x += ball.dx;
     ball.y += ball.dy;
     
-    // Check if game is over
+    // If the game is over (all bricks broken), display win message and stop animation
     if (gameOver) {
       drawGameOver(true);
-      return; // Stop the animation
+      return;
     }
     
-    // Continue the game loop
+    // Continue the game loop if game has started
     if (gameStarted) {
       requestAnimationFrame(draw);
     }
   }
-  
-  // Start the game
+
+  // Start the game if not already started and not over
   function startGame() {
     if (!gameStarted && !gameOver) {
       gameStarted = true;
       draw();
     }
   }
-  
-  // Reset the game
+
+  // Reset the game state to initial conditions
   function resetGame() {
     gameStarted = false;
     gameOver = false;
     score = 0;
     
-    // Reset ball position
+    // Reset ball position and speed
     ball.x = canvas.width / 2;
     ball.y = canvas.height - 50;
     ball.dx = 2.5;
     ball.dy = -2.5;
     
-    // Reset paddle position
+    // Reset paddle to center
     paddle.x = (canvas.width - paddle.width) / 2;
     
-    // Reset bricks
+    // Reset all bricks to intact with new random colors
     for (let c = 0; c < brickColumnCount; c++) {
       for (let r = 0; r < brickRowCount; r++) {
         bricks[c][r].status = 1;
@@ -355,17 +366,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     drawInitialState();
   }
-  
-  // Skip game and show full image
+
+  // Skip the game and immediately show the full background image
   function skipGame() {
-    // Set gameStarted to false to stop the game loop
     gameStarted = false;
     gameOver = true;
-    
-    // Show just the image with no overlays
     showFullImage();
   }
-  
-  // Initial draw
+
+  // Initial draw to display the starting state
   drawInitialState();
 });

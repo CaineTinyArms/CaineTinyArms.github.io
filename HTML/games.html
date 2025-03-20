@@ -1,119 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
+    <!-- Set viewport for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title -->
     <title>My Games</title>
+    <!-- Link to games-specific stylesheet -->
     <link rel="stylesheet" href="../CSS/games.css">
-</head>
-<body>
+  </head>
+  <body>
     <!-- Background overlay for retro effect -->
     <div class="page-overlay"></div>
     
-    <!-- Added Navigation Bar -->
+    <!-- Navigation bar -->
     <div class="nav">
-        <a href="../index.html">Home</a>
-        <a href="aboutme.html">About</a>
-        <a href="wordle.html">My Games</a>
-        <a href="contact.html">Contact</a>
+      <a href="../index.html">Home</a>
+      <a href="aboutme.html">About</a>
+      <a href="wordle.html">My Games</a>
+      <a href="contact.html">Contact</a>
     </div>
     
+    <!-- Main container for game content -->
     <div class="blockbuster-container">
-        <header class="blockbuster-header">
-            <h1>MY GAMES</h1>
-        </header>
-        
-        <div class="shelf-container">
-            <div class="shelf">
-                <div class="game-box" data-game="game1">
-                    <div class="game-cover">
-                        <img src="../Images/shrink.png" alt="Game 1">
-                    </div>
-                    <div class="game-title">shrink</div>
-                </div>
-                <div class="game-box" data-game="game2">
-                    <div class="game-cover">
-                        <img src="../Images/dwelling.png" alt="Game 2">
-                    </div>
-                    <div class="game-title">The Dwelling Afar</div>
-                </div>
-                <div class="game-box" data-game="game3">
-                    <div class="game-cover">
-                        <img src="../Images/cargo.png" alt="Game 3">
-                    </div>
-                    <div class="game-title">Contained Cargo</div>
-                </div>
+      <!-- Header with the page title -->
+      <header class="blockbuster-header">
+        <h1>MY GAMES</h1>
+      </header>
+      
+      <!-- Shelf container holding rows of game boxes -->
+      <div class="shelf-container">
+        <!-- First shelf row -->
+        <div class="shelf">
+          <!-- Each game box represents one game -->
+          <div class="game-box" data-game="game1">
+            <div class="game-cover">
+              <img src="../Images/shrink.png" alt="Game 1">
             </div>
-            
-            <div class="shelf">
-                <div class="game-box" data-game="game4">
-                    <div class="game-cover">
-                        <img src="../Images/doc.png" alt="Game 4">
-                    </div>
-                    <div class="game-title">Dall of Cuty</div>
-                </div>
-                <div class="game-box" data-game="game5">
-                    <div class="game-cover">
-                        <img src="../Images/bergs.png" alt="Game 5">
-                    </div>
-                    <div class="game-title">bergs</div>
-                </div>
-                <div class="game-box" data-game="game6">
-                    <div class="game-cover">
-                        <img src="../Images/sonder.png" alt="Game 6">
-                    </div>
-                    <div class="game-title">Sonder: Reflections</div>
-                </div>
+            <div class="game-title">shrink</div>
+          </div>
+          <div class="game-box" data-game="game2">
+            <div class="game-cover">
+              <img src="../Images/dwelling.png" alt="Game 2">
             </div>
-            
-            <div class="shelf">
-                <div class="game-box" data-game="game7">
-                    <div class="game-cover">
-                        <img src="../Images/balloon.png" alt="Game 7">
-                    </div>
-                    <div class="game-title">My Little Balloon Stand</div>
-                </div>
-                <div class="game-box" data-game="game8">
-                    <div class="game-cover">
-                        <img src="../Images/sotd.png" alt="Game 8">
-                    </div>
-                    <div class="game-title">Supermarket of the Dead</div>
-                </div>
-                <div class="game-box" data-game="game9">
-                    <div class="game-cover">
-                        <img src="../Images/fire.png" alt="Game 9">
-                    </div>
-                    <div class="game-title">Unfinished Puzzle Game</div>
-                </div>
+            <div class="game-title">The Dwelling Afar</div>
+          </div>
+          <div class="game-box" data-game="game3">
+            <div class="game-cover">
+              <img src="../Images/cargo.png" alt="Game 3">
             </div>
-            
-            <div class="shelf-bottom"></div>
+            <div class="game-title">Contained Cargo</div>
+          </div>
         </div>
         
-        <div id="game-details-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <div id="game-details-content">
-                    <h2>Game Title</h2>
-                    <div class="game-screenshot">
-                        <img src="../Images/fire.png" alt="Game Screenshot">
-                    </div>
-                    <p class="game-description">Game description goes here.</p>
-                    <div class="game-tags">
-                        <span class="tag">Tag 1</span>
-                        <span class="tag">Tag 2</span>
-                    </div>
-                    <a href="#" class="play-button">PLAY GAME</a>
-                </div>
+        <!-- Second shelf row -->
+        <div class="shelf">
+          <div class="game-box" data-game="game4">
+            <div class="game-cover">
+              <img src="../Images/doc.png" alt="Game 4">
             </div>
+            <div class="game-title">Dall of Cuty</div>
+          </div>
+          <div class="game-box" data-game="game5">
+            <div class="game-cover">
+              <img src="../Images/bergs.png" alt="Game 5">
+            </div>
+            <div class="game-title">bergs</div>
+          </div>
+          <div class="game-box" data-game="game6">
+            <div class="game-cover">
+              <img src="../Images/sonder.png" alt="Game 6">
+            </div>
+            <div class="game-title">Sonder: Reflections</div>
+          </div>
         </div>
+        
+        <!-- Third shelf row -->
+        <div class="shelf">
+          <div class="game-box" data-game="game7">
+            <div class="game-cover">
+              <img src="../Images/balloon.png" alt="Game 7">
+            </div>
+            <div class="game-title">My Little Balloon Stand</div>
+          </div>
+          <div class="game-box" data-game="game8">
+            <div class="game-cover">
+              <img src="../Images/sotd.png" alt="Game 8">
+            </div>
+            <div class="game-title">Supermarket of the Dead</div>
+          </div>
+          <div class="game-box" data-game="game9">
+            <div class="game-cover">
+              <img src="../Images/fire.png" alt="Game 9">
+            </div>
+            <div class="game-title">Unfinished Puzzle Game</div>
+          </div>
+        </div>
+        
+        <!-- Bottom shelf decoration -->
+        <div class="shelf-bottom"></div>
+      </div>
+      
+      <!-- Modal for displaying game details when a game box is clicked -->
+      <div id="game-details-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-button">&times;</span>
+          <div id="game-details-content">
+            <h2>Game Title</h2>
+            <div class="game-screenshot">
+              <img src="../Images/fire.png" alt="Game Screenshot">
+            </div>
+            <p class="game-description">Game description goes here.</p>
+            <div class="game-tags">
+              <span class="tag">Tag 1</span>
+              <span class="tag">Tag 2</span>
+            </div>
+            <a href="#" class="play-button">PLAY GAME</a>
+          </div>
+        </div>
+      </div>
     </div>
     
-    <!-- Added Footer -->
+    <!-- Footer section -->
     <div class="footer">
-        <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
+      <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
     </div>
     
+    <!-- Include external JavaScript file for games page interactivity -->
     <script src="../JavaScript/games.js"></script>
-</body>
+  </body>
 </html>

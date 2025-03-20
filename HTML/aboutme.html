@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>About Me - CaineTinyArms</title>
-  <link rel="stylesheet" type="text/css" href="../CSS/websiteStyleSheet.css">
-  <link rel="stylesheet" type="text/css" href="../CSS/aboutme.css">
-</head>
-<body>
-  <div class="header">
-    <h1>About Me</h1>
-    <marquee behavior="scroll" direction="left">Aspiring Game Developer</marquee>
-  </div>
-  
-  <div class="nav">
-    <a href="../index.html">Home</a>
-    <a href="aboutme.html">About</a>
-    <a href="wordle.html">My Games</a>
-    <a href="contact.html">Contact</a>
-  </div>
-
-  <div class="about-content">
-    <div class="game-container">
-      <canvas id="breakoutCanvas" width="1200" height="800"></canvas>
+  <head>
+    <meta charset="UTF-8">
+    <!-- Page title for the About page -->
+    <title>About Me - CaineTinyArms</title>
+    <!-- Link to global stylesheet and About–specific stylesheet -->
+    <link rel="stylesheet" type="text/css" href="../CSS/websiteStyleSheet.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/aboutme.css">
+  </head>
+  <body>
+    <!-- Header with page title and scrolling tagline -->
+    <div class="header">
+      <h1>About Me</h1>
+      <marquee behavior="scroll" direction="left">
+        Aspiring Game Developer
+      </marquee>
     </div>
-    
-    <div class="game-controls">
-      <button id="startButton">Start Game</button>
-      <button id="resetButton">Reset Game</button>
-      <button id="skipButton">Skip Game</button>
-      <p>Use left and right arrow keys or A and D keys to control the paddle.</p>
+
+    <!-- Navigation bar with links to site sections -->
+    <div class="nav">
+      <a href="../index.html">Home</a>
+      <a href="aboutme.html">About</a>
+      <a href="wordle.html">My Games</a>
+      <a href="contact.html">Contact</a>
     </div>
-  </div>
 
-  <div class="footer">
-    <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
-  </div>
+    <!-- About content area containing a canvas for the breakout game -->
+    <div class="about-content">
+      <!-- Container for the breakout game canvas -->
+      <div class="game-container">
+        <!-- Canvas element used by aboutme.js to run the breakout game -->
+        <canvas id="breakoutCanvas" width="1200" height="800"></canvas>
+      </div>
+      
+      <!-- Controls for starting, resetting, and skipping the game -->
+      <div class="game-controls">
+        <button id="startButton">Start Game</button>
+        <button id="resetButton">Reset Game</button>
+        <button id="skipButton">Skip Game</button>
+        <p>Use left and right arrow keys or A and D keys to control the paddle.</p>
+      </div>
+    </div>
 
-  <!-- External JS for the breakout game -->
-  <script src="../JavaScript/aboutme.js"></script>
-</body>
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
+    </div>
+
+    <!-- External JavaScript file for aboutme page functionality -->
+    <script src="../JavaScript/aboutme.js"></script>
+  </body>
 </html>

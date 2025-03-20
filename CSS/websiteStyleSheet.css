@@ -1,42 +1,33 @@
-/* ========== Global Styles ========== */
+/* websiteStyleSheet.css - Global styles for the website */
+
+/* Global body styling */
 body {
-  background-color: #99ccff;
+  background-color: #99ccff;  /* Light blue background */
   margin: 0;
   padding: 0;
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-/* ========== Table & Layout Styles ========== */
-table {
-  width: 80%;
-  margin: 20px auto;
-  border: 2px solid #000;
-  border-collapse: collapse;
-  background-color: #ffffff;
-}
+/* Removed unused table styles (as no tables are used in the markup) */
 
-td, th {
-  border: 2px solid #000;
-  padding: 20px;
-  vertical-align: top;
-}
-
-/* ========== Header & Footer Styles ========== */
+/* Header styling */
 .header {
-  background-color: #ffcc00;
+  background-color: #ffcc00;  /* Yellow background */
   text-align: center;
 }
 
+/* Header h1 styling */
 .header h1 {
   margin: 10px 0;
 }
 
+/* Footer styling */
 .footer {
   background-color: #ffcc00;
   text-align: center;
 }
 
-/* ========== Navigation Bar ========== */
+/* Navigation bar styling */
 .nav-bar,
 .nav {
   background-color: #66ff66;
@@ -44,6 +35,7 @@ td, th {
   padding: 10px;
 }
 
+/* Navigation link styling */
 .nav-bar a,
 .nav a {
   margin: 0 15px;
@@ -52,7 +44,7 @@ td, th {
   font-weight: bold;
 }
 
-/* ========== Index Page Content Layout ========== */
+/* Main content area layout for index page */
 .content {
   display: flex;
   align-items: center;
@@ -63,11 +55,12 @@ td, th {
   margin: 20px;
 }
 
+/* Text section inside content */
 .text-section {
   flex: 1;
 }
 
-/* ========== Animations ========== */
+/* Blinker animation for elements with .blink */
 @keyframes blinker {
   50% { opacity: 0; }
 }
@@ -75,6 +68,7 @@ td, th {
   animation: blinker 1s linear infinite;
 }
 
+/* Spin animation for elements with .spin */
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -85,6 +79,7 @@ td, th {
   display: inline-block;
 }
 
+/* Pulse animation for elements with .pulse */
 @keyframes pulse {
   0%   { transform: scale(0.7); }
   50%  { transform: scale(0.5); }
@@ -94,16 +89,15 @@ td, th {
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* ========== About Page Specific ========== */
+/* About page image styling */
 .about-images {
-  text-align: center; /* optional: center them horizontally */
-  /* or you can omit this if you prefer left alignment */
+  text-align: center;
 }
 
 .about-images img {
   display: inline-block;
   margin: 10px;
   vertical-align: middle;
-  width: 150px;   /* force width to 150px */
-  height: 150px;  /* force height to 150px */
+  width: 150px;
+  height: 150px;
 }

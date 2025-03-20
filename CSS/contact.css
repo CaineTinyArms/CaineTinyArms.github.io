@@ -1,7 +1,9 @@
-/* Import base website styles */
+/* contact.css - Styles for the Contact page */
+
+/* Import global website styles */
 @import url('websiteStyleSheet.css');
 
-/* Game and Contact Container */
+/* Container for the shooting game and contact section */
 .game-contact-container {
   position: relative;
   background-color: #fff;
@@ -12,15 +14,16 @@
   overflow: hidden;
 }
 
-/* Contact Grid Layout */
+/* Grid layout for contact options */
 .contact-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);  /* Three equal columns */
   gap: 20px;
   z-index: 1;
   position: relative;
 }
 
+/* Styling for each contact option box */
 .contact-option {
   text-align: center;
   padding: 10px;
@@ -34,18 +37,20 @@
   opacity: 0.7;
 }
 
+/* Activated (unlocked) contact options */
 .contact-option.activated {
   opacity: 1;
   background-color: rgba(255, 170, 0, 0.85);
 }
 
+/* Hover effect for activated options */
 .contact-option.activated:hover {
   transform: scale(1.05);
   background-color: rgba(255, 221, 153, 0.9);
   cursor: pointer;
 }
 
-/* Disable non-activated contact options */
+/* Disable pointer events on non-activated options */
 .contact-option:not(.activated) {
   pointer-events: none;
 }
@@ -57,23 +62,26 @@
   cursor: default;
 }
 
+/* Image size inside contact option */
 .contact-option img {
   width: 50px;
   height: 50px;
   margin-bottom: 5px;
 }
 
+/* Header inside contact option */
 .contact-option h3 {
   margin: 5px 0;
   font-size: 0.9em;
 }
 
+/* Paragraph inside contact option */
 .contact-option p {
   font-size: 0.8em;
   margin: 5px 0;
 }
 
-/* Game Elements */
+/* Gun element styling in the shooting game */
 #gun {
   position: absolute;
   bottom: 10px;
@@ -82,10 +90,12 @@
   width: 60px;
   height: 40px;
   background-color: #333;
+  /* Use clip-path to create gun shape */
   clip-path: polygon(0% 30%, 100% 30%, 100% 70%, 80% 70%, 80% 40%, 0% 40%);
   z-index: 3;
 }
 
+/* Target element styling */
 #target {
   position: absolute;
   width: 30px;
@@ -99,6 +109,7 @@
   align-items: center;
 }
 
+/* Before and after pseudo-elements for target design */
 #target::before, #target::after {
   content: '';
   position: absolute;
@@ -117,6 +128,7 @@
   background-color: #ff0000;
 }
 
+/* Bullet element styling */
 .bullet {
   position: absolute;
   width: 5px;
@@ -126,6 +138,7 @@
   z-index: 2;
 }
 
+/* Score display styling */
 #score-display {
   position: absolute;
   top: 10px;
@@ -139,7 +152,7 @@
   z-index: 3;
 }
 
-/* Skip game button */
+/* Skip game button styling */
 #skip-game {
   position: absolute;
   top: 10px;
@@ -159,7 +172,7 @@
   background-color: rgba(255, 170, 0, 0.9);
 }
 
-/* Hit animation */
+/* Hit animation for target */
 @keyframes hit {
   0% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2); opacity: 0; }
@@ -169,7 +182,7 @@
   animation: hit 0.5s ease-out;
 }
 
-/* Contact box animations */
+/* Pulse animation for activated contact option */
 @keyframes pulse {
   0%   { transform: scale(1); }
   50%  { transform: scale(1.1); }
@@ -180,7 +193,7 @@
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* Game instructions */
+/* Styling for the game instructions area */
 .game-instructions {
   text-align: center;
   margin: 10px 0 20px;
@@ -190,7 +203,7 @@
   border-radius: 10px;
 }
 
-/* Win message */
+/* Win message styling */
 .win-message {
   position: absolute;
   top: 40%;

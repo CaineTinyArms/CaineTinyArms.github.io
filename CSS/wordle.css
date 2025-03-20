@@ -1,137 +1,144 @@
-/* wordle.css */
+/* wordle.css - Styles for the Wordle-like anti-bot game */
 
-/* Match background color, font, and general style from your main page */
+/* Global body styling matching main site */
 body {
-    background-color: #99ccff;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Header matches the style of the main site */
-  .header {
-    background-color: #ffcc00;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .header h1 {
-    margin: 0;
-  }
-  
-  /* Nav bar, same as main site */
-  .nav {
-    background-color: #66ff66;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .nav a {
-    margin: 0 15px;
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-  }
-  
-  /* Main content area, white box with border */
-  .content {
-    background-color: #fff;
-    border: 2px solid #000;
-    margin: 20px;
-    padding: 20px;
-  }
-  
-  /* Wordle container: uses a flex layout for the game area + message */
-  .wordle-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* The game grid */
-  #game-container {
-    display: grid;
-    grid-template-rows: repeat(6, 50px);
-    grid-gap: 5px;
-    margin-bottom: 20px;
-  }
-  
-  .row {
-    display: grid;
-    grid-template-columns: repeat(5, 50px);
-    grid-gap: 5px;
-  }
-  
-  .tile {
-    border: 2px solid #d3d3d3;
-    width: 50px;
-    height: 50px;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    background-color: white;
-  }
-  
-  /* Color feedback for guesses (same concept, but you can tweak the colors) */
-  .correct {
-    background-color: #6aaa64; /* green */
-    color: #ffffff;
-    border-color: #6aaa64;
-  }
-  .present {
-    background-color: #c9b458; /* yellow */
-    color: #ffffff;
-    border-color: #c9b458;
-  }
-  .absent {
-    background-color: #787c7e; /* gray */
-    color: #ffffff;
-    border-color: #787c7e;
-  }
-  
-  /* On-screen keyboard styling */
-  #keyboard {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 500px;
-    justify-content: center;
-  }
-  
-  .key {
-    margin: 3px;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-size: 14px;
-    border-radius: 4px;
-    background-color: #d3d6da;
-  }
-  .key:hover {
-    background-color: #b5b9bd;
-  }
-  .wide-key {
-    flex: 1 0 60px;
-  }
-  
-  /* Message box */
-  #message {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    min-height: 24px; /* to maintain space if empty */
-    transition: opacity 1s ease-out;
-  }
-  
-  /* Footer matches your main site’s style */
-  .footer {
-    background-color: #ffcc00;
-    text-align: center;
-    padding: 10px;
-    font-size: 0.9em;
-  }
- 
+  background-color: #99ccff;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header styling */
+.header {
+  background-color: #ffcc00;
+  text-align: center;
+  padding: 20px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+/* Navigation bar styling */
+.nav {
+  background-color: #66ff66;
+  padding: 10px;
+  text-align: center;
+}
+
+.nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+
+/* Main content area styling */
+.content {
+  background-color: #fff;
+  border: 2px solid #000;
+  margin: 20px;
+  padding: 20px;
+}
+
+/* Wordle container uses flex for centering */
+.wordle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Grid for the Wordle game */
+#game-container {
+  display: grid;
+  grid-template-rows: repeat(6, 50px);
+  grid-gap: 5px;
+  margin-bottom: 20px;
+}
+
+/* Each row in the grid */
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 50px);
+  grid-gap: 5px;
+}
+
+/* Tile styling for each letter */
+.tile {
+  border: 2px solid #d3d3d3;
+  width: 50px;
+  height: 50px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: white;
+}
+
+/* Feedback color: correct letter and position */
+.correct {
+  background-color: #6aaa64;  /* Green */
+  color: #ffffff;
+  border-color: #6aaa64;
+}
+
+/* Feedback color: letter in word but wrong position */
+.present {
+  background-color: #c9b458;  /* Yellow */
+  color: #ffffff;
+  border-color: #c9b458;
+}
+
+/* Feedback color: letter not in word */
+.absent {
+  background-color: #787c7e;  /* Gray */
+  color: #ffffff;
+  border-color: #787c7e;
+}
+
+/* On-screen keyboard styling */
+#keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px;
+  justify-content: center;
+}
+
+.key {
+  margin: 3px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: #d3d6da;
+}
+
+.key:hover {
+  background-color: #b5b9bd;
+}
+
+.wide-key {
+  flex: 1 0 60px;
+}
+
+/* Message area styling */
+#message {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  min-height: 24px;
+  transition: opacity 1s ease-out;
+}
+
+/* Footer styling */
+.footer {
+  background-color: #ffcc00;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9em;
+}

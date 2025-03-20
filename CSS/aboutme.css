@@ -1,79 +1,89 @@
-/* About Me Page Specific Styles */
+/* aboutme.css - Styles specific to the About Me page */
+
+/* Container for the About page content */
 .about-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #fff;
-    border: 2px solid #000;
-    margin: 20px;
-  }
-  
+  display: flex;                /* Use flex layout for centering */
+  flex-direction: column;       /* Stack children vertically */
+  align-items: center;          /* Center children horizontally */
+  justify-content: center;      /* Center children vertically */
+  padding: 20px;                /* Add padding around the content */
+  background-color: #fff;       /* White background */
+  border: 2px solid #000;       /* Black border */
+  margin: 20px;                 /* Outer margin */
+}
+
+/* Container for the breakout game canvas */
+.game-container {
+  position: relative;           /* Relative positioning for inner elements */
+  width: 1200px;                /* Fixed width matching canvas */
+  height: 800px;                /* Fixed height matching canvas */
+  margin: 0 auto;               /* Center horizontally */
+  border: 2px solid #000;       /* Black border */
+}
+
+/* Styling for the breakout game canvas */
+#breakoutCanvas {
+  background-color: #cccccc;    /* Light gray background */
+  display: block;               /* Block display to remove inline spacing */
+  width: 1200px;                /* Fixed width */
+  height: 800px;                /* Fixed height */
+}
+
+/* Container for game controls (buttons and instructions) */
+.game-controls {
+  text-align: center;           /* Center text */
+  margin: 20px 0;               /* Vertical margin */
+  padding: 15px;                /* Padding inside the container */
+  background-color: #ffcc00;    /* Yellow background */
+  border: 2px solid #000;       /* Black border */
+  border-radius: 10px;          /* Rounded corners */
+  width: 90%;                   /* Responsive width */
+  max-width: 1200px;            /* Maximum width matching canvas */
+}
+
+/* Paragraph styling inside game controls */
+.game-controls p {
+  margin: 10px 0;               /* Vertical margin */
+  font-weight: bold;            /* Bold text */
+}
+
+/* Button styling inside game controls */
+.game-controls button {
+  background-color: #66ff66;    /* Light green background */
+  border: 2px solid #000;       /* Black border */
+  padding: 12px 20px;           /* Padding for button size */
+  margin: 10px;                 /* Margin around buttons */
+  font-family: "Comic Sans MS", cursive, sans-serif;  /* Comic Sans font */
+  font-weight: bold;            /* Bold text */
+  cursor: pointer;              /* Pointer cursor on hover */
+  font-size: 16px;              /* Font size */
+}
+
+/* Special styling for the skip button */
+#skipButton {
+  background-color: #ff9933;    /* Orange background */
+}
+
+/* Hover effects for game control buttons */
+.game-controls button:hover {
+  background-color: #33cc33;    /* Darker green on hover */
+  transform: scale(1.05);       /* Slight scaling effect */
+}
+
+/* Hover effect for skip button */
+#skipButton:hover {
+  background-color: #ff6600;    /* Darker orange on hover */
+}
+
+/* Responsive adjustments for smaller viewports */
+@media (max-width: 1250px) {
   .game-container {
-    position: relative;
-    width: 1200px; /* Updated to match new canvas width */
-    height: 800px;
-    margin: 0 auto;
-    border: 2px solid #000;
+      width: 100%;            /* Use full width */
+      height: auto;           /* Adjust height automatically */
   }
   
   #breakoutCanvas {
-    background-color: #cccccc;
-    display: block;
-    width: 1200px; /* Updated to match new canvas width */
-    height: 800px;
+      width: 100%;            /* Canvas scales with container */
+      height: auto;           /* Adjust height automatically */
   }
-  
-  .game-controls {
-    text-align: center;
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #ffcc00;
-    border: 2px solid #000;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 1200px; /* Updated to match new canvas width */
-  }
-  
-  .game-controls p {
-    margin: 10px 0;
-    font-weight: bold;
-  }
-  
-  .game-controls button {
-    background-color: #66ff66;
-    border: 2px solid #000;
-    padding: 12px 20px;
-    margin: 10px;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  #skipButton {
-    background-color: #ff9933;
-  }
-  
-  .game-controls button:hover {
-    background-color: #33cc33;
-    transform: scale(1.05);
-  }
-  
-  #skipButton:hover {
-    background-color: #ff6600;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 1250px) { /* Updated for wider canvas */
-    .game-container {
-      width: 100%;
-      height: auto;
-    }
-    
-    #breakoutCanvas {
-      width: 100%;
-      height: auto;
-    }
-  }
+}

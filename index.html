@@ -1,45 +1,59 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>CaineTinyArms</title>
-  <link rel="stylesheet" type="text/css" href="CSS/websiteStyleSheet.css">
-</head>
-<body>
-  <div class="header">
-    <h1>Welcome to my Portfolio!</h1>
-    <marquee behavior="scroll" direction="left">Aspiring Game Developer</marquee>
-  </div>
-  
-  <div class="nav">
-    <a href="index.html">Home</a>
-    <a href="HTML/aboutme.html">About</a>
-    <a href="HTML/wordle.html">My Games</a>
-    <a href="HTML/contact.html">Contact</a>
-  </div>
+  <head>
+    <!-- Set document character encoding -->
+    <meta charset="UTF-8">
+    <!-- Set the page title -->
+    <title>CaineTinyArms</title>
+    <!-- Link to the global stylesheet (unused table rules have been removed in the CSS file) -->
+    <link rel="stylesheet" type="text/css" href="CSS/websiteStyleSheet.css">
+  </head>
+  <body>
+    <!-- Header section with a title and scrolling marquee -->
+    <div class="header">
+      <h1>Welcome to my Portfolio!</h1>
+      <!-- Marquee with developer tagline -->
+      <marquee behavior="scroll" direction="left">
+        Aspiring Game Developer
+      </marquee>
+    </div>
 
-  <div class="content">
-    <div class="text-section">
-      <h2>Brief Introduction</h2>
-      <p>
-        From the smash hit "bergs" to the inspired "Dall of Cuty", there is no game I will not develop.
-      </p>
-      <p class="blink">UNLESS IT'S COPYRIGHT INFRINGEMENT, I DON'T MESS WITH THAT </p>
-      <div class="spin">
-        <img src="Images/fire.png" alt="Image of Fire" class="pulse" height="200" width="300">
+    <!-- Navigation bar linking to the main sections of the site -->
+    <div class="nav">
+      <a href="index.html">Home</a>
+      <a href="HTML/aboutme.html">About</a>
+      <a href="HTML/wordle.html">My Games</a>
+      <a href="HTML/contact.html">Contact</a>
+    </div>
+
+    <!-- Main content area -->
+    <div class="content">
+      <!-- Text section with a brief introduction -->
+      <div class="text-section">
+        <h2>Brief Introduction</h2>
+        <p>
+          From the smash hit "bergs" to the inspired "Dall of Cuty", there is no game I will not develop.
+        </p>
+        <!-- This paragraph uses a blinking animation -->
+        <p class="blink">UNLESS IT'S COPYRIGHT INFRINGEMENT, I DON'T MESS WITH THAT</p>
+        <!-- Image with a spinning effect -->
+        <div class="spin">
+          <img src="Images/fire.png" alt="Image of Fire" class="pulse" height="200" width="300">
+        </div>
+      </div>
+
+      <!-- Container for an animated canvas element -->
+      <div class="animation-container">
+        <canvas id="canvas" width="600" height="600"></canvas>
       </div>
     </div>
 
-    <div class="animation-container">
-      <canvas id="canvas" width="600" height="600"></canvas>
+    <!-- Footer section -->
+    <div class="footer">
+      <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
     </div>
-  </div>
 
-  <div class="footer">
-    <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
-  </div>
-
-  <!-- External JS for the index page -->
-  <script src="JavaScript/index.JS"></script>
-</body>
+    <!-- Include external JavaScript file for index page animations -->
+    <script src="JavaScript/index.JS"></script>
+  </body>
 </html>

@@ -1,15 +1,17 @@
-/* games.css - 90s Blockbuster Style */
+/* games.css - Retro 90s Blockbuster Style for the Games page */
 
-/* Global Styles */
+/* Reset margins, paddings and set box-sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Global body styling */
 body {
     font-family: "Courier New", Courier, monospace;
     background-color: #000;
+    /* Background image settings */
     background-image: url('../Images/background.png');
     background-size: cover;
     background-position: center;
@@ -18,6 +20,7 @@ body {
     padding: 20px;
 }
 
+/* Navigation bar styling */
 .nav {
     background-color: #66ff66;
     text-align: center;
@@ -42,6 +45,7 @@ body {
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
+/* Footer styling */
 .footer {
     background-color: #ffcc00;
     text-align: center;
@@ -53,7 +57,7 @@ body {
     color: #000;
 }
 
-/* Blockbuster Container */
+/* Container for the games (blockbuster look) */
 .blockbuster-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -62,7 +66,7 @@ body {
     box-shadow: 0 0 20px #1e3f8f;
 }
 
-/* Header */
+/* Header inside the games container */
 .blockbuster-header {
     background-color: #1e3f8f;
     padding: 15px;
@@ -78,17 +82,17 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Shelf Container */
+/* Shelf container for game rows */
 .shelf-container {
     background-color: rgba(26, 26, 26, 0.9);
     padding: 20px;
 }
 
-/* Shelf */
+/* Shelf styling */
 .shelf {
     display: flex;
     justify-content: space-around;
-    background-color: #654321; /* Changed from #333 to brown (#654321) to match shelf edges */
+    background-color: #654321;  /* Brown color for shelf edges */
     border-left: 15px solid #654321;
     border-right: 15px solid #654321;
     border-bottom: 2px solid #111;
@@ -96,7 +100,7 @@ body {
     margin-bottom: 20px;
 }
 
-
+/* Bottom shelf decoration */
 .shelf-bottom {
     height: 20px;
     background-color: #654321;
@@ -105,7 +109,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* Game Box */
+/* Game box container */
 .game-box {
     width: 180px;
     height: 250px;
@@ -123,6 +127,7 @@ body {
     z-index: 10;
 }
 
+/* Container for the game cover image */
 .game-cover {
     width: 100%;
     height: 220px;
@@ -138,6 +143,7 @@ body {
     object-fit: cover;
 }
 
+/* Game title overlay */
 .game-title {
     position: absolute;
     bottom: 0;
@@ -149,7 +155,7 @@ body {
     padding: 5px;
 }
 
-/* Modal */
+/* Modal for game details */
 .modal {
     display: none;
     position: fixed;
@@ -173,11 +179,13 @@ body {
     animation: modalFadeIn 0.5s;
 }
 
+/* Modal fade in animation */
 @keyframes modalFadeIn {
     from {opacity: 0; transform: translateY(-50px);}
     to {opacity: 1; transform: translateY(0);}
 }
 
+/* Close button for modal */
 .close-button {
     color: #fff;
     float: right;
@@ -190,6 +198,7 @@ body {
     color: #ff0;
 }
 
+/* Content inside modal */
 #game-details-content {
     padding: 20px;
 }
@@ -203,6 +212,7 @@ body {
     letter-spacing: 2px;
 }
 
+/* Container for game screenshot */
 .game-screenshot {
     width: 100%;
     height: 300px;
@@ -217,6 +227,7 @@ body {
     object-fit: cover;
 }
 
+/* Game description styling */
 .game-description {
     font-family: "Courier New", Courier, monospace;
     line-height: 1.6;
@@ -224,12 +235,14 @@ body {
     color: #fff;
 }
 
+/* Tags container */
 .game-tags {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
+/* Individual tag styling */
 .tag {
     background-color: #000;
     color: #fff;
@@ -240,6 +253,7 @@ body {
     font-size: 0.8rem;
 }
 
+/* Play button styling */
 .play-button {
     display: inline-block;
     background-color: #ff0;
@@ -260,7 +274,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Background Overlay */
+/* Background overlay with retro grid effect */
 .page-overlay {
     position: fixed;
     top: 0;
@@ -278,7 +292,7 @@ body {
     z-index: -1;
 }
 
-/* Responsive */
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .shelf {
         flex-direction: column;

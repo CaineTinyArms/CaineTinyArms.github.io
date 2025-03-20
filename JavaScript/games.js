@@ -1,7 +1,7 @@
-// games.js - 90s Blockbuster Style Interaction
+// games.js - Implements interactive retro-style effects on the Games page
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Game data - replace with your actual game data
+    // Define game data with details for each game
     const games = {
         game1: {
             title: "shrink",
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/shrink.png",
             tags: ["Action", "Adventure", "Puzzle"],
             playLink: "#game1",
-            devRamblingsLink: "../HTML/ramblings/shrink.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/shrink.html"
         },
         game2: {
             title: "The Dwelling Afar",
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["RPG", "Adventure", "Fantasy"],
             playLink: "#game2",
-            devRamblingsLink: "../HTML/ramblings/dwelling.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/dwelling.html"
         },
         game3: {
             title: "Contained Cargo",
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["Shooter", "Arcade", "Sci-Fi"],
             playLink: "#game3",
-            devRamblingsLink: "../HTML/ramblings/cargo.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/cargo.html"
         },
         game4: {
             title: "Dall of Cuty",
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/doc.png",
             tags: ["Platformer", "Puzzle", "Pixel Art"],
             playLink: "#game4",
-            devRamblingsLink: "../HTML/ramblings/doc.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/doc.html"
         },
         game5: {
             title: "bergs",
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["berg", "berg", "berg"],
             playLink: "#game5",
-            devRamblingsLink: "../HTML/ramblings/bergs.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/bergs.html"
         },
         game6: {
             title: "Sonder: Reflections",
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/sonder.png",
             tags: ["Survival", "Horror", "Action"],
             playLink: "#game6",
-            devRamblingsLink: "../HTML/ramblings/sonder.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/sonder.html"
         },
         game7: {
             title: "My Little Balloon Stand",
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["Puzzle", "Logic", "Casual"],
             playLink: "#game7",
-            devRamblingsLink: "../HTML/ramblings/balloon.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/balloon.html"
         },
         game8: {
             title: "Supermarket of the Dead",
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/sotd.png",
             tags: ["Fighting", "Versus", "Action"],
             playLink: "#game8",
-            devRamblingsLink: "../HTML/ramblings/sotd.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/sotd.html"
         },
         game9: {
             title: "Unfinished Puzzle Game.",
@@ -73,22 +73,23 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["Adventure", "Retro", "Open World"],
             playLink: "#game9",
-            devRamblingsLink: "../HTML/wordle.html" // Updated link
+            devRamblingsLink: "../HTML/wordle.html"
         }
     };
 
-    // Game box click event
+    // Select all game box elements and modal elements for displaying game details
     const gameBoxes = document.querySelectorAll('.game-box');
     const modal = document.getElementById('game-details-modal');
     const closeButton = document.querySelector('.close-button');
     const gameDetailsContent = document.getElementById('game-details-content');
 
+    // When a game box is clicked, populate and show the modal with game details
     gameBoxes.forEach(box => {
         box.addEventListener('click', function() {
             const gameId = this.getAttribute('data-game');
             const game = games[gameId];
             
-            // Update modal content
+            // Update modal inner HTML with game details
             gameDetailsContent.innerHTML = `
                 <h2>${game.title}</h2>
                 <div class="game-screenshot">
@@ -104,18 +105,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             
-            // Show modal with retro VHS effect
+            // Display the modal with a retro VHS effect
             modal.style.display = 'block';
             setTimeout(() => {
                 modal.classList.add('active');
             }, 10);
             
-            // Add VHS scan effect
+            // Create and add a temporary VHS scan effect overlay
             const vhsEffect = document.createElement('div');
             vhsEffect.classList.add('vhs-effect');
             modal.appendChild(vhsEffect);
             
-            // Remove VHS effect after animation
+            // Remove the VHS effect after its animation completes
             setTimeout(() => {
                 if (modal.contains(vhsEffect)) {
                     modal.removeChild(vhsEffect);
@@ -124,27 +125,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close modal when clicking X
+    // Close the modal when the close button is clicked
     closeButton.addEventListener('click', function() {
         modal.style.display = 'none';
     });
 
-    // Close modal when clicking outside
+    // Close the modal if the user clicks outside of it
     window.addEventListener('click', function(event) {
         if (event.target === modal) {
             modal.style.display = 'none';
         }
     });
     
-    // Add retro hover effect to game boxes
+    // Add a retro scan line effect when hovering over game boxes
     gameBoxes.forEach(box => {
         box.addEventListener('mouseover', function() {
-            // Add VHS scan line effect
             const scanLine = document.createElement('div');
             scanLine.classList.add('scan-line');
             this.appendChild(scanLine);
-            
-            // Remove scan line after animation
             setTimeout(() => {
                 if (this.contains(scanLine)) {
                     this.removeChild(scanLine);
@@ -153,25 +151,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add some retro animation to the page load
+    // Add a page-load animation effect
     document.body.classList.add('page-load');
     setTimeout(() => {
         document.body.classList.remove('page-load');
     }, 1000);
     
-    // Add CSS for the VHS and scan line effects, the new button, and Comic Sans font
+    // Dynamically add CSS for VHS and scan line effects as well as styling for buttons
     const style = document.createElement('style');
     style.textContent = `
-        /* Change all font to Comic Sans */
+        /* Set font family for all text elements */
         body, h1, h2, h3, p, div, span, a, button, input, textarea, .game-description, .game-title, .tag {
             font-family: "Comic Sans MS", cursive, sans-serif !important;
         }
         
-        /* Override any specific font settings */
+        /* Override specific fonts for headers and buttons */
         .blockbuster-header h1, #game-details-content h2, .play-button, .dev-ramblings-button {
             font-family: "Comic Sans MS", cursive, sans-serif !important;
         }
         
+        /* Scan line effect styling */
         .scan-line {
             position: absolute;
             top: 0;
@@ -187,6 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
             100% { top: 100%; }
         }
         
+        /* VHS effect overlay styling */
         .vhs-effect {
             position: absolute;
             top: 0;
@@ -208,6 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
             100% { opacity: 0; }
         }
         
+        /* Page load fade-in effect */
         .page-load {
             animation: pageLoadAnimation 1s ease-out;
         }
@@ -221,12 +222,14 @@ document.addEventListener('DOMContentLoaded', function() {
             100% { opacity: 1; }
         }
 
+        /* Container for buttons in the modal */
         .button-container {
             display: flex;
             gap: 15px;
             margin-top: 20px;
         }
 
+        /* Styling for the dev ramblings button */
         .dev-ramblings-button {
             display: inline-block;
             background-color: #ff5500;
