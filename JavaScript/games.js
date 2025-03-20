@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game1: {
             title: "shrink",
             description: "Escape from the lab before you shrink too small!",
-            image: "../images/shrink.png",
+            image: "../Images/shrink.png",
             tags: ["Action", "Adventure", "Puzzle"],
             playLink: "#game1",
             devRamblingsLink: "../HTML/wordle.html" // Updated link
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game2: {
             title: "The Dwelling Afar",
             description: "Locked in a lonely fishing cabin, use your wits to escape The Dwelling Afar.",
-            image: "../images/fire.png",
+            image: "../Images/fire.png",
             tags: ["RPG", "Adventure", "Fantasy"],
             playLink: "#game2",
             devRamblingsLink: "../HTML/wordle.html" // Updated link
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game3: {
             title: "Contained Cargo",
             description: 'Perform scientific tests on the "cargo". However, whatever you do... keep it contained.',
-            image: "../images/fire.png",
+            image: "../Images/fire.png",
             tags: ["Shooter", "Arcade", "Sci-Fi"],
             playLink: "#game3",
             devRamblingsLink: "../HTML/wordle.html" // Updated link
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game4: {
             title: "Dall of Cuty",
             description: "Slaughter endless hordes of zombies, while racking up points to upgrade your equipment and escape the cursed lands.",
-            image: "../images/fire.png",
+            image: "../Images/fire.png",
             tags: ["Platformer", "Puzzle", "Pixel Art"],
             playLink: "#game4",
             devRamblingsLink: "../HTML/wordle.html" // Updated link
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game5: {
             title: "bergs",
             description: "berg",
-            image: "../images/fire.png",
+            image: "../Images/fire.png",
             tags: ["berg", "berg", "berg"],
             playLink: "#game5",
             devRamblingsLink: "../HTML/wordle.html" // Updated link
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game6: {
             title: "Sonder: Reflections",
             description: "Take up the role of a taxi driver, listen to the customers conversations and respond accordingly.",
-            image: "../images/fire.png",
+            image: "../Images/fire.png",
             tags: ["Survival", "Horror", "Action"],
             playLink: "#game6",
             devRamblingsLink: "../HTML/wordle.html" // Updated link
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game7: {
             title: "My Little Balloon Stand",
             description: "Run a little balloon stand. Hey, that robot really likes balloons.",
-            image: "../images/fire.png",
+            image: "../Images/fire.png",
             tags: ["Puzzle", "Logic", "Casual"],
             playLink: "#game7",
             devRamblingsLink: "../HTML/wordle.html" // Updated link
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game8: {
             title: "Supermarket of the Dead",
             description: "Defend your supermarket from the zombie onslaught, but you better keep scanning those items, the mags aren't free.",
-            image: "../images/fire.png",
+            image: "../Images/fire.png",
             tags: ["Fighting", "Versus", "Action"],
             playLink: "#game8",
             devRamblingsLink: "../HTML/wordle.html" // Updated link
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game9: {
             title: "Unfinished Puzzle Game.",
             description: "My homage to Resident Evil. Unfinished, unrushed. Ready when it's ready.",
-            image: "../images/fire.png",
+            image: "../Images/fire.png",
             tags: ["Adventure", "Retro", "Open World"],
             playLink: "#game9",
             devRamblingsLink: "../HTML/wordle.html" // Updated link
