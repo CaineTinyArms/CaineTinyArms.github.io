@@ -162,34 +162,34 @@ body {
     visibility: visible;
 }
 
-/* First half of the rotation (0° to 180°) */
-@keyframes spin180First {
+/* First half of the rotation (0° to 90°) */
+@keyframes spin90First {
     0% { 
         transform: perspective(1000px) rotateY(0deg);
         filter: brightness(1);
     }
     50% { 
+        transform: perspective(1000px) rotateY(45deg);
+        filter: brightness(0.7);
+    }
+    100% { 
         transform: perspective(1000px) rotateY(90deg);
         filter: brightness(0.5);
     }
-    100% { 
-        transform: perspective(1000px) rotateY(180deg);
-        filter: brightness(0.3);
-    }
 }
 
-/* Second half of the rotation (180° to 360°) */
-@keyframes spin180Second {
+/* Second half of the rotation (90° to 180°) */
+@keyframes spin90Second {
     0% { 
-        transform: perspective(1000px) rotateY(180deg);
-        filter: brightness(0.3);
-    }
-    50% { 
-        transform: perspective(1000px) rotateY(270deg);
+        transform: perspective(1000px) rotateY(90deg);
         filter: brightness(0.5);
     }
+    50% { 
+        transform: perspective(1000px) rotateY(135deg);
+        filter: brightness(0.7);
+    }
     100% { 
-        transform: perspective(1000px) rotateY(360deg);
+        transform: perspective(1000px) rotateY(180deg);
         filter: brightness(1);
     }
 }
@@ -231,6 +231,29 @@ body {
     transform: translateY(-10px) scale(1.05);
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
     z-index: 10;
+}
+
+/* Empty game box styling - completely invisible but maintains spacing */
+.empty-box {
+    background-color: transparent;
+    border: none;
+    cursor: default;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.empty-box:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.empty-cover {
+    background-color: transparent;
+}
+
+.empty-box .game-title {
+    background-color: transparent;
+    color: transparent;
 }
 
 /* Container for the game cover image */

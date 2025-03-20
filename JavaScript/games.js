@@ -84,70 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
             playLink: "#game10",
             devRamblingsLink: "../HTML/wordle.html"
         },
-        game11: {
-            title: "Space Pirate",
-            description: "Sail the cosmic seas as a daring space pirate looking for the ultimate treasure.",
-            image: "../Images/fire.png",
-            tags: ["Space", "Adventure", "Strategy"],
-            playLink: "#game11",
-            devRamblingsLink: "../HTML/wordle.html"
-        },
-        game12: {
-            title: "Haunted Manor",
-            description: "Explore a haunted mansion filled with ghosts, puzzles, and mysterious artifacts.",
-            image: "../Images/fire.png",
-            tags: ["Horror", "Puzzle", "Mystery"],
-            playLink: "#game12",
-            devRamblingsLink: "../HTML/wordle.html"
-        },
-        game13: {
-            title: "Pixel Racer",
-            description: "Race through neon-lit pixel highways in this retro arcade racing game.",
-            image: "../Images/fire.png",
-            tags: ["Racing", "Arcade", "Retro"],
-            playLink: "#game13",
-            devRamblingsLink: "../HTML/wordle.html"
-        },
-        game14: {
-            title: "Jungle Quest",
-            description: "Brave the dangers of a jungle expedition to find ancient treasures.",
-            image: "../Images/fire.png",
-            tags: ["Adventure", "Platformer", "Exploration"],
-            playLink: "#game14",
-            devRamblingsLink: "../HTML/wordle.html"
-        },
-        game15: {
-            title: "Robot Factory",
-            description: "Build and program robots to solve increasingly complex puzzles.",
-            image: "../Images/fire.png",
-            tags: ["Puzzle", "Automation", "Strategy"],
-            playLink: "#game15",
-            devRamblingsLink: "../HTML/wordle.html"
-        },
-        game16: {
-            title: "Neon Nights",
-            description: "Navigate a cyberpunk city solving crimes in this noir detective adventure.",
-            image: "../Images/fire.png",
-            tags: ["Cyberpunk", "Mystery", "Adventure"],
-            playLink: "#game16",
-            devRamblingsLink: "../HTML/wordle.html"
-        },
-        game17: {
-            title: "Cyber Dawn",
-            description: "Battle against a rogue AI in this fast-paced cyberpunk shooter.",
-            image: "../Images/fire.png",
-            tags: ["Shooter", "Cyberpunk", "Action"],
-            playLink: "#game17",
-            devRamblingsLink: "../HTML/wordle.html"
-        },
-        game18: {
-            title: "Retro Blast",
-            description: "A collection of retro-inspired mini-games from the golden age of arcades.",
-            image: "../Images/fire.png",
-            tags: ["Retro", "Arcade", "Collection"],
-            playLink: "#game18",
-            devRamblingsLink: "../HTML/wordle.html"
-        }
     };
 
     // Select all game box elements and modal elements for displaying game details
@@ -175,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Flag to prevent multiple animations
     let isAnimating = false;
 
-    // Function to change shelf with a seamless 360 animation (180° + content change + 180°)
+    // Function to change shelf with a 180° animation (90° + content change + 90°)
     function changeShelf(direction) {
         if (isAnimating) return; // Prevent multiple animations
         isAnimating = true;
@@ -183,10 +119,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Activate VHS static effect during transition
         vhsStatic.classList.add('active');
         
-        // First half of the animation (0° to 180°)
-        shelvesWrapper.style.animation = 'spin180First 0.6s ease-in-out forwards';
+        // First half of the animation (0° to 90°)
+        shelvesWrapper.style.animation = 'spin90First 0.4s ease-in-out forwards';
         
-        // When the animation reaches 180 degrees, change the shelf content
+        // When the animation reaches 90 degrees, change the shelf content
         setTimeout(() => {
             // Remove active class from current shelf and dots
             shelfContainers[currentShelfIndex].classList.remove('active');
@@ -203,16 +139,16 @@ document.addEventListener('DOMContentLoaded', function() {
             shelfContainers[currentShelfIndex].classList.add('active');
             shelfDots[currentShelfIndex].classList.add('active');
             
-            // Start second half of animation (180° to 360°)
-            shelvesWrapper.style.animation = 'spin180Second 0.6s ease-in-out forwards';
-        }, 600); // Time for first 180° rotation
+            // Start second half of animation (90° to 180°)
+            shelvesWrapper.style.animation = 'spin90Second 0.4s ease-in-out forwards';
+        }, 400); // Time for first 90° rotation
         
         // After complete animation, clean up
         setTimeout(() => {
             shelvesWrapper.style.animation = '';
             vhsStatic.classList.remove('active');
             isAnimating = false;
-        }, 1200); // Total animation time
+        }, 800); // Total animation time
     }
 
     // Event listeners for shelf navigation buttons
