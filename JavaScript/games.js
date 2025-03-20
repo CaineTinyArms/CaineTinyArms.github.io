@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["RPG", "Adventure", "Fantasy"],
             playLink: "#game2",
-            devRamblingsLink: "../HTML/wordle.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/dwelling.html" // Updated link
         },
         game3: {
             title: "Contained Cargo",
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["Shooter", "Arcade", "Sci-Fi"],
             playLink: "#game3",
-            devRamblingsLink: "../HTML/wordle.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/cargo.html" // Updated link
         },
         game4: {
             title: "Dall of Cuty",
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["Platformer", "Puzzle", "Pixel Art"],
             playLink: "#game4",
-            devRamblingsLink: "../HTML/wordle.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/doc.html" // Updated link
         },
         game5: {
             title: "bergs",
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["berg", "berg", "berg"],
             playLink: "#game5",
-            devRamblingsLink: "../HTML/wordle.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/bergs.html" // Updated link
         },
         game6: {
             title: "Sonder: Reflections",
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["Survival", "Horror", "Action"],
             playLink: "#game6",
-            devRamblingsLink: "../HTML/wordle.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/sonder.html" // Updated link
         },
         game7: {
             title: "My Little Balloon Stand",
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["Puzzle", "Logic", "Casual"],
             playLink: "#game7",
-            devRamblingsLink: "../HTML/wordle.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/balloon.html" // Updated link
         },
         game8: {
             title: "Supermarket of the Dead",
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/fire.png",
             tags: ["Fighting", "Versus", "Action"],
             playLink: "#game8",
-            devRamblingsLink: "../HTML/wordle.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/sotd.html" // Updated link
         },
         game9: {
             title: "Unfinished Puzzle Game.",
