@@ -2,75 +2,41 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>About Me</title>
-  <!-- Link to the external style sheet -->
+  <title>About Me - CaineTinyArms</title>
   <link rel="stylesheet" type="text/css" href="../CSS/websiteStyleSheet.css">
+  <link rel="stylesheet" type="text/css" href="../CSS/aboutme.css">
 </head>
 <body>
+  <div class="header">
+    <h1>About Me</h1>
+    <marquee behavior="scroll" direction="left">Aspiring Game Developer</marquee>
+  </div>
+  
+  <div class="nav">
+    <a href="../index.html">Home</a>
+    <a href="aboutme.html">About</a>
+    <a href="wordle.html">My Games</a>
+    <a href="contact.html">Contact</a>
+  </div>
 
-<table>
-  <tr class="header">
-    <td colspan="2">
-      <h1>ABOUT ME</h1>
-    </td>
-  </tr>
+  <div class="about-content">
+    <div class="game-container">
+      <canvas id="breakoutCanvas" width="1200" height="800"></canvas>
+    </div>
+    
+    <div class="game-controls">
+      <button id="startButton">Start Game</button>
+      <button id="resetButton">Reset Game</button>
+      <button id="skipButton">Skip Game</button>
+      <p>Use left and right arrow keys or move your mouse to control the paddle.</p>
+    </div>
+  </div>
 
-  <tr class="nav-bar">
-    <td colspan="2">
-      <p>
-        <a href="../index.html">Home</a> | 
-        <a href="wordle.html">My Games</a> | 
-        <a href="contact.html">Contact</a>
-      </p>
-    </td>
-  </tr>
+  <div class="footer">
+    <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
+  </div>
 
-  <tr>
-    <td width="50%">
-      <h2>My Story</h2>
-      <p>This is where I would put the information about myself... IF I HAD ANY.</p>
-      <p>
-        <b>Favorite Things:</b>
-        <ul>
-          <li>Ludwig Van Beethoven</li>
-          <li>Bird Watching</li>
-          <li>Spongebob</li>
-        </ul>
-      </p>
-      
-      <div class="about-images">
-        <img 
-          src="../Images/thegoat.jpg" 
-          alt="Ludwig Van Beethoven"
-          class="image-style"
-        />
-        <img 
-          src="../Images/bird.jpg" 
-          alt="bird"
-          class="image-style"
-        />
-        <img 
-          src="../Images/spongebob.png" 
-          alt="spongebob"
-          class="image-style"
-        />
-      </div>
-    </td>
-
-    <td width="50%">
-      <img 
-        src="../Images/nogoat.png" 
-        alt="IMAGE OF MYSELF WHEN I CAN BE BOTHERED" 
-      />
-    </td>
-  </tr>
-
-  <tr class="footer">
-    <td colspan="2">
-      <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
-    </td>
-  </tr>
-</table>
-
+  <!-- External JS for the breakout game -->
+  <script src="../JavaScript/aboutme.js"></script>
 </body>
 </html>
