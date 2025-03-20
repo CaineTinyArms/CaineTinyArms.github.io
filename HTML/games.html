@@ -28,77 +28,162 @@
         <h1>MY GAMES</h1>
       </header>
       
+      <!-- Shelf navigation arrows -->
+      <div class="shelf-navigation">
+        <button id="prev-shelf" class="shelf-nav-button">&lt;</button>
+        <div id="shelf-indicator">
+          <span class="shelf-dot active" data-shelf="0"></span>
+          <span class="shelf-dot" data-shelf="1"></span>
+        </div>
+        <button id="next-shelf" class="shelf-nav-button">&gt;</button>
+      </div>
+      
       <!-- Shelf container holding rows of game boxes -->
-      <div class="shelf-container">
-        <!-- First shelf row -->
-        <div class="shelf">
-          <!-- Each game box represents one game -->
-          <div class="game-box" data-game="game1">
-            <div class="game-cover">
-              <img src="../Images/shrink.png" alt="Game 1">
+      <div class="shelves-wrapper">
+        <!-- First set of shelves -->
+        <div class="shelf-container active" id="shelf-set-0">
+          <!-- First shelf row -->
+          <div class="shelf">
+            <!-- Each game box represents one game -->
+            <div class="game-box" data-game="game1">
+              <div class="game-cover">
+                <img src="../Images/shrink.png" alt="Game 1">
+              </div>
+              <div class="game-title">shrink</div>
             </div>
-            <div class="game-title">shrink</div>
-          </div>
-          <div class="game-box" data-game="game2">
-            <div class="game-cover">
-              <img src="../Images/dwelling.png" alt="Game 2">
+            <div class="game-box" data-game="game2">
+              <div class="game-cover">
+                <img src="../Images/dwelling.png" alt="Game 2">
+              </div>
+              <div class="game-title">The Dwelling Afar</div>
             </div>
-            <div class="game-title">The Dwelling Afar</div>
-          </div>
-          <div class="game-box" data-game="game3">
-            <div class="game-cover">
-              <img src="../Images/cargo.png" alt="Game 3">
+            <div class="game-box" data-game="game3">
+              <div class="game-cover">
+                <img src="../Images/cargo.png" alt="Game 3">
+              </div>
+              <div class="game-title">Contained Cargo</div>
             </div>
-            <div class="game-title">Contained Cargo</div>
           </div>
+          
+          <!-- Second shelf row -->
+          <div class="shelf">
+            <div class="game-box" data-game="game4">
+              <div class="game-cover">
+                <img src="../Images/doc.png" alt="Game 4">
+              </div>
+              <div class="game-title">Dall of Cuty</div>
+            </div>
+            <div class="game-box" data-game="game5">
+              <div class="game-cover">
+                <img src="../Images/bergs.png" alt="Game 5">
+              </div>
+              <div class="game-title">bergs</div>
+            </div>
+            <div class="game-box" data-game="game6">
+              <div class="game-cover">
+                <img src="../Images/sonder.png" alt="Game 6">
+              </div>
+              <div class="game-title">Sonder: Reflections</div>
+            </div>
+          </div>
+          
+          <!-- Third shelf row -->
+          <div class="shelf">
+            <div class="game-box" data-game="game7">
+              <div class="game-cover">
+                <img src="../Images/balloon.png" alt="Game 7">
+              </div>
+              <div class="game-title">My Little Balloon Stand</div>
+            </div>
+            <div class="game-box" data-game="game8">
+              <div class="game-cover">
+                <img src="../Images/sotd.png" alt="Game 8">
+              </div>
+              <div class="game-title">Supermarket of the Dead</div>
+            </div>
+            <div class="game-box" data-game="game9">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 9">
+              </div>
+              <div class="game-title">Unfinished Puzzle Game</div>
+            </div>
+          </div>
+          
+          <!-- Bottom shelf decoration -->
+          <div class="shelf-bottom"></div>
         </div>
         
-        <!-- Second shelf row -->
-        <div class="shelf">
-          <div class="game-box" data-game="game4">
-            <div class="game-cover">
-              <img src="../Images/doc.png" alt="Game 4">
+        <!-- Second set of shelves (initially hidden) -->
+        <div class="shelf-container" id="shelf-set-1">
+          <!-- First shelf row -->
+          <div class="shelf">
+            <div class="game-box" data-game="game10">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 10">
+              </div>
+              <div class="game-title">Hollow Knight 2</div>
             </div>
-            <div class="game-title">Dall of Cuty</div>
-          </div>
-          <div class="game-box" data-game="game5">
-            <div class="game-cover">
-              <img src="../Images/bergs.png" alt="Game 5">
+            <div class="game-box" data-game="game11">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 11">
+              </div>
+              <div class="game-title">Space Pirate</div>
             </div>
-            <div class="game-title">bergs</div>
-          </div>
-          <div class="game-box" data-game="game6">
-            <div class="game-cover">
-              <img src="../Images/sonder.png" alt="Game 6">
+            <div class="game-box" data-game="game12">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 12">
+              </div>
+              <div class="game-title">Haunted Manor</div>
             </div>
-            <div class="game-title">Sonder: Reflections</div>
           </div>
+          
+          <!-- Second shelf row -->
+          <div class="shelf">
+            <div class="game-box" data-game="game13">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 13">
+              </div>
+              <div class="game-title">Pixel Racer</div>
+            </div>
+            <div class="game-box" data-game="game14">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 14">
+              </div>
+              <div class="game-title">Jungle Quest</div>
+            </div>
+            <div class="game-box" data-game="game15">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 15">
+              </div>
+              <div class="game-title">Robot Factory</div>
+            </div>
+          </div>
+          
+          <!-- Third shelf row -->
+          <div class="shelf">
+            <div class="game-box" data-game="game16">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 16">
+              </div>
+              <div class="game-title">Neon Nights</div>
+            </div>
+            <div class="game-box" data-game="game17">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 17">
+              </div>
+              <div class="game-title">Cyber Dawn</div>
+            </div>
+            <div class="game-box" data-game="game18">
+              <div class="game-cover">
+                <img src="../Images/fire.png" alt="Game 18">
+              </div>
+              <div class="game-title">Retro Blast</div>
+            </div>
+          </div>
+          
+          <!-- Bottom shelf decoration -->
+          <div class="shelf-bottom"></div>
         </div>
-        
-        <!-- Third shelf row -->
-        <div class="shelf">
-          <div class="game-box" data-game="game7">
-            <div class="game-cover">
-              <img src="../Images/balloon.png" alt="Game 7">
-            </div>
-            <div class="game-title">My Little Balloon Stand</div>
-          </div>
-          <div class="game-box" data-game="game8">
-            <div class="game-cover">
-              <img src="../Images/sotd.png" alt="Game 8">
-            </div>
-            <div class="game-title">Supermarket of the Dead</div>
-          </div>
-          <div class="game-box" data-game="game9">
-            <div class="game-cover">
-              <img src="../Images/fire.png" alt="Game 9">
-            </div>
-            <div class="game-title">Unfinished Puzzle Game</div>
-          </div>
-        </div>
-        
-        <!-- Bottom shelf decoration -->
-        <div class="shelf-bottom"></div>
       </div>
       
       <!-- Modal for displaying game details when a game box is clicked -->

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game2: {
             title: "The Dwelling Afar",
             description: "Locked in a lonely fishing cabin, use your wits to escape The Dwelling Afar.",
-            image: "../Images/fire.png",
+            image: "../Images/dwelling.png",
             tags: ["RPG", "Adventure", "Fantasy"],
             playLink: "#game2",
             devRamblingsLink: "../HTML/ramblings/dwelling.html"
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game3: {
             title: "Contained Cargo",
             description: 'Perform scientific tests on the "cargo". However, whatever you do... keep it contained.',
-            image: "../Images/fire.png",
+            image: "../Images/cargo.png",
             tags: ["Shooter", "Arcade", "Sci-Fi"],
             playLink: "#game3",
             devRamblingsLink: "../HTML/ramblings/cargo.html"
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game5: {
             title: "bergs",
             description: "berg",
-            image: "../Images/fire.png",
+            image: "../Images/bergs.png",
             tags: ["berg", "berg", "berg"],
             playLink: "#game5",
             devRamblingsLink: "../HTML/ramblings/bergs.html"
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game7: {
             title: "My Little Balloon Stand",
             description: "Run a little balloon stand. Hey, that robot really likes balloons.",
-            image: "../Images/fire.png",
+            image: "../Images/balloon.png",
             tags: ["Puzzle", "Logic", "Casual"],
             playLink: "#game7",
             devRamblingsLink: "../HTML/ramblings/balloon.html"
@@ -74,6 +74,79 @@ document.addEventListener('DOMContentLoaded', function() {
             tags: ["Adventure", "Retro", "Open World"],
             playLink: "#game9",
             devRamblingsLink: "../HTML/wordle.html"
+        },
+        // New games for the second shelf
+        game10: {
+            title: "Hollow Knight 2",
+            description: "Return to the underground kingdom with new challenges and enemies.",
+            image: "../Images/fire.png",
+            tags: ["Metroidvania", "Adventure", "Souls-like"],
+            playLink: "#game10",
+            devRamblingsLink: "../HTML/wordle.html"
+        },
+        game11: {
+            title: "Space Pirate",
+            description: "Sail the cosmic seas as a daring space pirate looking for the ultimate treasure.",
+            image: "../Images/fire.png",
+            tags: ["Space", "Adventure", "Strategy"],
+            playLink: "#game11",
+            devRamblingsLink: "../HTML/wordle.html"
+        },
+        game12: {
+            title: "Haunted Manor",
+            description: "Explore a haunted mansion filled with ghosts, puzzles, and mysterious artifacts.",
+            image: "../Images/fire.png",
+            tags: ["Horror", "Puzzle", "Mystery"],
+            playLink: "#game12",
+            devRamblingsLink: "../HTML/wordle.html"
+        },
+        game13: {
+            title: "Pixel Racer",
+            description: "Race through neon-lit pixel highways in this retro arcade racing game.",
+            image: "../Images/fire.png",
+            tags: ["Racing", "Arcade", "Retro"],
+            playLink: "#game13",
+            devRamblingsLink: "../HTML/wordle.html"
+        },
+        game14: {
+            title: "Jungle Quest",
+            description: "Brave the dangers of a jungle expedition to find ancient treasures.",
+            image: "../Images/fire.png",
+            tags: ["Adventure", "Platformer", "Exploration"],
+            playLink: "#game14",
+            devRamblingsLink: "../HTML/wordle.html"
+        },
+        game15: {
+            title: "Robot Factory",
+            description: "Build and program robots to solve increasingly complex puzzles.",
+            image: "../Images/fire.png",
+            tags: ["Puzzle", "Automation", "Strategy"],
+            playLink: "#game15",
+            devRamblingsLink: "../HTML/wordle.html"
+        },
+        game16: {
+            title: "Neon Nights",
+            description: "Navigate a cyberpunk city solving crimes in this noir detective adventure.",
+            image: "../Images/fire.png",
+            tags: ["Cyberpunk", "Mystery", "Adventure"],
+            playLink: "#game16",
+            devRamblingsLink: "../HTML/wordle.html"
+        },
+        game17: {
+            title: "Cyber Dawn",
+            description: "Battle against a rogue AI in this fast-paced cyberpunk shooter.",
+            image: "../Images/fire.png",
+            tags: ["Shooter", "Cyberpunk", "Action"],
+            playLink: "#game17",
+            devRamblingsLink: "../HTML/wordle.html"
+        },
+        game18: {
+            title: "Retro Blast",
+            description: "A collection of retro-inspired mini-games from the golden age of arcades.",
+            image: "../Images/fire.png",
+            tags: ["Retro", "Arcade", "Collection"],
+            playLink: "#game18",
+            devRamblingsLink: "../HTML/wordle.html"
         }
     };
 
@@ -83,169 +156,154 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeButton = document.querySelector('.close-button');
     const gameDetailsContent = document.getElementById('game-details-content');
 
-    // When a game box is clicked, populate and show the modal with game details
+    // Select shelf navigation elements
+    const prevShelfButton = document.getElementById('prev-shelf');
+    const nextShelfButton = document.getElementById('next-shelf');
+    const shelfDots = document.querySelectorAll('.shelf-dot');
+    const shelfContainers = document.querySelectorAll('.shelf-container');
+    const shelvesWrapper = document.querySelector('.shelves-wrapper');
+
+    // Current shelf index
+    let currentShelfIndex = 0;
+    const totalShelves = shelfContainers.length;
+
+    // Create VHS static effect element
+    const vhsStatic = document.createElement('div');
+    vhsStatic.classList.add('vhs-static');
+    shelvesWrapper.appendChild(vhsStatic);
+
+    // Flag to prevent multiple animations
+    let isAnimating = false;
+
+    // Function to change shelf with a seamless 360 animation (180° + content change + 180°)
+    function changeShelf(direction) {
+        if (isAnimating) return; // Prevent multiple animations
+        isAnimating = true;
+        
+        // Activate VHS static effect during transition
+        vhsStatic.classList.add('active');
+        
+        // First half of the animation (0° to 180°)
+        shelvesWrapper.style.animation = 'spin180First 0.6s ease-in-out forwards';
+        
+        // When the animation reaches 180 degrees, change the shelf content
+        setTimeout(() => {
+            // Remove active class from current shelf and dots
+            shelfContainers[currentShelfIndex].classList.remove('active');
+            shelfDots[currentShelfIndex].classList.remove('active');
+            
+            // Update current shelf index based on direction
+            if (direction === 'next') {
+                currentShelfIndex = (currentShelfIndex + 1) % totalShelves;
+            } else {
+                currentShelfIndex = (currentShelfIndex - 1 + totalShelves) % totalShelves;
+            }
+            
+            // Add active class to new current shelf and dots
+            shelfContainers[currentShelfIndex].classList.add('active');
+            shelfDots[currentShelfIndex].classList.add('active');
+            
+            // Start second half of animation (180° to 360°)
+            shelvesWrapper.style.animation = 'spin180Second 0.6s ease-in-out forwards';
+        }, 600); // Time for first 180° rotation
+        
+        // After complete animation, clean up
+        setTimeout(() => {
+            shelvesWrapper.style.animation = '';
+            vhsStatic.classList.remove('active');
+            isAnimating = false;
+        }, 1200); // Total animation time
+    }
+
+    // Event listeners for shelf navigation buttons
+    prevShelfButton.addEventListener('click', function() {
+        changeShelf('prev');
+    });
+
+    nextShelfButton.addEventListener('click', function() {
+        changeShelf('next');
+    });
+
+    // Event listeners for shelf indicator dots
+    shelfDots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            if (isAnimating) return; // Prevent clicks during animation
+            
+            const targetShelf = parseInt(this.getAttribute('data-shelf'));
+            
+            // Only change if not already on the target shelf
+            if (targetShelf !== currentShelfIndex) {
+                // Determine direction based on target shelf
+                const direction = targetShelf > currentShelfIndex ? 'next' : 'prev';
+                changeShelf(direction);
+            }
+        });
+    });
+
+    // Function to display game details in modal
+    function showGameDetails(gameId) {
+        // Get the selected game data
+        const game = games[gameId];
+        
+        // Generate modal content HTML
+        let modalHTML = `
+            <h2>${game.title}</h2>
+            <div class="game-screenshot">
+                <img src="${game.image}" alt="${game.title} Screenshot">
+            </div>
+            <p class="game-description">${game.description}</p>
+            <div class="game-tags">
+                ${game.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+            <div class="button-container">
+                <a href="${game.playLink}" class="play-button">PLAY GAME</a>
+                <a href="${game.devRamblingsLink}" class="dev-ramblings-button">DEV RAMBLINGS</a>
+            </div>
+        `;
+        
+        // Update modal content and display it
+        gameDetailsContent.innerHTML = modalHTML;
+        modal.style.display = 'block';
+        
+        // Add a slight delay before fade-in animation
+        setTimeout(() => {
+            modal.classList.add('active');
+        }, 10);
+    }
+
+    // Event listeners for game boxes
     gameBoxes.forEach(box => {
         box.addEventListener('click', function() {
             const gameId = this.getAttribute('data-game');
-            const game = games[gameId];
-            
-            // Update modal inner HTML with game details
-            gameDetailsContent.innerHTML = `
-                <h2>${game.title}</h2>
-                <div class="game-screenshot">
-                    <img src="${game.image}" alt="${game.title}">
-                </div>
-                <p class="game-description">${game.description}</p>
-                <div class="game-tags">
-                    ${game.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
-                <div class="button-container">
-                    <a href="${game.playLink}" class="play-button">PLAY GAME</a>
-                    <a href="${game.devRamblingsLink}" class="dev-ramblings-button">DEV RAMBLINGS</a>
-                </div>
-            `;
-            
-            // Display the modal with a retro VHS effect
-            modal.style.display = 'block';
-            setTimeout(() => {
-                modal.classList.add('active');
-            }, 10);
-            
-            // Create and add a temporary VHS scan effect overlay
-            const vhsEffect = document.createElement('div');
-            vhsEffect.classList.add('vhs-effect');
-            modal.appendChild(vhsEffect);
-            
-            // Remove the VHS effect after its animation completes
-            setTimeout(() => {
-                if (modal.contains(vhsEffect)) {
-                    modal.removeChild(vhsEffect);
-                }
-            }, 1000);
+            showGameDetails(gameId);
         });
     });
 
-    // Close the modal when the close button is clicked
+    // Event listener for modal close button
     closeButton.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
-
-    // Close the modal if the user clicks outside of it
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
             modal.style.display = 'none';
-        }
+        }, 500);
     });
-    
-    // Add a retro scan line effect when hovering over game boxes
-    gameBoxes.forEach(box => {
-        box.addEventListener('mouseover', function() {
-            const scanLine = document.createElement('div');
-            scanLine.classList.add('scan-line');
-            this.appendChild(scanLine);
+
+    // Event listener to close modal when clicking outside the content
+    modal.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.classList.remove('active');
             setTimeout(() => {
-                if (this.contains(scanLine)) {
-                    this.removeChild(scanLine);
-                }
-            }, 300);
-        });
+                modal.style.display = 'none';
+            }, 500);
+        }
     });
-    
-    // Add a page-load animation effect
-    document.body.classList.add('page-load');
-    setTimeout(() => {
-        document.body.classList.remove('page-load');
-    }, 1000);
-    
-    // Dynamically add CSS for VHS and scan line effects as well as styling for buttons
-    const style = document.createElement('style');
-    style.textContent = `
-        /* Set font family for all text elements */
-        body, h1, h2, h3, p, div, span, a, button, input, textarea, .game-description, .game-title, .tag {
-            font-family: "Comic Sans MS", cursive, sans-serif !important;
-        }
-        
-        /* Override specific fonts for headers and buttons */
-        .blockbuster-header h1, #game-details-content h2, .play-button, .dev-ramblings-button {
-            font-family: "Comic Sans MS", cursive, sans-serif !important;
-        }
-        
-        /* Scan line effect styling */
-        .scan-line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: rgba(255, 255, 255, 0.3);
-            animation: scanAnimation 0.3s linear forwards;
-        }
-        
-        @keyframes scanAnimation {
-            0% { top: 0; }
-            100% { top: 100%; }
-        }
-        
-        /* VHS effect overlay styling */
-        .vhs-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                rgba(50, 50, 50, 0) 0%,
-                rgba(50, 50, 50, 0.2) 50%,
-                rgba(50, 50, 50, 0) 100%
-            );
-            background-size: 100% 2px;
-            animation: vhsAnimation 0.5s linear forwards;
-            pointer-events: none;
-        }
-        
-        @keyframes vhsAnimation {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-        
-        /* Page load fade-in effect */
-        .page-load {
-            animation: pageLoadAnimation 1s ease-out;
-        }
-        
-        @keyframes pageLoadAnimation {
-            0% { opacity: 0; }
-            20% { opacity: 0.2; }
-            40% { opacity: 0.4; }
-            60% { opacity: 0.6; }
-            80% { opacity: 0.8; }
-            100% { opacity: 1; }
-        }
 
-        /* Container for buttons in the modal */
-        .button-container {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
+    // Function to initialize the page
+    function initPage() {
+        // Make sure first shelf is active
+        shelfContainers[0].classList.add('active');
+        shelfDots[0].classList.add('active');
+    }
 
-        /* Styling for the dev ramblings button */
-        .dev-ramblings-button {
-            display: inline-block;
-            background-color: #ff5500;
-            color: #fff;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-weight: bold;
-            border: 2px solid #000;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .dev-ramblings-button:hover {
-            background-color: #ff8800;
-            transform: scale(1.05);
-        }
-    `;
-    document.head.appendChild(style);
+    // Initialize the page when content is loaded
+    initPage();
 });
