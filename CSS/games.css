@@ -10,7 +10,7 @@
 body {
     font-family: "Courier New", Courier, monospace;
     background-color: #000;
-    background-image: url('../images/background.png');
+    background-image: url('../Images/background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
