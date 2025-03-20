@@ -3,6 +3,8 @@ let score = 0;
 let targetVisible = true;
 let gameActive = true;
 let gameWonDisplayed = false;
+let targetMoveTimer;
+let targetHitCooldown = false;
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -28,9 +30,15 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('keydown', handleKeyPress);
         skipGameButton.addEventListener('click', skipGame);
         
-        // Start target movement
-        setTimeout(moveTarget, 1000);
-        setInterval(moveTarget, 2000);
+        // Start target movement with a single timer system
+        moveTarget(); // Initial position
+        resetTargetMoveTimer();
+    }
+
+    // Reset the target movement timer
+    function resetTargetMoveTimer() {
+        clearTimeout(targetMoveTimer);
+        targetMoveTimer = setTimeout(moveTarget, 3000);
     }
 
     // Handle key presses (space to shoot)
@@ -82,89 +90,97 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Handle shooting
-// Handle shooting
-function shoot(event) {
-    if (!gameActive) return;
-    
-    // Create bullet
-    const bullet = document.createElement('div');
-    bullet.className = 'bullet';
-    
-    // Get position of click in the game area
-    const areaRect = gameArea.getBoundingClientRect();
-    const clickX = event.clientX - areaRect.left;
-    const clickY = event.clientY - areaRect.top;
-    
-    // Position bullet at gun position (center of the gun)
-    const gunRect = gun.getBoundingClientRect();
-    const gunCenterX = gunRect.left + (gun.offsetWidth / 2) - areaRect.left;
-    const gunCenterY = gunRect.top + (gun.offsetHeight / 2) - areaRect.top;
-    
-    bullet.style.left = gunCenterX + 'px';
-    bullet.style.top = gunCenterY + 'px';
-    
-    gameArea.appendChild(bullet);
-    
-    // Calculate angle to move bullet towards click point
-    const deltaX = clickX - gunCenterX;
-    const deltaY = clickY - gunCenterY;
-    const angle = Math.atan2(deltaY, deltaX);
-    const speed = 10;
-    const velocityX = Math.cos(angle) * speed;
-    const velocityY = Math.sin(angle) * speed;
-    
-    // Current bullet position
-    let bulletX = gunCenterX;
-    let bulletY = gunCenterY;
-    
-    // Animate bullet
-    const bulletInterval = setInterval(() => {
-        // Update bullet position
-        bulletX += velocityX;
-        bulletY += velocityY;
-        bullet.style.left = bulletX + 'px';
-        bullet.style.top = bulletY + 'px';
+    function shoot(event) {
+        if (!gameActive) return;
         
-        // Check if bullet hit target
-        const bulletRect = bullet.getBoundingClientRect();
-        const targetRect = target.getBoundingClientRect();
+        // Create bullet
+        const bullet = document.createElement('div');
+        bullet.className = 'bullet';
         
-        if (
-            bulletRect.left < targetRect.right &&
-            bulletRect.right > targetRect.left &&
-            bulletRect.top < targetRect.bottom &&
-            bulletRect.bottom > targetRect.top
-        ) {
-            // Hit!
-            clearInterval(bulletInterval);
-            target.classList.add('hit');
-            setTimeout(() => target.classList.remove('hit'), 500);
-            
-            // Add points
-            updateScore(5);
-            
-            // Highlight contact options based on score
-            updateContactOptions();
-            
-            // Move target
-            setTimeout(moveTarget, 500);
-            
-            // Remove bullet
-            bullet.remove();
-        }
+        // Get position of click in the game area
+        const areaRect = gameArea.getBoundingClientRect();
+        const clickX = event.clientX - areaRect.left;
+        const clickY = event.clientY - areaRect.top;
         
-        // Remove bullet if it goes off screen
-        if (
-            bulletX < 0 || 
-            bulletX > gameArea.offsetWidth || 
-            bulletY < 0 || 
-            bulletY > gameArea.offsetHeight
-        ) {
-            clearInterval(bulletInterval);
-            bullet.remove();
-        }
-    }, 20);
-}
+        // Position bullet at gun position (center of the gun)
+        const gunRect = gun.getBoundingClientRect();
+        const gunCenterX = gunRect.left + (gun.offsetWidth / 2) - areaRect.left;
+        const gunCenterY = gunRect.top + (gun.offsetHeight / 2) - areaRect.top;
+        
+        bullet.style.left = gunCenterX + 'px';
+        bullet.style.top = gunCenterY + 'px';
+        
+        gameArea.appendChild(bullet);
+        
+        // Calculate angle to move bullet towards click point
+        const deltaX = clickX - gunCenterX;
+        const deltaY = clickY - gunCenterY;
+        const angle = Math.atan2(deltaY, deltaX);
+        const speed = 10;
+        const velocityX = Math.cos(angle) * speed;
+        const velocityY = Math.sin(angle) * speed;
+        
+        // Current bullet position
+        let bulletX = gunCenterX;
+        let bulletY = gunCenterY;
+        
+        // Animate bullet
+        const bulletInterval = setInterval(() => {
+            // Update bullet position
+            bulletX += velocityX;
+            bulletY += velocityY;
+            bullet.style.left = bulletX + 'px';
+            bullet.style.top = bulletY + 'px';
+            
+            // Check if bullet hit target
+            const bulletRect = bullet.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            
+            if (
+                !targetHitCooldown &&
+                bulletRect.left < targetRect.right &&
+                bulletRect.right > targetRect.left &&
+                bulletRect.top < targetRect.bottom &&
+                bulletRect.bottom > targetRect.top
+            ) {
+                // Set cooldown to prevent multiple hits on same target
+                targetHitCooldown = true;
+                
+                // Hit!
+                clearInterval(bulletInterval);
+                target.classList.add('hit');
+                setTimeout(() => target.classList.remove('hit'), 500);
+                
+                // Add points
+                updateScore(5);
+                
+                // Highlight contact options based on score
+                updateContactOptions();
+                
+                // Move target after a short delay and reset the timer
+                setTimeout(() => {
+                    moveTarget();
+                    resetTargetMoveTimer();
+                    // Reset cooldown after target has moved
+                    targetHitCooldown = false;
+                }, 500);
+                
+                // Remove bullet
+                bullet.remove();
+            }
+            
+            // Remove bullet if it goes off screen
+            if (
+                bulletX < 0 || 
+                bulletX > gameArea.offsetWidth || 
+                bulletY < 0 || 
+                bulletY > gameArea.offsetHeight
+            ) {
+                clearInterval(bulletInterval);
+                bullet.remove();
+            }
+        }, 20);
+    }
 
     // Update score
     function updateScore(points) {
