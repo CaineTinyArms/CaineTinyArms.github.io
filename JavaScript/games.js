@@ -77,11 +77,11 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         // New games for the second shelf
         game10: {
-            title: "Hollow Knight 2",
-            description: "Return to the underground kingdom with new challenges and enemies.",
+            title: "Endless Wordle",
+            description: "Endless Wordle. Enough Said.",
             image: "../Images/fire.png",
             tags: ["Metroidvania", "Adventure", "Souls-like"],
-            playLink: "#game10",
+            playLink: "../HTML/endlesswordle.html",
             devRamblingsLink: "../HTML/wordle.html"
         },
     };
