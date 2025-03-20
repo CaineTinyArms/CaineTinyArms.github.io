@@ -18,7 +18,6 @@ body {
     padding: 20px;
 }
 
-/* Navigation Bar - Styled to match websiteStyleSheet.css but with Blockbuster theme */
 .nav {
     background-color: #66ff66;
     text-align: center;
@@ -43,7 +42,6 @@ body {
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
-/* Footer - Styled to match websiteStyleSheet.css but with Blockbuster theme */
 .footer {
     background-color: #ffcc00;
     text-align: center;

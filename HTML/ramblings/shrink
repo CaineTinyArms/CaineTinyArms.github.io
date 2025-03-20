@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Big Title in the Middle</title>
+  <!-- Make sure the path to your CSS file is correct -->
+  <link rel="stylesheet" type="text/css" href="CSS/websiteStyleSheet.css">
+</head>
+<body>
+  <!-- Navigation bar at the top -->
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="HTML/aboutme.html">About</a>
+    <a href="HTML/wordle.html">My Games</a>
+    <a href="HTML/contact.html">Contact</a>
+  </div>
+
+  <!-- Big Title, centered by default in .header style -->
+  <div class="header">
+    <h1>My Big Title</h1>
+  </div>
+
+  <!-- A "content" container with a text-section for large text -->
+  <div class="content">
+    <div class="text-section">
+      <h2>A Large Text Box Below the Nav Bar</h2>
+      <p>
+        This is where you can add a large amount of text. 
+        It inherits the styles from your existing stylesheet, including the 
+        background color, fonts, and any other custom features you’ve defined.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula 
+        libero vel lectus porttitor, in tincidunt mauris pellentesque. 
+        Vestibulum volutpat tellus quis tempus luctus. Suspendisse potenti. 
+        Morbi dignissim maximus tortor, quis feugiat quam.
+      </p>
+      <!-- Add as many paragraphs or elements here as you need. -->
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
+  </div>
+</body>
+</html>

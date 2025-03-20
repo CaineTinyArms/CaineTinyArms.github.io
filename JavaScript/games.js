@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "../Images/shrink.png",
             tags: ["Action", "Adventure", "Puzzle"],
             playLink: "#game1",
-            devRamblingsLink: "../HTML/wordle.html" // Updated link
+            devRamblingsLink: "../HTML/ramblings/shrink.html" // Updated link
         },
         game2: {
             title: "The Dwelling Afar",
