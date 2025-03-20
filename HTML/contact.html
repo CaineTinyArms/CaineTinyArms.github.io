@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>CaineTinyArms - Contact</title>
   <link rel="stylesheet" href="../CSS/websiteStyleSheet.css">
+  <link rel="stylesheet" href="../CSS/contact.css">
 </head>
 <body>
   <div class="header">
@@ -17,60 +18,64 @@
     <a href="wordle.html">My Games</a>
     <a href="contact.html">Contact</a>
   </div>
-
-  <div class="content contact-layout" id="gameArea">
-    <canvas id="gameCanvas" width="800" height="800"></canvas>
-
-    <div class="contact-row">
-      <div class="contact-box">
+  
+  <div class="game-instructions">
+    <p>🎮 Shoot the targets to unlock my contact methods! 🎯 Press SPACE to shoot.</p>
+  </div>
+  
+  <div class="game-contact-container" id="game-area">
+    <div id="target"></div>
+    <div id="gun"></div>
+    <div id="score-display">Score: 0</div>
+    <div id="skip-game">Skip Game</div>
+    
+    <div class="contact-container">
+      <div class="contact-option" data-points="5">
         <a href="https://www.linkedin.com/in/caine-morris-20314b22a/">
-          <img src="../Images/linkedin.png" alt="LinkedIn">
+          <img src="../images/linkedin.png" alt="Linkedin">
+          <h3>Linkedin</h3>
+          <p>connect with me on the professional facebook.</p>
         </a>
-        <hr>
-        <p>connect with me on the professional facebook.</p>
       </div>
-      <div class="contact-box">
-        <a href="https://cainetinyarms.itch.io/">
-          <img src="../Images/itchio.svg" alt="itch.io">
+      
+      <div class="contact-option" data-points="20">
+        <a href="https://cainetinyarms.itch.io/" target="_blank">
+          <img src="../images/itchio.svg" alt="Itch.io">
+          <h3>Itch.io</h3>
+          <p>check out my itch.io for the best games this side of the universe.</p>
         </a>
-        <hr>
-        <p>checkout my itchio for the best games this side of the universe.</p>
       </div>
-      <div class="contact-box">
-        <a href="mailto:cainetinyarmsdev@gmail.com">
-          <img src="../Images/email.svg" alt="Email">
+      
+      <div class="contact-option" data-points="40">
+        <a href="mailto:cainetinyarmsdev@gmail.com" target="_blank">
+          <img src="../images/email.svg" alt="Email">
+          <h3>Email</h3>
+          <p>send me an email to ask about my favourite looney toons character.</p>
         </a>
-        <hr>
-        <p>send me an email to ask about my favourite looney toons character.</p>
       </div>
-    </div>
-
-    <div class="contact-row">
-      <div class="contact-box">
-        <a href="https://x.com/ctagamedev">
-          <img src="../Images/twitter.png" alt="Twitter">
+      
+      <div class="contact-option" data-points="60">
+        <a href="https://x.com/CTAGameDev" target="_blank">
+          <img src="../images/twitter.png" alt="Twitter">
+          <h3>x / twitter</h3>
+          <p>i cant legally use the twitter logo but its still twitter to me.</p>
         </a>
-        <hr>
-        <p>i cant legally use the twitter logo but its still twitter to me.</p>
       </div>
-
-      <div class="score-column">
-        <div class="contact-box">
-          <a href="https://github.com/CaineTinyArms">
-            <img src="../Images/github.svg" alt="GitHub">
-          </a>
-          <hr>
+      
+      <div class="contact-option" data-points="80">
+        <a href="https://github.com/CaineTinyArms" target="_blank">
+          <img src="../images/github.svg" alt="GitHub">
+          <h3>GitHub</h3>
           <p>the only hub that matters.</p>
-        </div>
-        <p id="scoreDisplay">Score: 0</p>
+        </a>
       </div>
-
-      <div class="contact-box">
-        <a href="https://www.twitch.tv/cainetinyarms">
-          <img src="../Images/twitch.svg" alt="Twitch">
-        </a>  
-        <hr>
-        <p>dev streams sometimes very rarely.</p>
+      
+      <div class="contact-option" data-points="100">
+        <a href="twitch.tv/cainetinyarms">
+          <img src="../images/twitch.svg" alt="Twitch">
+          <h3>Twitch</h3>
+          <p>dev streams sometimes. very rarely.</p>
+        </a>
       </div>
     </div>
   </div>

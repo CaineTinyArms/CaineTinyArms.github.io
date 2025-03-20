@@ -1,0 +1,211 @@
+/* Import base website styles */
+@import url('websiteStyleSheet.css');
+
+/* Game and Contact Container */
+.game-contact-container {
+  position: relative;
+  background-color: #fff;
+  border: 2px solid #000;
+  margin: 20px;
+  padding: 15px;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+/* Contact Grid Layout */
+.contact-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  z-index: 1;
+  position: relative;
+}
+
+.contact-option {
+  text-align: center;
+  padding: 10px;
+  border: 2px solid #000;
+  background-color: rgba(217, 242, 255, 0.85);
+  transition: transform 0.3s, background-color 0.3s;
+  position: relative;
+  max-width: 150px;
+  margin: 0 auto;
+  z-index: 2;
+  opacity: 0.7;
+}
+
+.contact-option.activated {
+  opacity: 1;
+  background-color: rgba(255, 170, 0, 0.85);
+}
+
+.contact-option.activated:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 221, 153, 0.9);
+  cursor: pointer;
+}
+
+/* Disable non-activated contact options */
+.contact-option:not(.activated) {
+  pointer-events: none;
+}
+
+.contact-option:not(.activated) a {
+  pointer-events: none;
+  color: inherit;
+  text-decoration: none;
+  cursor: default;
+}
+
+.contact-option img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.contact-option h3 {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+.contact-option p {
+  font-size: 0.8em;
+  margin: 5px 0;
+}
+
+/* Game Elements */
+#gun {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 40px;
+  background-color: #333;
+  clip-path: polygon(0% 30%, 100% 30%, 100% 70%, 80% 70%, 80% 40%, 0% 40%);
+  z-index: 3;
+}
+
+#target {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  border: 3px solid #000;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#target::before, #target::after {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+#target::before {
+  width: 20px;
+  height: 20px;
+}
+
+#target::after {
+  width: 10px;
+  height: 10px;
+  background-color: #ff0000;
+}
+
+.bullet {
+  position: absolute;
+  width: 5px;
+  height: 10px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+#score-display {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-weight: bold;
+  color: #000;
+  background-color: rgba(255, 204, 0, 0.85);
+  padding: 5px 10px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  z-index: 3;
+}
+
+/* Skip game button */
+#skip-game {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-weight: bold;
+  color: #000;
+  background-color: rgba(255, 204, 0, 0.85);
+  padding: 5px 10px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  z-index: 3;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#skip-game:hover {
+  background-color: rgba(255, 170, 0, 0.9);
+}
+
+/* Hit animation */
+@keyframes hit {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.hit {
+  animation: hit 0.5s ease-out;
+}
+
+/* Contact box animations */
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Game instructions */
+.game-instructions {
+  text-align: center;
+  margin: 10px 0 20px;
+  padding: 5px;
+  background-color: rgba(255, 204, 0, 0.85);
+  border: 2px solid #000;
+  border-radius: 10px;
+}
+
+/* Win message */
+.win-message {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 204, 0, 0.95);
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  border: 2px solid #000;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.win-message.fade-out {
+  opacity: 0;
+}
