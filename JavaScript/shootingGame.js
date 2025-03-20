@@ -232,7 +232,6 @@ function shoot(event) {
     
     // Skip game and unlock all contacts
     function skipGame() {
-        gameActive = false;
         unlockAllContacts();
         
         // Hide target and gun
