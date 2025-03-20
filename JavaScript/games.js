@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "../Images/shrink/shrink.gif"
             ],
             tags: ["Action", "Adventure", "Puzzle"],
-            playLink: "#game1",
+            playLink: "https://cainetinyarms.itch.io/shrink",
             devRamblingsLink: "../HTML/ramblings/shrink.html"
         },
         game2: {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "../Images/dwelling/dwelling.gif",
             ],
             tags: ["RPG", "Adventure", "Fantasy"],
-            playLink: "#game2",
+            playLink: "https://cainetinyarms.itch.io/the-dwelling-afar",
             devRamblingsLink: "../HTML/ramblings/dwelling.html"
         },
         game3: {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "../Images/cargo/cargo.gif",
             ],
             tags: ["Shooter", "Arcade", "Sci-Fi"],
-            playLink: "#game3",
+            playLink: "https://burnttoastdev.itch.io/contained-cargo",
             devRamblingsLink: "../HTML/ramblings/cargo.html"
         },
         game4: {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "../Images/doc/doc.gif",
             ],
             tags: ["Platformer", "Puzzle", "Pixel Art"],
-            playLink: "#game4",
+            playLink: "https://cainetinyarms.itch.io/dall-of-cuty",
             devRamblingsLink: "../HTML/ramblings/doc.html"
         },
         game5: {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "../Images/bergs/bergs.gif",
             ],
             tags: ["berg", "berg", "berg"],
-            playLink: "#game5",
+            playLink: "https://www.newgrounds.com/portal/view/928130",
             devRamblingsLink: "../HTML/ramblings/bergs.html"
         },
         game6: {
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "../Images/sonder/sonder.gif",
             ],
             tags: ["Survival", "Horror", "Action"],
-            playLink: "#game6",
+            playLink: "https://cainetinyarms.itch.io/sonder-reflections",
             devRamblingsLink: "../HTML/ramblings/sonder.html"
         },
         game7: {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "../Images/balloon/balloon.gif",
             ],
             tags: ["Puzzle", "Logic", "Casual"],
-            playLink: "#game7",
+            playLink: "https://cainetinyarms.itch.io/my-little-balloon-stand",
             devRamblingsLink: "../HTML/ramblings/balloon.html"
         },
         game8: {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "../Images/sotd/sotd.gif"
             ],
             tags: ["Fighting", "Versus", "Action"],
-            playLink: "#game8",
+            playLink: "https://cainetinyarms.itch.io/supermarket-of-the-dead",
             devRamblingsLink: "../HTML/ramblings/sotd.html"
         },
         game9: {
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "../Images/wordle.png",
             ],
             tags: ["Adventure", "Retro", "Open World"],
-            playLink: "#game9",
+            playLink: "../HTML/endlesswordle.html",
             devRamblingsLink: "../HTML/wordle.html"
         }
     };
