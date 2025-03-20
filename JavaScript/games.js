@@ -6,7 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
         game1: {
             title: "shrink",
             description: "Escape from the lab before you shrink too small!",
-            image: "../Images/shrink.png",
+            images: [
+                "../Images/shrink/screen1.png", 
+                "../Images/shrink/screen2.png", 
+                "../Images/shrink/screen3.png",
+                "../Images/shrink/shrink.gif"
+            ],
             tags: ["Action", "Adventure", "Puzzle"],
             playLink: "#game1",
             devRamblingsLink: "../HTML/ramblings/shrink.html"
@@ -14,7 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
         game2: {
             title: "The Dwelling Afar",
             description: "Locked in a lonely fishing cabin, use your wits to escape The Dwelling Afar.",
-            image: "../Images/dwelling.png",
+            images: [
+                "../Images/dwelling/screen1.png", 
+                "../Images/dwelling/screen2.png", 
+                "../Images/dwelling/screen3.png",
+                "../Images/dwelling/dwelling.gif",
+            ],
             tags: ["RPG", "Adventure", "Fantasy"],
             playLink: "#game2",
             devRamblingsLink: "../HTML/ramblings/dwelling.html"
@@ -22,7 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
         game3: {
             title: "Contained Cargo",
             description: 'Perform scientific tests on the "cargo". However, whatever you do... keep it contained.',
-            image: "../Images/cargo.png",
+            images: [
+                "../Images/cargo/screen1.png", 
+                "../Images/cargo/screen2.png", 
+                "../Images/cargo/screen3.png",
+                "../Images/cargo/cargo.gif",
+            ],
             tags: ["Shooter", "Arcade", "Sci-Fi"],
             playLink: "#game3",
             devRamblingsLink: "../HTML/ramblings/cargo.html"
@@ -30,7 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
         game4: {
             title: "Dall of Cuty",
             description: "Slaughter endless hordes of zombies, while racking up points to upgrade your equipment and escape the cursed lands.",
-            image: "../Images/doc.png",
+            images: [
+                "../Images/doc/screen1.png", 
+                "../Images/doc/screen2.png", 
+                "../Images/doc/screen3.png",
+                "../Images/doc/doc.gif",
+            ],
             tags: ["Platformer", "Puzzle", "Pixel Art"],
             playLink: "#game4",
             devRamblingsLink: "../HTML/ramblings/doc.html"
@@ -38,7 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
         game5: {
             title: "bergs",
             description: "berg",
-            image: "../Images/bergs.png",
+            images: [
+                "../Images/bergs/screen1.png", 
+                "../Images/bergs/screen2.png", 
+                "../Images/bergs/screen3.png",
+                "../Images/bergs/bergs.gif",
+            ],
             tags: ["berg", "berg", "berg"],
             playLink: "#game5",
             devRamblingsLink: "../HTML/ramblings/bergs.html"
@@ -46,7 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
         game6: {
             title: "Sonder: Reflections",
             description: "Take up the role of a taxi driver, listen to the customers conversations and respond accordingly.",
-            image: "../Images/sonder.png",
+            images: [
+                "../Images/sonder/screen1.png", 
+                "../Images/sonder/screen2.png", 
+                "../Images/sonder/sonder.gif",
+            ],
             tags: ["Survival", "Horror", "Action"],
             playLink: "#game6",
             devRamblingsLink: "../HTML/ramblings/sonder.html"
@@ -54,7 +83,12 @@ document.addEventListener('DOMContentLoaded', function() {
         game7: {
             title: "My Little Balloon Stand",
             description: "Run a little balloon stand. Hey, that robot really likes balloons.",
-            image: "../Images/balloon.png",
+            images: [
+                "../Images/balloon/screen1.png", 
+                "../Images/balloon/screen2.png", 
+                "../Images/balloon/screen3.png",
+                "../Images/balloon/balloon.gif",
+            ],
             tags: ["Puzzle", "Logic", "Casual"],
             playLink: "#game7",
             devRamblingsLink: "../HTML/ramblings/balloon.html"
@@ -62,28 +96,26 @@ document.addEventListener('DOMContentLoaded', function() {
         game8: {
             title: "Supermarket of the Dead",
             description: "Defend your supermarket from the zombie onslaught, but you better keep scanning those items, the mags aren't free.",
-            image: "../Images/sotd.png",
+            images: [
+                "../Images/sotd/screen1.png",
+                "../Images/sotd/screen2.png",
+                "../Images/sotd/screen3.png",
+                "../Images/sotd/sotd.gif"
+            ],
             tags: ["Fighting", "Versus", "Action"],
             playLink: "#game8",
             devRamblingsLink: "../HTML/ramblings/sotd.html"
         },
         game9: {
-            title: "Unfinished Puzzle Game.",
-            description: "My homage to Resident Evil. Unfinished, unrushed. Ready when it's ready.",
-            image: "../Images/fire.png",
+            title: "Endless Wordle.",
+            description: "Wordle, but endless. Enough said.",
+            images: [
+                "../Images/wordle.png",
+            ],
             tags: ["Adventure", "Retro", "Open World"],
             playLink: "#game9",
             devRamblingsLink: "../HTML/wordle.html"
-        },
-        // New games for the second shelf
-        game10: {
-            title: "Endless Wordle",
-            description: "Endless Wordle. Enough Said.",
-            image: "../Images/fire.png",
-            tags: ["Metroidvania", "Adventure", "Souls-like"],
-            playLink: "../HTML/endlesswordle.html",
-            devRamblingsLink: "../HTML/wordle.html"
-        },
+        }
     };
 
     // Select all game box elements and modal elements for displaying game details
@@ -92,101 +124,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeButton = document.querySelector('.close-button');
     const gameDetailsContent = document.getElementById('game-details-content');
 
-    // Select shelf navigation elements
-    const prevShelfButton = document.getElementById('prev-shelf');
-    const nextShelfButton = document.getElementById('next-shelf');
-    const shelfDots = document.querySelectorAll('.shelf-dot');
-    const shelfContainers = document.querySelectorAll('.shelf-container');
-    const shelvesWrapper = document.querySelector('.shelves-wrapper');
+    // Store the current carousel slide index
+    let currentSlideIndex = 0;
 
-    // Current shelf index
-    let currentShelfIndex = 0;
-    const totalShelves = shelfContainers.length;
-
-    // Create VHS static effect element
-    const vhsStatic = document.createElement('div');
-    vhsStatic.classList.add('vhs-static');
-    shelvesWrapper.appendChild(vhsStatic);
-
-    // Flag to prevent multiple animations
-    let isAnimating = false;
-
-    // Function to change shelf with a 180° animation (90° + content change + 90°)
-    function changeShelf(direction) {
-        if (isAnimating) return; // Prevent multiple animations
-        isAnimating = true;
-        
-        // Activate VHS static effect during transition
-        vhsStatic.classList.add('active');
-        
-        // First half of the animation (0° to 90°)
-        shelvesWrapper.style.animation = 'spin90First 0.4s ease-in-out forwards';
-        
-        // When the animation reaches 90 degrees, change the shelf content
-        setTimeout(() => {
-            // Remove active class from current shelf and dots
-            shelfContainers[currentShelfIndex].classList.remove('active');
-            shelfDots[currentShelfIndex].classList.remove('active');
-            
-            // Update current shelf index based on direction
-            if (direction === 'next') {
-                currentShelfIndex = (currentShelfIndex + 1) % totalShelves;
-            } else {
-                currentShelfIndex = (currentShelfIndex - 1 + totalShelves) % totalShelves;
-            }
-            
-            // Add active class to new current shelf and dots
-            shelfContainers[currentShelfIndex].classList.add('active');
-            shelfDots[currentShelfIndex].classList.add('active');
-            
-            // Start second half of animation (90° to 180°)
-            shelvesWrapper.style.animation = 'spin90Second 0.4s ease-in-out forwards';
-        }, 400); // Time for first 90° rotation
-        
-        // After complete animation, clean up
-        setTimeout(() => {
-            shelvesWrapper.style.animation = '';
-            vhsStatic.classList.remove('active');
-            isAnimating = false;
-        }, 800); // Total animation time
-    }
-
-    // Event listeners for shelf navigation buttons
-    prevShelfButton.addEventListener('click', function() {
-        changeShelf('prev');
-    });
-
-    nextShelfButton.addEventListener('click', function() {
-        changeShelf('next');
-    });
-
-    // Event listeners for shelf indicator dots
-    shelfDots.forEach(dot => {
-        dot.addEventListener('click', function() {
-            if (isAnimating) return; // Prevent clicks during animation
-            
-            const targetShelf = parseInt(this.getAttribute('data-shelf'));
-            
-            // Only change if not already on the target shelf
-            if (targetShelf !== currentShelfIndex) {
-                // Determine direction based on target shelf
-                const direction = targetShelf > currentShelfIndex ? 'next' : 'prev';
-                changeShelf(direction);
-            }
-        });
-    });
-
-    // Function to display game details in modal
+    // Function to display game details in modal with carousel
     function showGameDetails(gameId) {
         // Get the selected game data
         const game = games[gameId];
         
+        // Reset current slide index
+        currentSlideIndex = 0;
+        
+        // Generate carousel HTML
+        let carouselHTML = `
+            <div class="carousel-container">
+                <div class="carousel-slides">
+                    ${game.images.map((image, index) => 
+                        `<div class="carousel-slide ${index === 0 ? 'active' : ''}">
+                            <img src="${image}" alt="${game.title} Image ${index + 1}">
+                        </div>`
+                    ).join('')}
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-control prev-slide">&lt;</button>
+                    <div class="carousel-indicators">
+                        ${game.images.map((_, index) => 
+                            `<span class="carousel-indicator ${index === 0 ? 'active' : ''}" data-slide="${index}"></span>`
+                        ).join('')}
+                    </div>
+                    <button class="carousel-control next-slide">&gt;</button>
+                </div>
+            </div>
+        `;
+        
         // Generate modal content HTML
         let modalHTML = `
             <h2>${game.title}</h2>
-            <div class="game-screenshot">
-                <img src="${game.image}" alt="${game.title} Screenshot">
-            </div>
+            ${carouselHTML}
             <p class="game-description">${game.description}</p>
             <div class="game-tags">
                 ${game.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
@@ -205,6 +179,109 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             modal.classList.add('active');
         }, 10);
+        
+        // Add event listeners for carousel controls
+        setupCarouselControls();
+    }
+    
+    // Function to set up carousel controls
+    function setupCarouselControls() {
+        const prevButton = modal.querySelector('.prev-slide');
+        const nextButton = modal.querySelector('.next-slide');
+        const indicators = modal.querySelectorAll('.carousel-indicator');
+        
+        if (prevButton && nextButton) {
+            prevButton.addEventListener('click', function() {
+                changeSlide('prev');
+            });
+            
+            nextButton.addEventListener('click', function() {
+                changeSlide('next');
+            });
+        }
+        
+        if (indicators.length > 0) {
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    goToSlide(slideIndex);
+                });
+            });
+        }
+    }
+    
+    // Function to change slide
+    function changeSlide(direction) {
+        const slides = modal.querySelectorAll('.carousel-slide');
+        const indicators = modal.querySelectorAll('.carousel-indicator');
+        
+        if (slides.length <= 1) return;
+        
+        // Remove active class from current slide
+        slides[currentSlideIndex].classList.remove('active');
+        indicators[currentSlideIndex].classList.remove('active');
+        
+        // Update slide index based on direction
+        if (direction === 'next') {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+        } else {
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+        }
+        
+        // Add active class to new slide
+        slides[currentSlideIndex].classList.add('active');
+        indicators[currentSlideIndex].classList.add('active');
+        
+        // Add VHS static effect during slide change
+        const carouselContainer = modal.querySelector('.carousel-container');
+        const slideStatic = document.createElement('div');
+        slideStatic.classList.add('vhs-static');
+        slideStatic.classList.add('slide-static');
+        carouselContainer.appendChild(slideStatic);
+        
+        // Flash static briefly
+        slideStatic.classList.add('active');
+        setTimeout(() => {
+            slideStatic.classList.remove('active');
+            setTimeout(() => {
+                slideStatic.remove();
+            }, 300);
+        }, 200);
+    }
+    
+    // Function to go to specific slide
+    function goToSlide(slideIndex) {
+        const slides = modal.querySelectorAll('.carousel-slide');
+        const indicators = modal.querySelectorAll('.carousel-indicator');
+        
+        if (slideIndex === currentSlideIndex || slideIndex < 0 || slideIndex >= slides.length) return;
+        
+        // Remove active class from current slide
+        slides[currentSlideIndex].classList.remove('active');
+        indicators[currentSlideIndex].classList.remove('active');
+        
+        // Update slide index
+        currentSlideIndex = slideIndex;
+        
+        // Add active class to new slide
+        slides[currentSlideIndex].classList.add('active');
+        indicators[currentSlideIndex].classList.add('active');
+        
+        // Add VHS static effect during slide change
+        const carouselContainer = modal.querySelector('.carousel-container');
+        const slideStatic = document.createElement('div');
+        slideStatic.classList.add('vhs-static');
+        slideStatic.classList.add('slide-static');
+        carouselContainer.appendChild(slideStatic);
+        
+        // Flash static briefly
+        slideStatic.classList.add('active');
+        setTimeout(() => {
+            slideStatic.classList.remove('active');
+            setTimeout(() => {
+                slideStatic.remove();
+            }, 300);
+        }, 200);
     }
 
     // Event listeners for game boxes
@@ -232,14 +309,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         }
     });
-
-    // Function to initialize the page
-    function initPage() {
-        // Make sure first shelf is active
-        shelfContainers[0].classList.add('active');
-        shelfDots[0].classList.add('active');
-    }
-
-    // Initialize the page when content is loaded
-    initPage();
 });

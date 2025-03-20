@@ -83,115 +83,17 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Shelf navigation styling */
-.shelf-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #1e3f8f;
-    border-bottom: 4px solid #fff;
-}
-
-.shelf-nav-button {
-    background-color: #ffcc00;
-    color: #000;
-    border: 3px solid #000;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-    font-family: "Impact", sans-serif;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.shelf-nav-button:hover {
-    background-color: #ff5500;
-    color: #fff;
-    transform: scale(1.1);
-}
-
-#shelf-indicator {
-    display: flex;
-    gap: 10px;
-}
-
-.shelf-dot {
-    width: 15px;
-    height: 15px;
-    background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.shelf-dot.active {
-    background-color: #ffcc00;
-    transform: scale(1.2);
-}
-
 /* Shelves wrapper and containers */
 .shelves-wrapper {
     position: relative;
     overflow: hidden;
     height: 1000px; /* Increased height to show full game titles */
-    perspective: 1000px; /* For 3D effect */
 }
 
 .shelf-container {
     background-color: rgba(26, 26, 26, 0.9);
     padding: 20px;
-    position: absolute;
     width: 100%;
-    opacity: 0;
-    transform: translateX(100%);
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    visibility: hidden;
-}
-
-.shelf-container.active {
-    opacity: 1;
-    transform: translateX(0);
-    visibility: visible;
-}
-
-/* First half of the rotation (0° to 90°) */
-@keyframes spin90First {
-    0% { 
-        transform: perspective(1000px) rotateY(0deg);
-        filter: brightness(1);
-    }
-    50% { 
-        transform: perspective(1000px) rotateY(45deg);
-        filter: brightness(0.7);
-    }
-    100% { 
-        transform: perspective(1000px) rotateY(90deg);
-        filter: brightness(0.5);
-    }
-}
-
-/* Second half of the rotation (90° to 180°) */
-@keyframes spin90Second {
-    0% { 
-        transform: perspective(1000px) rotateY(90deg);
-        filter: brightness(0.5);
-    }
-    50% { 
-        transform: perspective(1000px) rotateY(135deg);
-        filter: brightness(0.7);
-    }
-    100% { 
-        transform: perspective(1000px) rotateY(180deg);
-        filter: brightness(1);
-    }
 }
 
 /* Shelf styling */
@@ -231,29 +133,6 @@ body {
     transform: translateY(-10px) scale(1.05);
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
     z-index: 10;
-}
-
-/* Empty game box styling - completely invisible but maintains spacing */
-.empty-box {
-    background-color: transparent;
-    border: none;
-    cursor: default;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.empty-box:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-.empty-cover {
-    background-color: transparent;
-}
-
-.empty-box .game-title {
-    background-color: transparent;
-    color: transparent;
 }
 
 /* Container for the game cover image */
@@ -341,7 +220,126 @@ body {
     letter-spacing: 2px;
 }
 
-/* Container for game screenshot */
+/* Carousel Styling */
+.carousel-container {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 4px solid #fff;
+    background-color: #000;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.carousel-slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.carousel-controls {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 10;
+}
+
+.carousel-control {
+    background-color: #ffcc00;
+    color: #000;
+    border: 3px solid #000;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-family: "Impact", sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-control:hover {
+    background-color: #ff5500;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.carousel-indicators {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+    background-color: #ffcc00;
+    transform: scale(1.2);
+}
+
+/* VHS static specifically for slide transitions */
+.slide-static {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+
+/* Glitch effect animation for VHS transitions */
+@keyframes glitchEffect {
+    0% { transform: translate(0); }
+    20% { transform: translate(-5px, 5px); }
+    40% { transform: translate(-5px, -5px); }
+    60% { transform: translate(5px, 5px); }
+    80% { transform: translate(5px, -5px); }
+    100% { transform: translate(0); }
+}
+
+/* Game screenshot styling (REPLACED BY CAROUSEL) */
 .game-screenshot {
     width: 100%;
     height: 300px;
@@ -382,27 +380,6 @@ body {
     font-size: 0.8rem;
 }
 
-/* Play button styling */
-.play-button {
-    display: inline-block;
-    background-color: #ff0;
-    color: #000;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    border: 2px solid #000;
-    text-transform: uppercase;
-    font-family: "Impact", sans-serif;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
-}
-
-.play-button:hover {
-    background-color: #ff5500;
-    color: #fff;
-    transform: scale(1.05);
-}
-
 /* Button container */
 .button-container {
     display: flex;
@@ -410,86 +387,48 @@ body {
     margin-top: 20px;
 }
 
-/* Styling for the dev ramblings button */
-.dev-ramblings-button {
-    display: inline-block;
+/* Play button styling */
+.play-button {
     background-color: #ff5500;
     color: #fff;
-    padding: 10px 20px;
     text-decoration: none;
-    font-weight: bold;
-    border: 2px solid #000;
-    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 3px solid #000;
     font-family: "Impact", sans-serif;
-    letter-spacing: 2px;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
     transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.play-button:hover {
+    background-color: #ffcc00;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.7);
+}
+
+/* Dev Ramblings button styling */
+.dev-ramblings-button {
+    background-color: #1e3f8f;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 3px solid #000;
+    font-family: "Impact", sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .dev-ramblings-button:hover {
-    background-color: #ff8800;
+    background-color: #66ff66;
+    color: #000;
     transform: scale(1.05);
-}
-
-/* Background overlay with retro grid effect */
-.page-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.05) 0px,
-        rgba(0, 0, 0, 0.05) 1px,
-        transparent 1px,
-        transparent 2px
-    );
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* VHS static effect for transitions */
-.vhs-static {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../Images/static.gif');
-    background-size: cover;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 10;
-    transition: opacity 0.3s ease;
-}
-
-.vhs-static.active {
-    opacity: 0.3;
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .shelf {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .game-box {
-        margin-bottom: 20px;
-    }
-    
-    .blockbuster-header h1 {
-        font-size: 2rem;
-    }
-    
-    .nav a {
-        font-size: 1rem;
-        margin: 0 10px;
-    }
-    
-    .shelf-nav-button {
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-    }
+    box-shadow: 0 0 15px rgba(102, 255, 102, 0.7);
 }
