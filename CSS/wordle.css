@@ -124,14 +124,7 @@ body {
   background-color: #b5b9bd;
 }
 
-/* 
- * NEW: Color styling for keyboard keys 
- * These match the tile colors but are applied to the keyboard keys
- * Following the same color scheme as the original Wordle:
- * - Green for correct letters
- * - Yellow for present letters (right letter, wrong position)
- * - Gray for absent letters (not in the word)
- */
+/* These are for the keyboard keys, isntead of the grid.*/
 .key.correct {
   background-color: #6aaa64;  /* Green */
   color: #ffffff; /* White text for better contrast */
