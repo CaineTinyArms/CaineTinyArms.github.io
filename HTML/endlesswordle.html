@@ -10,7 +10,7 @@
   <body>
     <!-- Header with title and marquee tagline -->
     <div class="header">
-      <h1>Endless Wordle</h1>
+      <h1>Endless Wordle Challenge</h1>
       <marquee behavior="scroll" direction="left">
         Aspiring Game Developer
       </marquee>
@@ -119,6 +119,7 @@
         <!-- Controls for the game -->
         <div id="game-controls">
           <button id="reset-game">New Word</button>
+          <a href="games.html">Go to Games Page</a>
         </div>
 
       </div>
@@ -129,21 +130,6 @@
       <p>&copy; 2025 CaineTinyArms. All Rights Reserved.</p>
     </div>
     <!-- Include external JavaScript file for Wordle game functionality -->
-    <script src="../JavaScript/endlesswordle.js"></script>
-    <!-- Additional script to initialize and handle the reset button -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        // Add event listener for the reset button
-        document.getElementById("reset-game").addEventListener("click", function() {
-          // Call the resetGame function from the main script
-          resetGame();
-        });
-        
-        // Update the words completed counter whenever it changes
-        setInterval(function() {
-          document.getElementById("words-completed").textContent = "Words Completed: " + wordsCompleted;
-        }, 1000);
-      });
-    </script>
+    <script src="../JavaScript/wordle.JS"></script>
   </body>
 </html>

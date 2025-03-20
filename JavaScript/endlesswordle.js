@@ -148,7 +148,8 @@ function resetGame() {
   }
   
   // Reset keyboard colors
-  keys.forEach((key) => {
+  const keyboardKeys = document.querySelectorAll(".key");
+  keyboardKeys.forEach((key) => {
     if (key.id === "enter" || key.id === "backspace") {
       key.className = "key wide-key";
     } else {
@@ -157,7 +158,9 @@ function resetGame() {
   });
   
   // Clear any message
-  setMessage("");
+  const messageEl = document.getElementById("message");
+  messageEl.innerHTML = "";
+  messageEl.style.opacity = 1;
   
   // Select a new word
   selectNewWord();
@@ -247,6 +250,7 @@ function checkRow() {
   // If guess matches the solution, congratulate user and prepare for next word
   if (guess === solution) {
     wordsCompleted++;
+    updateWordCounter();
     setMessage(`Correct! That's ${wordsCompleted} word${wordsCompleted > 1 ? 's' : ''} solved. Next word coming up!`);
     isGameOver = true;
     
@@ -275,6 +279,14 @@ function checkRow() {
   }
 }
 
+/* --- Function to update the word counter display --- */
+function updateWordCounter() {
+  const counterElement = document.getElementById("words-completed");
+  if (counterElement) {
+    counterElement.textContent = "Words Completed: " + wordsCompleted;
+  }
+}
+
 /* --- Function to display a message to the user --- */
 function setMessage(msg) {
   const messageEl = document.getElementById("message");
@@ -290,3 +302,13 @@ function setMessage(msg) {
     }, 1000);
   }
 }
+
+/* --- Set up the New Word button event listener --- */
+document.addEventListener("DOMContentLoaded", function() {
+  const resetButton = document.getElementById("reset-game");
+  if (resetButton) {
+    resetButton.addEventListener("click", function() {
+      resetGame();
+    });
+  }
+});
