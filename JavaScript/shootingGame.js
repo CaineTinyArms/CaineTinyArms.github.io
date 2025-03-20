@@ -2,6 +2,7 @@
 let score = 0;
 let targetVisible = true;
 let gameActive = true;
+let gameWonDisplayed = false;
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -212,7 +213,11 @@ function shoot(event) {
 
     // Game won
     function gameWon() {
-        unlockAllContacts();
+      if (gameWonDisplayed) return;
+
+      gameWonDisplayed = true;
+
+      unlockAllContacts();
         
         // Display winning message
         const winMessage = document.createElement('div');
@@ -233,11 +238,9 @@ function shoot(event) {
     // Skip game and unlock all contacts
     function skipGame() {
         unlockAllContacts();
-        
-        // Hide target and gun
-        target.style.display = 'none';
-        gun.style.display = 'none';
-        
+
+        skipGameButton.style.display = 'none';
+
         // Display skipped message
         const skipMessage = document.createElement('div');
         skipMessage.className = 'win-message';
