@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game4: {
             title: "Dall of Cuty",
             description: "Slaughter endless hordes of zombies, while racking up points to upgrade your equipment and escape the cursed lands.",
-            image: "../Images/fire.png",
+            image: "../Images/doc.png",
             tags: ["Platformer", "Puzzle", "Pixel Art"],
             playLink: "#game4",
             devRamblingsLink: "../HTML/ramblings/doc.html" // Updated link
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game6: {
             title: "Sonder: Reflections",
             description: "Take up the role of a taxi driver, listen to the customers conversations and respond accordingly.",
-            image: "../Images/fire.png",
+            image: "../Images/sonder.png",
             tags: ["Survival", "Horror", "Action"],
             playLink: "#game6",
             devRamblingsLink: "../HTML/ramblings/sonder.html" // Updated link
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         game8: {
             title: "Supermarket of the Dead",
             description: "Defend your supermarket from the zombie onslaught, but you better keep scanning those items, the mags aren't free.",
-            image: "../Images/fire.png",
+            image: "../Images/sotd.png",
             tags: ["Fighting", "Versus", "Action"],
             playLink: "#game8",
             devRamblingsLink: "../HTML/ramblings/sotd.html" // Updated link

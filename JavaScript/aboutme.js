@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.font = '36px "Comic Sans MS"';
       ctx.fillStyle = '#000';
       ctx.textAlign = 'center';
-      ctx.fillText('Break blocks to reveal my photo!', canvas.width / 2, canvas.height / 2);
+      ctx.fillText('Break blocks to reveal my info!', canvas.width / 2, canvas.height / 2);
       ctx.font = '24px "Comic Sans MS"';
       ctx.fillText('Click "Start Game" to begin', canvas.width / 2, canvas.height / 2 + 50);
       ctx.textAlign = 'start';
