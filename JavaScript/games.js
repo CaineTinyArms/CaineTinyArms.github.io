@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             tags: ["Adventure", "Retro", "Open World"],
             playLink: "../HTML/endlesswordle.html",
-            devRamblingsLink: "../HTML/endlesswordle.html"
+            devRamblingsLink: "../HTML/ramblings/endlesswordle.html"
         }
     };
 
