@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             tags: ["Adventure", "Retro", "Open World"],
             playLink: "../HTML/endlesswordle.html",
-            devRamblingsLink: "../HTML/wordle.html"
+            devRamblingsLink: "../HTML/endlesswordle.html"
         }
     };
 
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function showGameDetails(gameId) {
         // Get the selected game data
         const game = games[gameId];
-        
+            
         // Reset current slide index
         currentSlideIndex = 0;
         
