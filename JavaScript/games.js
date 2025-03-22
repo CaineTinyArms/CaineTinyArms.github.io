@@ -309,4 +309,89 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         }
     });
+
+    // Set up 3D hover effect for game boxes
+gameBoxes.forEach(box => {
+    box.addEventListener('mousemove', handleMouseMove);
+    box.addEventListener('mouseleave', handleMouseLeave);
+    
+    // Create static noise overlay
+    const staticOverlay = document.createElement('div');
+    staticOverlay.className = 'vhs-static';
+    box.appendChild(staticOverlay);
+    
+    // Create tracking lines (3 of them)
+    for (let i = 0; i < 3; i++) {
+        const trackingLine = document.createElement('div');
+        trackingLine.className = 'tracking-line';
+        // Stagger the animation
+        trackingLine.style.animationDelay = `${i * 0.5}s`;
+        // Vary the height
+        trackingLine.style.height = `${1 + Math.random() * 3}px`;
+        // Vary the speed
+        trackingLine.style.animationDuration = `${1.5 + Math.random() * 1}s`;
+        box.appendChild(trackingLine);
+    }
+});
+
+function handleMouseMove(e) {
+    const box = e.currentTarget;
+    const boxRect = box.getBoundingClientRect();
+    
+    // Calculate mouse position relative to the center of the box
+    const mouseX = e.clientX - boxRect.left - boxRect.width / 2;
+    const mouseY = e.clientY - boxRect.top - boxRect.height / 2;
+    
+    // Calculate rotation based on mouse position with increased sensitivity
+    const rotateX = -mouseY * 0.15; // Increased from 0.1 for faster response
+    const rotateY = mouseX * 0.15; // Increased from 0.1 for faster response
+    
+    // Apply the 3D rotation with smoother transition
+    box.style.transform = `
+        perspective(1000px)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        translateY(-10px)
+        scale(1.05)
+    `;
+    
+    // Add depth to cover image with reduced transition time
+    const cover = box.querySelector('.game-cover');
+    cover.style.transform = `translateZ(20px)`;
+    cover.style.transition = 'transform 0.1s ease'; // Faster transition
+    
+    // Add depth to title with reduced transition time
+    const title = box.querySelector('.game-title');
+    title.style.transform = `translateZ(10px)`;
+    title.style.transition = 'transform 0.1s ease'; // Faster transition
+    
+    // Add more controlled lighting effect - limit the range to avoid extremes
+    // Constrain brightness between 0.9 and 1.1
+    const brightnessValue = 1 + (mouseY / boxRect.height * 0.2);
+    const brightness = Math.min(Math.max(brightnessValue, 0.9), 1.1);
+    box.style.filter = `brightness(${brightness})`;
+    
+    // Add slight box shadow based on mouse position with increased sensitivity
+    const shadowX = -mouseX * 0.15; // Increased from 0.1
+    const shadowY = -mouseY * 0.15; // Increased from 0.1
+    box.style.boxShadow = `
+        ${shadowX}px ${shadowY}px 15px rgba(0, 0, 0, 0.4),
+        0 15px 20px rgba(0, 0, 0, 0.4)
+    `;
+}
+
+    function handleMouseLeave(e) {
+          const box = e.currentTarget;
+    
+       // Reset transform and effects
+       box.style.transform = 'translateZ(0) rotateX(0) rotateY(0)';
+      box.style.filter = 'brightness(1)';
+      box.style.boxShadow = 'none';
+    
+       const cover = box.querySelector('.game-cover');
+       cover.style.transform = 'translateZ(0)';
+    
+       const title = box.querySelector('.game-title');
+       title.style.transform = 'translateZ(0)';
+    }
 });
