@@ -1,0 +1,348 @@
+/* =========================
+   BACKGROUND
+========================= */
+
+.background-gradient {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #1a1a1a 0%,
+            #050505 70%
+        );
+
+    z-index: -3;
+}
+
+.background-noise {
+
+    position: fixed;
+
+    inset: 0;
+
+    opacity: 0.03;
+
+    pointer-events: none;
+
+    background-image:
+        url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+    z-index: -2;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+
+    width: 100%;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding:
+        2rem
+        3rem;
+
+    z-index: 100;
+}
+
+.logo {
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.25rem;
+}
+
+.nav-links {
+
+    display: flex;
+
+    gap: 2rem;
+}
+
+.nav-links a {
+
+    color: var(--text-secondary);
+
+    transition:
+        color var(--transition-fast);
+}
+
+.nav-links a:hover {
+
+    color: var(--text-primary);
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero-section {
+
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns:
+        0.85fr
+        1.15fr;
+}
+
+/* =========================
+   HERO CONTENT
+========================= */
+
+.hero-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding:
+        8rem
+        5rem;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+.hero-subtitle {
+
+    color: var(--text-secondary);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.15rem;
+
+    margin-bottom: 1.5rem;
+
+    font-size: 0.85rem;
+}
+
+.hero-content h1 {
+
+    font-size: clamp(3rem, 7vw, 6rem);
+
+    line-height: 1.02;
+
+    letter-spacing: -0.045em;
+
+    font-weight: 600;
+
+    margin-bottom: 2rem;
+
+    max-width: 700px;
+}
+
+.hero-description {
+
+    max-width: 600px;
+
+    color: var(--text-secondary);
+
+    font-size: 1.1rem;
+
+    margin-bottom: 3rem;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 1rem;
+}
+
+.primary-button,
+.secondary-button {
+
+    padding:
+        1rem
+        1.75rem;
+
+    border:
+        1px solid var(--border-primary);
+
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.primary-button {
+
+    background: var(--surface-primary);
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(255, 255, 255, 0.18);
+}
+
+.primary-button:hover {
+
+    background:
+        rgba(255, 255, 255, 0.05);
+}
+
+/* =========================
+   HERO VISUAL
+========================= */
+
+.hero-visual {
+
+    position: relative;
+
+    height: 100vh;
+
+    overflow: hidden;
+
+    clip-path:
+        polygon(
+            8% 0%,
+            100% 0%,
+            92% 100%,
+            0% 100%
+        );
+}
+
+/* =========================
+   VISUAL TRACK
+========================= */
+
+.visual-track {
+
+    display: flex;
+
+    width: max-content;
+
+    height: 100%;
+
+    animation:
+        scrollHorizontal 35s linear infinite;
+}
+
+/* =========================
+   IMAGES
+========================= */
+
+.visual-track img {
+
+    width: 1600px;
+
+    height: 100vh;
+
+    object-fit: cover;
+
+    flex-shrink: 0;
+
+    filter:
+        brightness(0.82);
+
+    transform: scale(1.02);
+}
+
+/* =========================
+   VISUAL OVERLAY
+========================= */
+
+.visual-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to left,
+            rgba(5, 5, 5, 0.15),
+            rgba(5, 5, 5, 0.55)
+        );
+
+    pointer-events: none;
+}
+
+/* =========================
+   IMAGE ANIMATION
+========================= */
+
+@keyframes scrollHorizontal {
+
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .hero-section {
+
+        grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+
+        display: none;
+    }
+
+    .hero-content {
+
+        padding:
+            7rem
+            2rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .navbar {
+
+        padding:
+            1.5rem;
+    }
+
+    .nav-links {
+
+        gap: 1rem;
+    }
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}
