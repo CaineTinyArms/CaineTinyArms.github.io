@@ -115,8 +115,12 @@
 
     justify-content: center;
 
+    min-height: 100vh;
+
     padding:
-        8rem
+        clamp(7rem, 10vh, 10rem)
+        5rem
+        4rem
         5rem;
 
     position: relative;
@@ -139,7 +143,8 @@
 
 .hero-content h1 {
 
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-size:
+        clamp(2.8rem, 5vw, 6rem);
 
     line-height: 1.02;
 
@@ -147,7 +152,7 @@
 
     font-weight: 600;
 
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 
     max-width: 700px;
 }
@@ -158,9 +163,10 @@
 
     color: var(--text-secondary);
 
-    font-size: 1.1rem;
+    font-size:
+        clamp(1rem, 1.1vw, 1.1rem);
 
-    margin-bottom: 3rem;
+    margin-bottom: 2.25rem;
 }
 
 /* =========================
@@ -226,7 +232,7 @@
         polygon(
             8% 0%,
             100% 0%,
-            92% 100%,
+            100% 100%,
             0% 100%
         );
 }
@@ -253,7 +259,11 @@
 
 .visual-track img {
 
-    width: 1600px;
+    width: 65vw;
+
+    max-width: 1600px;
+
+    min-width: 700px;
 
     height: 100vh;
 
