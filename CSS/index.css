@@ -394,7 +394,7 @@
 
     max-width: 700px;
 
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
 }
 
 .section-label {
@@ -434,52 +434,194 @@
 }
 
 /* =========================
-   PLACEHOLDER
+   FEATURED PROJECTS
 ========================= */
 
-.projects-placeholder {
+.featured-projects {
 
-    width: 100%;
+    display: flex;
 
-    min-height: 300px;
+    flex-direction: column;
+
+    gap: 8rem;
+}
+
+/* =========================
+   PROJECT CARD
+========================= */
+
+.project-card {
+
+    display: grid;
+
+    grid-template-columns:
+        1.1fr
+        0.9fr;
+
+    gap: 4rem;
+
+    align-items: center;
+}
+
+/* Reverse Layout */
+
+.project-card.reverse {
+
+    grid-template-columns:
+        0.9fr
+        1.1fr;
+}
+
+.project-card.reverse .project-image {
+
+    order: 2;
+}
+
+.project-card.reverse .project-content {
+
+    order: 1;
+}
+
+/* =========================
+   PROJECT IMAGE
+========================= */
+
+.project-image {
+
+    position: relative;
+
+    overflow: hidden;
+
+    aspect-ratio: 16 / 10;
 
     border:
         1px solid rgba(255, 255, 255, 0.06);
 
     background:
-        rgba(255, 255, 255, 0.015);
+        rgba(255, 255, 255, 0.02);
+}
 
-    display: flex;
+.project-image img {
 
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+
+    transform: scale(1.03);
+}
+
+/* =========================
+   PROJECT CONTENT
+========================= */
+
+.project-number {
 
     color: var(--text-secondary);
 
+    letter-spacing: 0.12rem;
+
+    margin-bottom: 1rem;
+
+    font-size: 0.8rem;
+}
+
+.project-content h3 {
+
+    font-size:
+        clamp(2rem, 4vw, 3.5rem);
+
+    line-height: 1.05;
+
+    letter-spacing: -0.04em;
+
+    font-weight: 600;
+
+    margin-bottom: 1.5rem;
+}
+
+.project-description {
+
+    color: var(--text-secondary);
+
+    font-size: 1.05rem;
+
+    margin-bottom: 1.5rem;
+
+    max-width: 550px;
+}
+
+.project-tech {
+
+    color:
+        rgba(255, 255, 255, 0.55);
+
     font-size: 0.95rem;
+
+    margin-bottom: 2rem;
 }
 
 /* =========================
-   RESPONSIVE
+   PROJECT LINK
 ========================= */
 
-@media (max-width: 1100px) {
+.project-link {
 
-    .projects-section {
+    position: relative;
 
-        padding:
-            7rem
-            2rem;
-    }
+    display: inline-block;
+
+    transition:
+        color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.project-link::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -6px;
+
+    width: 100%;
+    height: 1px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    transition:
+        background var(--transition-fast);
+}
+
+.project-link:hover {
+
+    transform: translateX(4px);
+}
+
+.project-link:hover::after {
+
+    background:
+        rgba(255, 255, 255, 0.3);
 }
 
 /* =========================
-   PROJECTS LINK
+   ALL PROJECTS LINK
 ========================= */
 
 .projects-link-wrapper {
 
-    margin-top: 2rem;
+    margin-top: 4rem;
 
     display: flex;
 
@@ -531,6 +673,44 @@
 
     background:
         rgba(255, 255, 255, 0.3);
+}
+
+/* =========================
+   PROJECTS RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .projects-section {
+
+        padding:
+            7rem
+            2rem;
+    }
+
+    .featured-projects {
+
+        gap: 6rem;
+    }
+
+    .project-card,
+    .project-card.reverse {
+
+        grid-template-columns: 1fr;
+
+        gap: 2rem;
+    }
+
+    .project-card.reverse .project-image,
+    .project-card.reverse .project-content {
+
+        order: initial;
+    }
+
+    .section-header {
+
+        margin-bottom: 4rem;
+    }
 }
 
 /* =========================
