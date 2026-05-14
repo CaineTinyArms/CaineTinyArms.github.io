@@ -523,3 +523,138 @@
     background:
         rgba(255, 255, 255, 0.3);
 }
+
+/* =========================
+   ABOUT SECTION
+========================= */
+
+.about-section {
+
+    position: relative;
+
+    padding:
+        10rem
+        5rem;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* =========================
+   ABOUT GRID
+========================= */
+
+.about-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr
+        0.8fr;
+
+    gap: 6rem;
+}
+
+/* =========================
+   ABOUT CONTENT
+========================= */
+
+.about-content h2 {
+
+    font-size:
+        clamp(2.5rem, 5vw, 4.5rem);
+
+    line-height: 1.05;
+
+    letter-spacing: -0.04em;
+
+    font-weight: 600;
+
+    margin-bottom: 2rem;
+
+    max-width: 800px;
+}
+
+.about-description {
+
+    max-width: 700px;
+
+    color: var(--text-secondary);
+
+    font-size: 1.05rem;
+
+    margin-bottom: 1.5rem;
+}
+
+/* =========================
+   ABOUT DETAILS
+========================= */
+
+.about-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3rem;
+
+    padding-top: 5rem;
+}
+
+/* =========================
+   DETAIL BLOCK
+========================= */
+
+.detail-block {
+
+    padding-bottom: 2rem;
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.06);
+}
+
+.detail-label {
+
+    display: block;
+
+    color: var(--text-secondary);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.12rem;
+
+    font-size: 0.8rem;
+
+    margin-bottom: 1rem;
+}
+
+.detail-block p {
+
+    line-height: 1.9;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .about-section {
+
+        padding:
+            7rem
+            2rem;
+    }
+
+    .about-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 4rem;
+    }
+
+    .about-details {
+
+        padding-top: 0;
+    }
+}
