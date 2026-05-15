@@ -1,0 +1,351 @@
+/* =========================
+   BACKGROUND
+========================= */
+
+.background-gradient {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #1a1a1a 0%,
+            #050505 70%
+        );
+
+    z-index: -3;
+}
+
+.background-noise {
+
+    position: fixed;
+
+    inset: 0;
+
+    opacity: 0.03;
+
+    pointer-events: none;
+
+    background-image:
+        url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+    z-index: -2;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+
+    width: 100%;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding:
+        1.5rem
+        3rem;
+
+    z-index: 100;
+
+    background:
+        rgba(5, 5, 5, 0.55);
+
+    backdrop-filter:
+        blur(14px);
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.04);
+}
+
+.logo {
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.25rem;
+}
+
+.nav-links {
+
+    display: flex;
+
+    gap: 2rem;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.projects-hero {
+
+    padding:
+        12rem
+        5rem
+        6rem
+        5rem;
+
+    max-width: 900px;
+}
+
+.projects-hero h1 {
+
+    font-size:
+        clamp(3rem, 7vw, 6rem);
+
+    line-height: 1.02;
+
+    letter-spacing: -0.05em;
+
+    font-weight: 600;
+
+    margin-bottom: 2rem;
+}
+
+.projects-intro {
+
+    color: var(--text-secondary);
+
+    font-size: 1.1rem;
+
+    max-width: 650px;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.filter-section {
+
+    padding:
+        0rem
+        5rem
+        4rem
+        5rem;
+}
+
+.filter-bar {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+}
+
+.filter-button {
+
+    background:
+        rgba(255, 255, 255, 0.03);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.06);
+
+    color: var(--text-secondary);
+
+    padding:
+        0.85rem
+        1.25rem;
+
+    cursor: pointer;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.filter-button:hover {
+
+    transform: translateY(-2px);
+
+    color: var(--text-primary);
+
+    border-color:
+        rgba(255, 255, 255, 0.12);
+}
+
+.filter-button.active {
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color: var(--text-primary);
+}
+
+/* =========================
+   PROJECT GRID
+========================= */
+
+.projects-grid {
+
+    padding:
+        0rem
+        5rem
+        8rem
+        5rem;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 2rem;
+}
+
+/* =========================
+   PROJECT CARD
+========================= */
+
+.archive-project {
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.06);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.archive-project:hover {
+
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(255, 255, 255, 0.12);
+}
+
+.archive-project img {
+
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.archive-content {
+
+    padding: 2rem;
+}
+
+.archive-category {
+
+    color: var(--text-secondary);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.12rem;
+
+    font-size: 0.75rem;
+
+    margin-bottom: 1rem;
+}
+
+.archive-content h2 {
+
+    font-size: 2rem;
+
+    line-height: 1.05;
+
+    margin-bottom: 1rem;
+}
+
+.archive-description {
+
+    color: var(--text-secondary);
+
+    margin-bottom: 1.5rem;
+
+    line-height: 1.7;
+}
+
+.archive-tags {
+
+    color:
+        rgba(255, 255, 255, 0.55);
+
+    font-size: 0.95rem;
+
+    margin-bottom: 2rem;
+}
+
+.archive-link {
+
+    position: relative;
+
+    display: inline-block;
+}
+
+.archive-link::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -6px;
+
+    width: 100%;
+    height: 1px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+}
+
+/* =========================
+   HIDDEN FILTER STATE
+========================= */
+
+.archive-project.hidden {
+
+    display: none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .projects-hero,
+    .filter-section,
+    .projects-grid {
+
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .projects-grid {
+
+        grid-template-columns: 1fr;
+    }
+}
