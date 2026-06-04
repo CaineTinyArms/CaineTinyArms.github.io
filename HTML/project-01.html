@@ -73,9 +73,9 @@
         </h1>
 
         <p class="project-intro">
-            A mobile application designed to simplify household
-            food tracking through expiration monitoring,
-            visual organisation, and streamlined interaction design.
+            A mobile application designed to reduce household
+            food waste through barcode scanning, expiration monitoring,
+            visual organisation, and recipe suggestions.
         </p>
 
         <div class="project-tags">
@@ -116,13 +116,8 @@
 
         <div class="section-heading">
 
-            <p class="section-label">
-                Overview
-            </p>
-
             <h2>
-                Designed to make food management
-                more accessible and visually intuitive.
+                The Problem
             </h2>
 
         </div>
@@ -130,17 +125,8 @@
         <div class="text-content">
 
             <p>
-                Originally developed as a final-year dissertation project,
-                this application focused on reducing unnecessary household
-                food waste through clear expiration tracking,
-                simplified inventory management,
-                and streamlined interaction design.
-            </p>
-
-            <p>
-                The project explored how visual hierarchy and interface
-                clarity could improve usability while maintaining
-                a lightweight and approachable user experience.
+                In 2022, 19% of all food produced globally was wasted across the retail, food service, and household 
+                sectors, with 60% of the waste coming from households. 
             </p>
 
         </div>
@@ -148,20 +134,56 @@
     </section>
 
     <!-- =========================
+         AIMS
+    ========================= -->
+
+    <section class="content-section">
+
+        <div class="section-heading">
+
+            <h2>
+                The Aim
+            </h2>
+
+        </div>
+
+        <div class="text-content">
+
+            <p>
+                The aim of this project was to design and develop a mobile application that allows users to track their 
+                grocery items and use-by-dates through barcode scanning, receive notifications when items are nearing expiration, 
+                and view recipe suggestions based on the items in their food list.
+            </p>
+
+        </div>
+
+    </section>
+    <!-- =========================
          FEATURES
     ========================= -->
+
+    <section class="content-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Application Features
+            </h2>
+
+        </div>
+
+    </section>
 
     <section class="features-section">
 
         <div class="feature-card">
 
             <h3>
-                Expiration Tracking
+                Barcode Scanning
             </h3>
 
             <p>
-                Monitor food expiration dates through prioritised
-                visual organisation and status-based indicators.
+                Scan the barcodes of your grocery items to add them into the database with their expiration dates.
             </p>
 
         </div>
@@ -173,8 +195,19 @@
             </h3>
 
             <p>
-                Store and organise household food items through
-                a simplified and accessible interface structure.
+                Add and remove items from your database by scanning and swiping respectively. 
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <h3>
+                Expiration Notifications
+            </h3>
+
+            <p>
+                Receive notifications the day before and the day of an items expiration date, to remind you to use them.
             </p>
 
         </div>
@@ -186,8 +219,19 @@
             </h3>
 
             <p>
-                Integrated external APIs to allow for users to 
-                scan their items into the database.
+                The application uses the OpenFoodFacts.org API, a community-maintained database of food products and nutritional information.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <h3>
+                Recipe Suggestions
+            </h3>
+
+            <p>
+                The application provides recipe suggestions based on what items you have scanned into your list using a rule-based system.
             </p>
 
         </div>
@@ -201,12 +245,12 @@
     <section class="gallery-section">
 
         <img
-            src="../Images/FoodWasteApp.webp"
+            src="../Images/placeholderfoodapp.webp"
             alt=""
         >
 
         <img
-            src="../Images/FoodWasteApp.webp"
+            src="../Images/placeholderfoodapp.webp"
             alt=""
         >
 
@@ -221,12 +265,11 @@
         <div class="section-heading">
 
             <p class="section-label">
-                Technical Breakdown
+                Technical Implementation
             </p>
 
             <h2>
-                Technical implementation focused on
-                usability, structure, and scalability.
+                Android Studio and Kotlin
             </h2>
 
         </div>
@@ -234,19 +277,97 @@
         <div class="text-content">
 
             <p>
-                The application was developed using Kotlin within Android Studio,
-                with a focus on maintainable architecture,
-                responsive UI behaviour,
-                and structured local data handling.
+                Android Studio and Kotlin were chosen to develop the application as a native Android experience. Kotlin provided a modern and readable programming language with strong support for Android development, while Android Studio offered a comprehensive 
+                set of tools for interface design, debugging, and testing. As I owned an Android device, features could be tested directly on physical hardware throughout development, allowing functionality and 
+                usability to be validated under real-world conditions rather than relying solely on an emulator.
             </p>
+
+        </div>
+
+    </section>
+
+    <section class="content-section">
+
+        <div class="section-heading">
+
+            <h2>
+                API Integration
+            </h2>
+
+        </div>
+
+        <div class="text-content">
 
             <p>
-                Additional development focused on interface clarity,
-                information hierarchy,
-                and creating an interaction flow that remained simple
-                and readable across varying amounts of user data.
+                Retrofit2 was used to handle communication with the OpenFoodFacts API, enabling the application to retrieve product information from community-contributed food databases. 
+                The library was chosen for its strong Kotlin support, simplified API request handling, and automatic JSON deserialization, reducing development complexity while maintaining clean and 
+                maintainable networking code.
             </p>
+            
+        </div>
 
+    </section>
+
+    <section class="content-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Food Database
+            </h2>
+
+        </div>
+
+        <div class="text-content">
+
+            <p>
+                Room was selected as the application's persistence layer to store inventory data locally on the device. By abstracting many of the complexities of SQLite, Room provided type-safe database access, 
+                structured data models, and maintainable query management. This allowed food items and expiration information to remain available between sessions while supporting efficient data retrieval throughout 
+                the application.
+            </p>
+            
+        </div>
+
+    </section>
+
+    <section class="content-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Expiration Notifications
+            </h2>
+
+        </div>
+
+        <div class="text-content">
+
+            <p>
+                Android WorkManager was used to execute background checks on the Room database in order to create expiration reminders. The worker collects food items that have been stored, checks their expiration dates against the current date, 
+                and automatically creates alerts for products that are about to expire.
+            </p>
+            
+        </div>
+
+    </section>
+
+    <section class="content-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Barcode Scanning
+            </h2>
+
+        </div>
+
+        <div class="text-content">
+
+            <p>
+                Google ML Kit was used to provide on-device barcode recognition through the device camera. The library was chosen for its reliable scanning performance and straightforward Android integration. Once a barcode is successfully detected, 
+                the application uses the resulting product identifier to query the OpenFoodFacts API and retrieve relevant food information automatically. This approach reduced user input requirements while improving the speed and accuracy of product registration.
+            </p>
+            
         </div>
 
     </section>
@@ -259,13 +380,8 @@
 
         <div class="section-heading">
 
-            <p class="section-label">
-                Reflection
-            </p>
-
             <h2>
-                Balancing technical implementation
-                with usability-focused design.
+                Reflection
             </h2>
 
         </div>
@@ -273,17 +389,8 @@
         <div class="text-content">
 
             <p>
-                One of the primary challenges during development
-                was maintaining interface clarity while supporting
-                increasingly complex data organisation and interaction flows.
+                
             </p>
-
-            <p>
-                The project became a valuable exploration of combining
-                structured technical systems with accessible
-                and visually readable user experience design.
-            </p>
-
         </div>
 
     </section>
